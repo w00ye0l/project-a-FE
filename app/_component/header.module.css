@@ -1,0 +1,32 @@
+.titleSection {
+  margin: 50px;
+  color: #fff;
+}
+
+.subTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.title {
+  margin-bottom: 40px;
+  font-size: 48px;
+}
+
+.buttonSection {
+  display: flex;
+  gap: 20px;
+}
+
+.button {
+  width: 120px;
+  height: 50px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 0;
+}
+
+.calBtn {
+  background-color: #05141f;
+  color: #fff;
+}
