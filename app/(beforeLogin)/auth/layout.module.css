@@ -1,0 +1,30 @@
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 80px;
+  width: 600px;
+  height: 100dvh;
+}
+
+.logoSection {
+  display: flex;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 60px;
+  gap: 20px;
+  align-items: center;
+}
+
+.logoImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 50px;
+  background-color: #ccc;
+}
+
+.title {
+  font-size: 24px;
+}
