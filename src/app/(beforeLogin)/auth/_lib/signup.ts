@@ -6,8 +6,6 @@ const validatePassword = (password: string) => {
 };
 
 const onSubmit = async (prevState: any, rawFormData: FormData) => {
-  // console.log(rawFormData);
-
   if (
     !rawFormData.get("userId") ||
     !(rawFormData.get("userId") as string)?.trim()
@@ -82,15 +80,15 @@ const onSubmit = async (prevState: any, rawFormData: FormData) => {
 
     console.log(data);
 
-    if (response.status === 404) {
+    if (response.status === 200) {
+      console.log("회원가입 성공");
+      return { message: "SUCCESS" };
+    } else if (response.status === 404) {
       console.log("이미 존재하는 유저입니다.");
       return { message: "USER_ALREADY_EXISTS" };
     } else if (response.status === 400) {
       console.log("회원가입에 실패했습니다.");
       return { message: "INVALID_DATA" };
-    } else if (response.status === 200) {
-      console.log("회원가입 성공");
-      return { message: "SUCCESS" };
     }
   } catch (error) {
     console.error(error);
