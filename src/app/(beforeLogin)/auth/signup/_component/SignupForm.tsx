@@ -46,10 +46,8 @@ export default function SignupForm() {
     if (text.length !== 0) {
       toast.error(text);
     } else if (message === "SUCCESS") {
+      router.push("/auth/login");
       toast.success("회원가입이 완료되었습니다.");
-      setTimeout(() => {
-        router.push("/auth/login");
-      }, 1000);
     }
     return "";
   }
