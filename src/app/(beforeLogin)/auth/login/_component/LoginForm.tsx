@@ -3,41 +3,60 @@
 import cx from "classnames";
 import style from "../page.module.css";
 import { useRouter } from "next/navigation";
-import onSubmit from "../../_lib/login";
-import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
+import { FormEventHandler, useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
-  const [state, formAction] = useFormState(onSubmit, { message: "" });
-  const { pending } = useFormStatus();
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
-  function showMessage(message: string | null) {
-    let text = "";
+  // 로그인 기능
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
 
-    if (message === "NO_EMAIL_OR_USER_ID") {
-      text = "아이디를 입력해주세요.";
-    }
-    if (message === "NO_PASSWORD") {
-      text = "비밀번호를 입력해주세요.";
-    }
-    if (message === "INVALID_DATA") {
-      text = "로그인에 실패했습니다. 다시 시도해주세요.";
-    }
+    try {
+      // auth.js의 signIn 함수 호출
+      const response = await signIn("credentials", {
+        userIdOrEmail: id,
+        password,
+        redirect: false,
+      });
 
-    if (text.length !== 0) {
-      toast.error(text);
-    } else if (message === "SUCCESS") {
-      router.refresh();
-      router.push("/");
-      toast.success("로그인 성공");
+      // console.log({ response });
+      // 성공 시
+      // response: {
+      //   error: null,
+      //   status: 200,
+      //   ok: true,
+      //   url: 'http://localhost:3000/auth/login'
+      // }
+
+      // 실패 시
+      // response: {
+      //   error: 'Configuration',
+      //   status: 200,
+      //   ok: true,
+      //   url: null
+      // }
+
+      if (response?.error) {
+        toast.error("아이디와 비밀번호를 다시 확인해주세요.");
+      } else if (response?.error === null) {
+        console.log("로그인 성공");
+        router.replace("/page");
+        router.refresh();
+        toast.success("로그인 성공");
+      }
+    } catch (error) {
+      // console.error(error);
+      toast.error("로그인에 실패했습니다. 다시 시도해주세요.");
     }
-    return "";
-  }
+  };
 
   return (
-    <form className={style.loginForm} action={formAction}>
-      <div hidden>{showMessage(state?.message!)}</div>
+    <form className={style.loginForm} onSubmit={onSubmit}>
       <div className={style.loginOption}>
         <div className={style.saveOptionContainer}>
           <div className={cx(style.saveOption, style.saveLogin)}>
@@ -64,15 +83,19 @@ export default function LoginForm() {
         className={cx(style.input, style.id)}
         type="text"
         name="username"
+        value={id}
+        onChange={(e) => setId(e.target.value)}
         placeholder="아이디/인증 메일"
       />
       <input
         className={cx(style.input, style.password)}
         type="password"
         name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="비밀번호"
       />
-      <button className={style.loginBtn} disabled={pending}>
+      <button className={style.loginBtn} disabled={!id && !password}>
         로그인
       </button>
     </form>

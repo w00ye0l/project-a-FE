@@ -4,24 +4,23 @@ import Link from "next/link";
 import cx from "classnames";
 import style from "./page.module.css";
 import LoginForm from "./_component/LoginForm";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
-  const { data: session } = useSession();
-
-  if (session?.user) {
-    router.replace("/");
-    return null;
-  }
+  const onKakaoLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+  };
 
   const onNaverLogin = () => {
-    // window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+    window.location.href = "http://localhost:8080/oauth2/authorization/naver";
   };
 
   const onGoogleLogin = () => {
-    // window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+
+  const onFacebookLogin = () => {
+    window.location.href =
+      "http://localhost:8080/oauth2/authorization/facebook";
   };
 
   return (
@@ -48,11 +47,17 @@ export default function LoginPage() {
           <div className={style.socialLoginImg}></div>
           <p className={style.loginName}>네이버 로그인</p>
         </div>
-        <div className={cx(style.socialLoginBtn, style.kakaoLogin)}>
+        <div
+          onClick={onKakaoLogin}
+          className={cx(style.socialLoginBtn, style.kakaoLogin)}
+        >
           <div className={style.socialLoginImg}></div>
           <p className={style.loginName}>카카오 로그인</p>
         </div>
-        <div className={cx(style.socialLoginBtn, style.facebookLogin)}>
+        <div
+          onClick={onFacebookLogin}
+          className={cx(style.socialLoginBtn, style.facebookLogin)}
+        >
           <div className={style.socialLoginImg}></div>
           <p className={style.loginName}>페이스북 로그인</p>
         </div>

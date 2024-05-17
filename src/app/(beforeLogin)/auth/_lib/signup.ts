@@ -1,5 +1,10 @@
 "use server";
 
+const validateUserId = (userId: string) => {
+  const regex = /^[a-zA-Z0-9]{4,20}$/;
+  return regex.test(userId);
+};
+
 const validatePassword = (password: string) => {
   const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,20}$/;
   return regex.test(password);
@@ -11,6 +16,9 @@ const onSubmit = async (prevState: any, rawFormData: FormData) => {
     !(rawFormData.get("userId") as string)?.trim()
   ) {
     return { message: "NO_USER_ID" };
+  }
+  if (validateUserId(rawFormData.get("userId") as string) === false) {
+    return { message: "INVALID_USER_ID" };
   }
   if (
     !rawFormData.get("password") ||

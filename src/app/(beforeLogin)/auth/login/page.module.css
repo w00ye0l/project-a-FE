@@ -105,7 +105,7 @@
 
 .socialLoginBtn {
   display: flex;
-  width: 90px;
+  /* width: 90px; */
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

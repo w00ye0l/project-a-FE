@@ -1,5 +1,14 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { CustomUser } from "./app/model/User";
+
+interface ExtendedUser extends CustomUser {
+  id: string;
+  email: string;
+  accessToken?: string;
+  refreshToken?: string;
+  emailVerified: Date | null; // AdapterUser에서 요구하는 필드 추가
+}
 
 export const {
   handlers: { GET, POST },
@@ -31,22 +40,52 @@ export const {
           }
         );
 
-        const data = await authResponse.json();
+        const user = await authResponse.json();
 
-        if (!data) {
-          throw new Error("User not found");
+        // console.log("authorize", user);
+
+        if (user.statusCode === 400) {
+          console.log({ user });
+          throw new Error(user);
         }
 
-        const user = data.member;
-        console.log("user", user);
+        // JWT 토큰을 헤더에서 추출
+        const accessToken = authResponse.headers.get("accessToken");
+        const refreshToken = authResponse.headers.get("refreshToken");
 
-        return {
-          name: user.nickname,
-          email: user.email,
-          image: user.profileImage,
-          ...user,
-        };
+        // JWT를 유저 객체에 포함하여 반환
+        // return user;
+        return { ...user, accessToken, refreshToken };
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, account, user }) {
+      // console.log("jwt callback", token, account, user);
+
+      // 타입 단언 사용
+      const extendedUser = user as ExtendedUser;
+
+      if (account && extendedUser) {
+        // token에 유저 정보, JWT 정보 추가
+        token = { ...token, ...extendedUser };
+      }
+
+      // console.log("jwt token", token);
+      return token;
+    },
+    async session({ session, token }) {
+      // console.log("session callback", session, token);
+
+      // 세션의 사용자 객체에 대한 타입 단언
+      session.user = session.user as ExtendedUser;
+
+      if (token) {
+        // 세션에 유저 정보, JWT 정보 추가
+        session = { ...session, ...token };
+      }
+      // console.log("session", session);
+      return session;
+    },
+  },
 });
