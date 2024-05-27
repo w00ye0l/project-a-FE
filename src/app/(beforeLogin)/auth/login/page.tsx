@@ -28,10 +28,10 @@ export default function LoginPage() {
       <LoginForm />
 
       <div className={style.authLinkSection}>
-        <Link className={style.authLink} href="https://naver.com">
+        <Link className={style.authLink} href="/user/find/id">
           아이디 찾기
         </Link>
-        <Link className={style.authLink} href="https://naver.com">
+        <Link className={style.authLink} href="/user/find/pw">
           비밀번호 찾기
         </Link>
         <Link className={style.authLink} href="/auth/signup">
