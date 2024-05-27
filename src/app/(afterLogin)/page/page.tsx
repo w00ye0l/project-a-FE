@@ -1,6 +1,7 @@
 import LogoutButton from "@/app/_component/LogoutButton";
 import { CustomUser } from "@/app/model/User";
 import { auth } from "@/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function MyPage() {
@@ -22,6 +23,10 @@ export default async function MyPage() {
         <p>{userInfo.point}</p>
         <p>{userInfo.cash}</p>
         <p>{userInfo.eventPoint}</p>
+        <p>{userInfo.accessToken}</p>
+        <p>{userInfo.refreshToken}</p>
+
+        <Link href="/user/change/pw">비밀번호 변경</Link>
       </div>
 
       <LogoutButton me={session} />
