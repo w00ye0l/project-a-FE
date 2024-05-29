@@ -8,7 +8,7 @@ export default function Title() {
 
   return (
     <h1 className={style.title}>
-      {pathname === "/auth/login" ? "로그인" : "회원가입"}
+      {pathname === "/auth/signup" ? "회원가입" : "로그인"}
     </h1>
   );
 }

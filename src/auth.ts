@@ -23,6 +23,7 @@ export const {
   },
   providers: [
     Credentials({
+      // name: "DefaultLogin",
       credentials: {
         userIdOrEmail: {},
         password: {},
@@ -58,24 +59,56 @@ export const {
         return { ...user, accessToken, refreshToken };
       },
     }),
+    // Credentials({
+    //   name: "SocialLogin",
+    //   credentials: {
+    //     accessToken: { label: "Access Token", type: "text" },
+    //     refreshToken: { label: "Refresh Token", type: "text" },
+    //   },
+    //   authorize: async (credentials) => {
+    //     const { accessToken, refreshToken } = credentials;
+    //     const user = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       },
+    //     }).then((res) => res.json());
+
+    //     console.log({ user });
+
+    //     if (user && user.email) {
+    //       return user;
+    //     } else {
+    //       throw new Error("Authentication failed!");
+    //     }
+    //   },
+    // }),
   ],
   callbacks: {
-    async jwt({ token, account, user }) {
-      // console.log("jwt callback", token, account, user);
+    async jwt({ token, account, user, trigger }) {
+      console.log("jwt callback", token, account, user);
+      if (trigger === "update") {
+        console.log("되니?");
+        token = { ...token, ...user };
+
+        console.log("done!", token);
+
+        // console.log("update jwt token", token);
+        return token;
+      }
 
       // 타입 단언 사용
       const extendedUser = user as ExtendedUser;
 
       if (account && extendedUser) {
         // token에 유저 정보, JWT 정보 추가
-        token = { ...token, ...extendedUser };
+        token = { ...token, ...account, ...extendedUser };
       }
 
       // console.log("jwt token", token);
       return token;
     },
-    async session({ session, token }) {
-      // console.log("session callback", session, token);
+    async session({ session, user, token }) {
+      console.log("session callback", session, user, token);
 
       // 세션의 사용자 객체에 대한 타입 단언
       session.user = session.user as ExtendedUser;
@@ -84,7 +117,7 @@ export const {
         // 세션에 유저 정보, JWT 정보 추가
         session = { ...session, ...token };
       }
-      // console.log("session", session);
+      console.log("session", session);
       return session;
     },
   },

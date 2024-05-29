@@ -9,6 +9,7 @@ export interface CustomUser extends Session {
   picture: string;
   image: string;
 
+  userPk: number;
   userId: string;
   username: string;
   nickname: string;

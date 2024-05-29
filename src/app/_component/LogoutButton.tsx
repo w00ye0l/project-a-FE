@@ -21,6 +21,7 @@ export default function LogoutButton({ me }: Props) {
     console.log({ response });
 
     if (response?.message === "LOGOUT_SUCCESS") {
+      // signOut({ callbackUrl: "/" }); 로 대체 가능
       // auth.js의 signOut 함수 호출
       signOut({ redirect: false })
         .then(() => {
