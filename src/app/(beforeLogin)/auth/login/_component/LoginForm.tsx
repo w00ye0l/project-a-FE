@@ -18,7 +18,7 @@ export default function LoginForm() {
 
     try {
       // auth.js의 signIn 함수 호출
-      const response = await signIn("credentials", {
+      const response = await signIn("default-login", {
         userIdOrEmail: id,
         password,
         redirect: false,
@@ -44,8 +44,7 @@ export default function LoginForm() {
       if (response?.error) {
         toast.error("아이디와 비밀번호를 다시 확인해주세요.");
       } else if (response?.error === null) {
-        console.log("로그인 성공");
-        router.replace("/page");
+        router.replace("/mypage");
         router.refresh();
         toast.success("로그인 성공");
       }

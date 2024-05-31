@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { CustomUser } from "../model/User";
 import logout from "../(beforeLogin)/auth/_lib/logout";
 import { toast } from "sonner";
-import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import { Session } from "@auth/core/types";
 
 type Props = {
   me: Session;
@@ -18,9 +18,8 @@ export default function LogoutButton({ me }: Props) {
   const onLogout = async () => {
     const response = await logout();
 
-    console.log({ response });
-
     if (response?.message === "LOGOUT_SUCCESS") {
+      // signOut({ callbackUrl: "/" }); 로 대체 가능
       // auth.js의 signOut 함수 호출
       signOut({ redirect: false })
         .then(() => {
