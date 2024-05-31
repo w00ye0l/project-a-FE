@@ -23,7 +23,8 @@ export const {
   },
   providers: [
     Credentials({
-      // name: "DefaultLogin",
+      id: "default-login",
+      name: "DefaultLogin",
       credentials: {
         userIdOrEmail: {},
         password: {},
@@ -59,42 +60,47 @@ export const {
         return { ...user, accessToken, refreshToken };
       },
     }),
-    // Credentials({
-    //   name: "SocialLogin",
-    //   credentials: {
-    //     accessToken: { label: "Access Token", type: "text" },
-    //     refreshToken: { label: "Refresh Token", type: "text" },
-    //   },
-    //   authorize: async (credentials) => {
-    //     const { accessToken, refreshToken } = credentials;
-    //     const user = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}`, {
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //       },
-    //     }).then((res) => res.json());
+    Credentials({
+      id: "social-login",
+      name: "SocialLogin",
+      credentials: {
+        accessToken: { label: "Access Token", type: "text" },
+        refreshToken: { label: "Refresh Token", type: "text" },
+        pk: { label: "User PK", type: "text" },
+      },
+      authorize: async (credentials) => {
+        const { accessToken, refreshToken, pk } = credentials;
 
-    //     console.log({ user });
+        // console.log({ accessToken, refreshToken, pk });
 
-    //     if (user && user.email) {
-    //       return user;
-    //     } else {
-    //       throw new Error("Authentication failed!");
-    //     }
-    //   },
-    // }),
+        const authResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/${pk}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        const user = await authResponse.json();
+
+        // console.log({ user });
+        if (user.statusCode === 400) {
+          console.log({ user });
+          throw new Error(user);
+        }
+
+        if (user && user.email) {
+          return { ...user, accessToken, refreshToken };
+        } else {
+          throw new Error("Authentication failed!");
+        }
+      },
+    }),
   ],
   callbacks: {
-    async jwt({ token, account, user, trigger }) {
-      console.log("jwt callback", token, account, user);
-      if (trigger === "update") {
-        console.log("되니?");
-        token = { ...token, ...user };
-
-        console.log("done!", token);
-
-        // console.log("update jwt token", token);
-        return token;
-      }
+    async jwt({ token, account, user }) {
+      // console.log("jwt callback", token, account, user);
 
       // 타입 단언 사용
       const extendedUser = user as ExtendedUser;
@@ -108,7 +114,7 @@ export const {
       return token;
     },
     async session({ session, user, token }) {
-      console.log("session callback", session, user, token);
+      // console.log("session callback", session, user, token);
 
       // 세션의 사용자 객체에 대한 타입 단언
       session.user = session.user as ExtendedUser;
@@ -117,7 +123,7 @@ export const {
         // 세션에 유저 정보, JWT 정보 추가
         session = { ...session, ...token };
       }
-      console.log("session", session);
+      // console.log("session", session);
       return session;
     },
   },
