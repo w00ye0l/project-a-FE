@@ -1,14 +1,10 @@
 import LogoutButton from "@/app/_component/LogoutButton";
-import { CustomUser } from "@/app/model/User";
 import { auth } from "@/auth";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import UserInfo from "./_component/UserInfo";
 
 export default async function MyPage() {
   const session = await auth();
-  const userInfo = session as CustomUser;
-
-  // console.log(session);
 
   if (!session?.user) {
     redirect("/");
@@ -16,20 +12,9 @@ export default async function MyPage() {
 
   return (
     <>
-      <div>마이 페이지</div>
+      <h1>마이 페이지</h1>
       <div>
-        <p>{userInfo.userPk}</p>
-        <p>{userInfo.name}</p>
-        <p>{userInfo.email}</p>
-        <p>{userInfo.picture}</p>
-        <p>{userInfo.userType}</p>
-        <p>{userInfo.point}</p>
-        <p>{userInfo.cash}</p>
-        <p>{userInfo.eventPoint}</p>
-        <p>{userInfo.accessToken}</p>
-        <p>{userInfo.refreshToken}</p>
-
-        <Link href="/user/change/pw">비밀번호 변경</Link>
+        <UserInfo me={session} />
       </div>
 
       <LogoutButton me={session} />
