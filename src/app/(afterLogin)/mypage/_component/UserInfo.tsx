@@ -13,11 +13,13 @@ type Props = {
 
 export default function UserInfo({ me }: Props) {
   const [userInfo, setUserInfo] = useState<CustomUser | null>(null);
+  const [initialLoad, setInitialLoad] = useState(true);
   const preUserInfo = me as CustomUser;
 
   // 유저 정보 가져오는 함수
   // getUserInfo 함수를 useCallback으로 메모이제이션하여 의존성 배열 문제 해결
   const getUserInfo = useCallback(async () => {
+    console.log("getUserInfo called");
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/user/${preUserInfo.userPk}`,
       {
@@ -78,9 +80,13 @@ export default function UserInfo({ me }: Props) {
 
   // useEffect를 사용하여 컴포넌트가 마운트되면 유저 정보를 가져오도록 설정
   useEffect(() => {
-    getUserInfo();
+    console.log("useEffect called");
+    if (initialLoad) {
+      getUserInfo();
+      setInitialLoad(false);
+    }
     // getUserInfo 함수를 의존성 배열에 추가
-  }, [getUserInfo]);
+  }, [getUserInfo, initialLoad]);
 
   return (
     <>
