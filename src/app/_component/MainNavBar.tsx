@@ -1,9 +1,9 @@
-import style from "@/app/_component/mainHeader.module.css";
+import style from "@/app/_component/mainNavBar.module.css";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { auth } from "@/auth";
 
-export default async function MainHeader() {
+export default async function MainNavBar() {
   const session = await auth();
 
   return (
@@ -12,8 +12,8 @@ export default async function MainHeader() {
         <Link href="/car" className={style.link}>
           차량 정보
         </Link>
-        <Link href="https://naver.com" className={style.link}>
-          테스트 링크2
+        <Link href="/community" className={style.link}>
+          커뮤니티
         </Link>
       </div>
 
@@ -30,7 +30,12 @@ export default async function MainHeader() {
             </Link>
           </>
         ) : (
-          <LogoutButton me={session} />
+          <>
+            <Link href="/mypage" className={style.link}>
+              마이 페이지
+            </Link>
+            <LogoutButton me={session} />
+          </>
         )}
       </div>
     </div>
