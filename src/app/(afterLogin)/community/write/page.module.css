@@ -1,0 +1,21 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.editorContainer,
+.previewContainer {
+  width: 50%;
+}
+
+.editor,
+.preview {
+  height: 400px;
+}
+
+.preview {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+}
