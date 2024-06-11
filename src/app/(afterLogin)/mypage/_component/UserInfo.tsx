@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomUser } from "@/app/model/User";
+import { CustomUser } from "@/model/User";
 import { Session } from "@auth/core/types";
 import { useCallback, useEffect, useState } from "react";
 import ProfileImage from "./ProfileImage";
