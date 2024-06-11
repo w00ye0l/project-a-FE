@@ -23,14 +23,19 @@ export default function CommunityWritePage() {
   };
 
   const onCancel = () => {
-    router.push("/community");
+    router.push("/community/DH");
   };
 
   return (
     <>
+      <div className={style.buttonContainer}>
+        <button onClick={onCancel}>뒤로 가기</button>
+        <button onClick={onSubmit}>작성하기</button>
+      </div>
+
       <div className={style.main}>
         <div className={style.editorContainer}>
-          <h1>글쓰기</h1>
+          <h2>글쓰기</h2>
           <div className={style.editor}>
             <QuillEditor
               value={content}
@@ -41,17 +46,13 @@ export default function CommunityWritePage() {
         </div>
 
         <div className={style.previewContainer}>
-          <h1>미리보기</h1>
+          <h2>미리보기</h2>
           <div
             className={cx(style.preview, "ql-content")}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
       </div>
-
-      <button onClick={onCancel}>뒤로 가기</button>
-
-      <button onClick={onSubmit}>작성하기</button>
     </>
   );
 }
