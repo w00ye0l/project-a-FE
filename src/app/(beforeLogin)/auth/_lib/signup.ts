@@ -84,17 +84,17 @@ const onSubmit = async (prevState: any, rawFormData: FormData) => {
 
     console.log(response.status);
 
-    const data = await response.json();
+    const result = await response.json();
 
-    console.log(data);
+    console.log(result);
 
-    if (response.status === 200) {
+    if (result.statusCode === 200) {
       console.log("회원가입 성공");
       return { message: "SUCCESS" };
-    } else if (response.status === 404) {
+    } else if (result.statusCode === 404) {
       console.log("이미 존재하는 유저입니다.");
       return { message: "USER_ALREADY_EXISTS" };
-    } else if (response.status === 400) {
+    } else if (result.statusCode === 400) {
       console.log("회원가입에 실패했습니다.");
       return { message: "INVALID_DATA" };
     }

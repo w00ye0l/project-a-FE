@@ -87,9 +87,9 @@ export default function ProfileImage({
       toast.success("이미지 업로드 성공");
 
       // 업로드된 이미지 URL을 상태에 저장
-      setImage(result.imageUrl);
+      setImage(result.data.imageUrl);
       // 부모 컴포넌트의 상태를 업데이트하는 콜백 함수 호출
-      onImageUploadSuccess(result.imageUrl);
+      onImageUploadSuccess(result.data.imageUrl);
     } catch (error) {
       console.error(error);
     }

@@ -40,7 +40,7 @@ export default function UserInfo({ me }: Props) {
     }
 
     // 유저 정보를 state에 저장
-    setUserInfo({ ...result });
+    setUserInfo({ ...result.data });
   }, [preUserInfo.userPk, preUserInfo.accessToken]);
 
   // 프로필 이미지 삭제 함수

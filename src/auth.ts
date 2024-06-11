@@ -44,8 +44,6 @@ export const {
 
         const user = await authResponse.json();
 
-        // console.log("authorize", user);
-
         if (user.statusCode === 400) {
           console.log({ user });
           throw new Error(user);
@@ -57,7 +55,7 @@ export const {
 
         // JWT를 유저 객체에 포함하여 반환
         // return user;
-        return { ...user, accessToken, refreshToken };
+        return { ...user.data, accessToken, refreshToken };
       },
     }),
     Credentials({
@@ -84,14 +82,13 @@ export const {
 
         const user = await authResponse.json();
 
-        // console.log({ user });
         if (user.statusCode === 400) {
           console.log({ user });
           throw new Error(user);
         }
 
-        if (user && user.email) {
-          return { ...user, accessToken, refreshToken };
+        if (user.data && user.data.email) {
+          return { ...user.data, accessToken, refreshToken };
         } else {
           throw new Error("Authentication failed!");
         }
