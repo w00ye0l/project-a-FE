@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -67,12 +68,20 @@ export default function BoardList() {
       <h3>게시판 목록</h3>
 
       <ul style={{ flex: "1", listStyle: "none" }}>
-        {boardList.map((board: { boardPk: number; boardName: string }) => (
-          <li key={board.boardPk}>
-            <p>
-              {board.boardPk}: {board.boardName}
-            </p>
+        <Link href="/community">
+          <li>
+            <p>전체 게시판</p>
           </li>
+        </Link>
+
+        {boardList.map((board: { boardPk: number; boardName: string }) => (
+          <Link href={`/community/${board.boardPk}`} key={board.boardPk}>
+            <li key={board.boardPk}>
+              <p>
+                {board.boardPk}: {board.boardName}
+              </p>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
