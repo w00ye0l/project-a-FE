@@ -15,15 +15,15 @@ const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
 export default function CommunityWritePage() {
   const router = useRouter();
   const [content, setContent] = useState("");
-  const [textContent, setTextContent] = useState("");
+  const [originContent, setOriginContent] = useState("");
 
   const onSubmit = () => {
-    console.log(content);
-    console.log(textContent);
+    console.log("originContent", originContent);
+    console.log("content", content);
   };
 
   const onCancel = () => {
-    router.push("/community/DH");
+    router.back();
   };
 
   return (
@@ -38,9 +38,9 @@ export default function CommunityWritePage() {
           <h2>글쓰기</h2>
           <div className={style.editor}>
             <QuillEditor
-              value={content}
+              value={originContent}
+              onOriginChange={setOriginContent}
               onChange={setContent}
-              onTextChange={setTextContent}
             />
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function CommunityWritePage() {
           <h2>미리보기</h2>
           <div
             className={cx(style.preview, "ql-content")}
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: originContent }}
           />
         </div>
       </div>

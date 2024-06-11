@@ -1,25 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function NavMenu() {
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
+  const { boardPk } = useParams();
+
+  console.log(pathname);
 
   return (
-    <nav>
-      <ul style={{ display: "flex", listStyleType: "none", gap: "10px" }}>
-        <li>
-          <Link href="/community/DH">
-            {segment === "DH" ? <b>커뮤니티(동현)</b> : "커뮤니티(동현)"}
-          </Link>
-        </li>
-        <li>
-          <Link href="/community/HS">
-            {segment === "HS" ? <b>커뮤니티(현성)</b> : "커뮤니티(현성)"}
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      {boardPk && (
+        <nav>
+          <ul style={{ display: "flex", listStyleType: "none", gap: "10px" }}>
+            <li>
+              <Link href={`/community/${boardPk}/write1`}>
+                {pathname.endsWith("write1") ? (
+                  <b>글 쓰기(v1)</b>
+                ) : (
+                  "글 쓰기(v1)"
+                )}
+              </Link>
+            </li>
+            <li>
+              <Link href={`/community/${boardPk}/write2`}>
+                {pathname.endsWith("write2") ? (
+                  <b>글 쓰기(v2)</b>
+                ) : (
+                  "글 쓰기(v2)"
+                )}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </>
   );
 }

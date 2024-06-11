@@ -10,15 +10,15 @@ Quill.register("modules/imageResize", ImageResize);
 
 interface QuillEditorProps {
   value: string;
-  onChange: (content: string) => void;
+  onOriginChange: (content: string) => void;
   // 순수 텍스트만 추출하기 위한 콜백 함수
-  onTextChange: (text: string) => void;
+  onChange: (text: string) => void;
 }
 
 export default function QuillEditor({
   value,
+  onOriginChange,
   onChange,
-  onTextChange,
 }: QuillEditorProps) {
   // Quill 모듈 설정
   const modules = useMemo(
@@ -73,12 +73,12 @@ export default function QuillEditor({
     editor: any
   ) => {
     // 태그 포함 텍스트 추출
-    onChange(content);
+    onOriginChange(content);
 
     // 순수 텍스트 추출
     let text = editor.getText();
     text = text.replace(/\n/g, " ");
-    onTextChange(text);
+    onChange(text);
   };
 
   return (
