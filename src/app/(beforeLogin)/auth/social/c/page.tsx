@@ -18,7 +18,9 @@ export default function SocialRedirectPage() {
     if (status === "unauthenticated" && accessToken && refreshToken) {
       signIn("social-login", { redirect: false, accessToken, refreshToken, pk })
         .then((result) => {
+          console.log({ result });
           if (result?.error) {
+            console.log(result.error);
             toast.error("로그인에 실패했습니다.");
           }
         })
