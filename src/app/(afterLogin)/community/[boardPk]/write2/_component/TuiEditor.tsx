@@ -21,23 +21,24 @@ export default function TuiEditor() {
   const router = useRouter();
   const [markdownContent, setMarkdownContent] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
+  const [content, setContent] = useState("");
 
   const onCancel = () => {
-    router.push("/community/HS");
+    router.back();
   };
 
   const extractTextFromHTML = (getHTML: string) => {
     // <p> 태그를 제거하고 줄바꿈 문자를 추가
-    let withoutPTags = getHTML.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n");
+    const withoutPTags = getHTML.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n");
 
     // 나머지 태그들 제거
-    let withoutTags = withoutPTags.replace(/<[^>]*>/g, "");
+    const withoutTags = withoutPTags.replace(/<[^>]*>/g, "");
 
     // &nbsp; 제거
-    let withoutNBSP = withoutTags.replace(/&nbsp;/g, " ");
+    const withoutNBSP = withoutTags.replace(/&nbsp;/g, " ");
 
     // \n 제거
-    let withoutLF = withoutNBSP.replace(/\n/g, " ");
+    const withoutLF = withoutNBSP.replace(/\n/g, " ");
 
     return withoutLF;
   };
@@ -46,21 +47,22 @@ export default function TuiEditor() {
     const instance = editorRef.current?.getInstance();
     const getMarkdown = instance.getMarkdown();
     const getHTML = instance.getHTML();
-    const originText = extractTextFromHTML(getHTML);
+    const content = extractTextFromHTML(getHTML);
+
     setMarkdownContent(getMarkdown);
     setHtmlContent(getHTML);
+    setContent(content);
+  };
 
-    console.log({
-      getMarkdown,
-      getHTML,
-      originText,
-    });
+  const onSubmit = () => {
+    console.log("originContent", htmlContent);
+    console.log("content", content);
   };
 
   return (
     <>
       <button onClick={onCancel}>뒤로 가기</button>
-      <button onClick={handleChange}>작성하기</button>
+      <button onClick={onSubmit}>작성하기</button>
 
       <Editor
         initialValue=" "
@@ -71,6 +73,7 @@ export default function TuiEditor() {
         useCommandShortcut={true}
         plugins={[colorSyntax]}
         ref={editorRef}
+        onChange={handleChange}
       />
     </>
   );
