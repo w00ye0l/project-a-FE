@@ -7,7 +7,7 @@ export default function NavMenu() {
   const pathname = usePathname();
   const { boardPk } = useParams();
 
-  console.log(pathname);
+  // console.log(pathname);
 
   return (
     <>
