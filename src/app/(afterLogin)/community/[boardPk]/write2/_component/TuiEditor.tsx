@@ -59,10 +59,7 @@ export default function TuiEditor() {
   };
 
   const onSubmit = async () => {
-    console.log("boardPk", boardPk);
-    console.log("title", title);
-    console.log("originContent", htmlContent);
-    console.log("content", content);
+    console.log({ boardPk, title, htmlContent, content });
 
     // 게시글 작성 API 호출
     const result = await createArticle({

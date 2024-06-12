@@ -22,10 +22,7 @@ export default function CommunityWritePage() {
   const [originContent, setOriginContent] = useState("");
 
   const onSubmit = async () => {
-    console.log("boardPk", boardPk);
-    console.log("title", title);
-    console.log("originContent", originContent);
-    console.log("content", content);
+    console.log({ boardPk, title, content, originContent });
 
     // 게시글 작성 API 호출
     const result = await createArticle({
