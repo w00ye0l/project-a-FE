@@ -5,6 +5,7 @@ import { getArticleDetail } from "../../_lib/getArticleDetail";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Article } from "@/model/Article";
+import { deleteArticle } from "../../_lib/deleteArticle";
 
 const ViewerComponent = dynamic(() => import("./_component/Viewer"), {
   ssr: false,
@@ -40,6 +41,16 @@ export default function ArticleDetailPage() {
     router.push(`/community/${article?.boardName}/${article?.articlePk}/edit`);
   };
 
+  // 삭제 버튼 클릭
+  const handleDeleteButtonClick = () => {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      // 삭제 API 호출
+      console.log("삭제");
+      deleteArticle({ articlePk });
+      router.push(`/community/${article?.boardName}`);
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -57,7 +68,7 @@ export default function ArticleDetailPage() {
           <div>
             <button onClick={handleBackButtonClick}>뒤로가기</button>
             <button onClick={handleEditButtonClick}>수정</button>
-            <button>삭제</button>
+            <button onClick={handleDeleteButtonClick}>삭제</button>
           </div>
 
           <div>
