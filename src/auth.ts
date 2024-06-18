@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { CustomUser } from "./model/User";
+import { CustomUser } from "./model/CustomUser";
 
 interface ExtendedUser extends CustomUser {
   id: string;
