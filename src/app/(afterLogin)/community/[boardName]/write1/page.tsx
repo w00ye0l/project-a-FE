@@ -2,11 +2,13 @@
 
 import style from "./page.module.css";
 import cx from "classnames";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 
 import dynamic from "next/dynamic";
+import { createArticle } from "../../_lib/createArticle";
+
 const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -14,12 +16,31 @@ const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
 
 export default function CommunityWritePage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const boardName = pathname.split("/")[2];
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [originContent, setOriginContent] = useState("");
 
-  const onSubmit = () => {
-    console.log("originContent", originContent);
-    console.log("content", content);
+  const onSubmit = async () => {
+    console.log({ boardName, title, content, originContent });
+
+    // 게시글 작성 API 호출
+    const result = await createArticle({
+      boardName,
+      ArticleData: {
+        title,
+        content,
+        originContent,
+      },
+    });
+
+    console.log({ result });
+    setTitle("");
+    setContent("");
+    setOriginContent("");
+
+    router.push(`/community/${boardName}`);
   };
 
   const onCancel = () => {
@@ -36,6 +57,15 @@ export default function CommunityWritePage() {
       <div className={style.main}>
         <div className={style.editorContainer}>
           <h2>글쓰기</h2>
+
+          <label htmlFor="title">제목</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
           <div className={style.editor}>
             <QuillEditor
               value={originContent}
@@ -47,9 +77,13 @@ export default function CommunityWritePage() {
 
         <div className={style.previewContainer}>
           <h2>미리보기</h2>
+          <p>제목: {title}</p>
           <div
             className={cx(style.preview, "ql-content")}
-            dangerouslySetInnerHTML={{ __html: originContent }}
+            dangerouslySetInnerHTML={{
+              // __html: DOMPurify.sanitize(originContent),
+              __html: originContent,
+            }}
           />
         </div>
       </div>

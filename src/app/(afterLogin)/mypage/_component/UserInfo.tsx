@@ -1,11 +1,13 @@
 "use client";
 
-import { CustomUser } from "@/model/User";
+import { CustomUser } from "@/model/CustomUser";
 import { Session } from "@auth/core/types";
 import { useCallback, useEffect, useState } from "react";
 import ProfileImage from "./ProfileImage";
 import { toast } from "sonner";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   me: Session;
@@ -15,33 +17,40 @@ export default function UserInfo({ me }: Props) {
   const [userInfo, setUserInfo] = useState<CustomUser | null>(null);
   const [initialLoad, setInitialLoad] = useState(true);
   const preUserInfo = me as CustomUser;
+  const router = useRouter();
 
   // 유저 정보 가져오는 함수
   // getUserInfo 함수를 useCallback으로 메모이제이션하여 의존성 배열 문제 해결
   const getUserInfo = useCallback(async () => {
     console.log("getUserInfo called");
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/user/${preUserInfo.userPk}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${preUserInfo.accessToken}`,
-        },
-      }
-    );
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/${preUserInfo.userPk}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${preUserInfo.accessToken}`,
+          },
+        }
+      );
 
-    const result = await response.json();
+      const result = await response.json();
 
-    // 유저 정보 가져오는 것 실패
-    if (!response.ok) {
+      // 유저 정보를 state에 저장
+      setUserInfo({ ...result.data });
+    } catch (error) {
+      // 유저 정보 가져오는 것 실패
       console.error("유저 정보를 가져오는데 실패했습니다.");
       toast.error("유저 정보를 가져오는데 실패했습니다.");
+      signOut({ redirect: false }).then(() => {
+        // 로그아웃 후 페이지 이동
+        router.replace("/");
+        // 캐시 데이터 제거
+        router.refresh();
+      });
       return;
     }
-
-    // 유저 정보를 state에 저장
-    setUserInfo({ ...result.data });
-  }, [preUserInfo.userPk, preUserInfo.accessToken]);
+  }, [preUserInfo.userPk, preUserInfo.accessToken, router]);
 
   // 프로필 이미지 삭제 함수
   const handleImageDelete = async () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomUser } from "@/model/User";
+import { CustomUser } from "@/model/CustomUser";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import {

@@ -1,13 +1,23 @@
 "use client";
 
+import { CustomUser } from "@/model/CustomUser";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+interface IBoard {
+  boardPk: number;
+  boardName: string;
+}
+
 export default function BoardList() {
   const [boardName, setBoardName] = useState("");
   const [boardList, setBoardList] = useState([]);
+  const { data: session } = useSession();
+  const user = session as CustomUser;
 
+  // 게시판 목록 조회
   const getBoardList = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/community/boardlist`,
@@ -21,6 +31,7 @@ export default function BoardList() {
     setBoardList(result.data);
   };
 
+  // 게시판 생성
   const handleBoardCreate = async () => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/community/board`,
@@ -28,16 +39,21 @@ export default function BoardList() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
         },
         body: JSON.stringify({
           boardName,
+          boardAuthType: 2,
         }),
       }
     );
 
     const result = await response.json();
 
+    console.log({ result });
+
     if (result.statusCode !== 201) {
+      console.log(result);
       toast.error(result.message);
       return;
     }
@@ -70,17 +86,13 @@ export default function BoardList() {
       <ul style={{ flex: "1", listStyle: "none" }}>
         <Link href="/community">
           <li>
-            <p>전체 게시판</p>
+            <p>전체</p>
           </li>
         </Link>
 
         {boardList.map((board: { boardPk: number; boardName: string }) => (
-          <Link href={`/community/${board.boardPk}`} key={board.boardPk}>
-            <li key={board.boardPk}>
-              <p>
-                {board.boardPk}: {board.boardName}
-              </p>
-            </li>
+          <Link href={`/community/${board.boardName}`} key={board.boardPk}>
+            <li>{board.boardName} 게시판</li>
           </Link>
         ))}
       </ul>

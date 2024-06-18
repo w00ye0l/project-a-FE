@@ -1,28 +1,31 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { getArticleList } from "../_lib/getArticleList";
 import { useEffect, useState } from "react";
-import { getArticleList } from "./_lib/getArticleList";
 import Link from "next/link";
 import { Article } from "@/model/Article";
 
-export default function CommunityPage() {
+export default function CommunityBoardPage() {
+  // 동적 경로 매개변수
+  const { boardName } = useParams();
   const [articleList, setArticleList] = useState([] as Article[]);
 
-  const getData = async () => {
-    const result = await getArticleList({});
+  const getData = async ({ boardName }: { boardName: string | string[] }) => {
+    const result = await getArticleList({ boardName });
 
-    console.log({ result });
+    // console.log({ result });
 
     setArticleList(result.data);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData({ boardName });
+  }, [boardName]);
 
   return (
     <>
-      <h1>전체 글 목록</h1>
+      <h1>{boardName} 게시판</h1>
 
       <table>
         <thead>
@@ -43,9 +46,7 @@ export default function CommunityPage() {
               <td>{article.boardName}</td>
               <td>{article.articlePk}</td>
               <td>
-                <Link
-                  href={`/community/${article.boardName}/${article.articlePk}`}
-                >
+                <Link href={`/community/${boardName}/${article.articlePk}`}>
                   {article.title}
                 </Link>
               </td>

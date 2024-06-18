@@ -2,13 +2,14 @@
 
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
-import { Editor, Viewer } from "@toast-ui/react-editor";
+import { Editor } from "@toast-ui/react-editor";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import type { Editor as IEditor } from "@toast-ui/react-editor";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { createArticle } from "../../../_lib/createArticle";
 
 const toolbarItems = [
   ["heading", "bold", "italic", "strike"],
@@ -17,8 +18,11 @@ const toolbarItems = [
 ];
 
 export default function TuiEditor() {
-  const editorRef = useRef<IEditor>(null);
   const router = useRouter();
+  const pathname = usePathname();
+  const boardName = pathname.split("/")[2];
+  const editorRef = useRef<IEditor>(null);
+  const [title, setTitle] = useState("");
   const [markdownContent, setMarkdownContent] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
   const [content, setContent] = useState("");
@@ -54,27 +58,56 @@ export default function TuiEditor() {
     setContent(content);
   };
 
-  const onSubmit = () => {
-    console.log("originContent", htmlContent);
-    console.log("content", content);
+  const onSubmit = async () => {
+    console.log({ boardName, title, htmlContent, content });
+
+    // 게시글 작성 API 호출
+    const result = await createArticle({
+      boardName,
+      ArticleData: {
+        title,
+        content,
+        originContent: htmlContent,
+      },
+    });
+
+    console.log({ result });
+    setTitle("");
+    setContent("");
+    setHtmlContent("");
+
+    router.push(`/community/${boardName}`);
   };
 
   return (
     <>
-      <button onClick={onCancel}>뒤로 가기</button>
-      <button onClick={onSubmit}>작성하기</button>
+      <div>
+        <button onClick={onCancel}>뒤로 가기</button>
+        <button onClick={onSubmit}>작성하기</button>
+      </div>
 
-      <Editor
-        initialValue=" "
-        toolbarItems={toolbarItems}
-        previewStyle="vertical"
-        height="400px"
-        initialEditType="markdown"
-        useCommandShortcut={true}
-        plugins={[colorSyntax]}
-        ref={editorRef}
-        onChange={handleChange}
-      />
+      <div>
+        <h2>글쓰기</h2>
+        <label htmlFor="title">제목</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <Editor
+          initialValue=" "
+          toolbarItems={toolbarItems}
+          previewStyle="vertical"
+          height="400px"
+          initialEditType="markdown"
+          useCommandShortcut={true}
+          plugins={[colorSyntax]}
+          ref={editorRef}
+          onChange={handleChange}
+        />
+      </div>
     </>
   );
 }
