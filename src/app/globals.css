@@ -119,3 +119,8 @@ body {
 .ql-size-huge {
   font-size: 2.5em !important;
 }
+
+.box {
+  margin: 10px 5px;
+  border: 1px solid #000;
+}
