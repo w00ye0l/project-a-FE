@@ -3,19 +3,20 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-export default function NavMenu() {
+export default function WriteNavMenu() {
   const pathname = usePathname();
-  const { boardPk } = useParams();
+  const { boardName } = useParams();
 
-  // console.log(pathname);
+  console.log(pathname);
+  console.log(boardName);
 
   return (
     <>
-      {boardPk && (
+      {boardName && (
         <nav>
           <ul style={{ display: "flex", listStyleType: "none", gap: "10px" }}>
             <li>
-              <Link href={`/community/${boardPk}/write1`}>
+              <Link href={`/community/${boardName}/write1`}>
                 {pathname.endsWith("write1") ? (
                   <b>글 쓰기(v1)</b>
                 ) : (
@@ -24,7 +25,7 @@ export default function NavMenu() {
               </Link>
             </li>
             <li>
-              <Link href={`/community/${boardPk}/write2`}>
+              <Link href={`/community/${boardName}/write2`}>
                 {pathname.endsWith("write2") ? (
                   <b>글 쓰기(v2)</b>
                 ) : (

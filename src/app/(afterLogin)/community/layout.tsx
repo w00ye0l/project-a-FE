@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BoardList from "./_component/BoardList";
-import NavMenu from "./_component/NavMenu";
+import WriteNavMenu from "./_component/WriteNavMenu";
 
 export default function CommunityLayout({
   children,
@@ -17,7 +17,7 @@ export default function CommunityLayout({
         <BoardList />
 
         <div style={{ flex: "10" }}>
-          <NavMenu />
+          <WriteNavMenu />
           {children}
         </div>
       </div>
