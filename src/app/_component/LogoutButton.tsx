@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { CustomUser } from "../../model/User";
+import { CustomUser } from "../../model/CustomUser";
 import logout from "../(beforeLogin)/auth/_lib/logout";
 import { toast } from "sonner";
 import { signOut } from "next-auth/react";
