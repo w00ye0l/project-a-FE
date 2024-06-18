@@ -66,6 +66,7 @@ export default function QuillEditor({
     []
   );
 
+  // 텍스트 변경 시 호출되는 콜백 함수
   const handleChange = (
     content: string,
     delta: any,

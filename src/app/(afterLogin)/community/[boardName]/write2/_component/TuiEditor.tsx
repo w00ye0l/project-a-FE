@@ -2,7 +2,7 @@
 
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
-import { Editor, Viewer } from "@toast-ui/react-editor";
+import { Editor } from "@toast-ui/react-editor";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
@@ -20,7 +20,7 @@ const toolbarItems = [
 export default function TuiEditor() {
   const router = useRouter();
   const pathname = usePathname();
-  const boardPk = pathname.split("/")[2];
+  const boardName = pathname.split("/")[2];
   const editorRef = useRef<IEditor>(null);
   const [title, setTitle] = useState("");
   const [markdownContent, setMarkdownContent] = useState("");
@@ -59,11 +59,11 @@ export default function TuiEditor() {
   };
 
   const onSubmit = async () => {
-    console.log({ boardPk, title, htmlContent, content });
+    console.log({ boardName, title, htmlContent, content });
 
     // 게시글 작성 API 호출
     const result = await createArticle({
-      boardPk: Number(boardPk),
+      boardName,
       ArticleData: {
         title,
         content,
@@ -76,7 +76,7 @@ export default function TuiEditor() {
     setContent("");
     setHtmlContent("");
 
-    router.push(`/community/${boardPk}`);
+    router.push(`/community/${boardName}`);
   };
 
   return (

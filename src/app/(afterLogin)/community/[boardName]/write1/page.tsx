@@ -8,6 +8,7 @@ import "react-quill/dist/quill.snow.css";
 
 import dynamic from "next/dynamic";
 import { createArticle } from "../../_lib/createArticle";
+
 const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -16,17 +17,17 @@ const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
 export default function CommunityWritePage() {
   const router = useRouter();
   const pathname = usePathname();
-  const boardPk = pathname.split("/")[2];
+  const boardName = pathname.split("/")[2];
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [originContent, setOriginContent] = useState("");
 
   const onSubmit = async () => {
-    console.log({ boardPk, title, content, originContent });
+    console.log({ boardName, title, content, originContent });
 
     // 게시글 작성 API 호출
     const result = await createArticle({
-      boardPk: Number(boardPk),
+      boardName,
       ArticleData: {
         title,
         content,
@@ -39,7 +40,7 @@ export default function CommunityWritePage() {
     setContent("");
     setOriginContent("");
 
-    router.push(`/community/${boardPk}`);
+    router.push(`/community/${boardName}`);
   };
 
   const onCancel = () => {
@@ -79,7 +80,10 @@ export default function CommunityWritePage() {
           <p>제목: {title}</p>
           <div
             className={cx(style.preview, "ql-content")}
-            dangerouslySetInnerHTML={{ __html: originContent }}
+            dangerouslySetInnerHTML={{
+              // __html: DOMPurify.sanitize(originContent),
+              __html: originContent,
+            }}
           />
         </div>
       </div>
