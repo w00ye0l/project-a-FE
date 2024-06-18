@@ -56,6 +56,7 @@ export default function ArticleEditPage() {
     });
 
     router.push(`/community/${params.boardName}/${params.articlePk}`);
+    router.refresh();
   };
 
   // 뒤로가기 버튼 클릭
