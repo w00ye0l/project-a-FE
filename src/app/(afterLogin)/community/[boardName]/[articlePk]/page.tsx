@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { getArticleDetail } from "../../_lib/getArticleDetail";
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Article } from "@/model/Article";
 import { deleteArticle } from "../../_lib/deleteArticle";
@@ -12,6 +12,7 @@ import { createComment } from "../../_lib/createComment";
 import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 import { deleteComment } from "../../_lib/deleteComment";
+import DOMPurify from "isomorphic-dompurify";
 
 const ViewerComponent = dynamic(() => import("./_component/Viewer"), {
   ssr: false,
@@ -115,13 +116,14 @@ export default function ArticleDetailPage() {
             <p>게시글 제목: {article.title}</p>
             <p>게시글 내용: {article.content}</p>
             <p>게시글 내용 원본: {article.originContent}</p>
+
             <div
               className={cx("box", "ql-content")}
               dangerouslySetInnerHTML={{
-                // __html: DOMPurify.sanitize(originContent),
-                __html: article.originContent,
+                __html: DOMPurify.sanitize(article.originContent),
               }}
             />
+
             <p>조회수: {article.readCount}</p>
             <p>좋아요 수: {article.likeCount}</p>
             <p>작성일: {article.createdAt}</p>
