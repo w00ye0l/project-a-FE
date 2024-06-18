@@ -1,11 +1,11 @@
 interface Props {
-  boardPk?: string | string[];
+  boardName?: string | string[];
 }
 
-export const getArticleList = async ({ boardPk }: Props) => {
+export const getArticleList = async ({ boardName }: Props) => {
   const response = await fetch(
-    boardPk
-      ? `${process.env.NEXT_PUBLIC_BASE_URL}/community?boardPk=${boardPk}`
+    boardName
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/community?boardName=${boardName}`
       : `${process.env.NEXT_PUBLIC_BASE_URL}/community`,
     {
       method: "GET",
@@ -13,6 +13,8 @@ export const getArticleList = async ({ boardPk }: Props) => {
   );
 
   const result = await response.json();
+
+  console.log({ result });
 
   return result;
 };
