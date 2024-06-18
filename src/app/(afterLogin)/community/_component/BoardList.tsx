@@ -83,7 +83,7 @@ export default function BoardList() {
 
       <h3>게시판 목록</h3>
 
-      <ul style={{ flex: "1", listStyle: "none" }}>
+      <ul className="box" style={{ flex: "1", listStyle: "none" }}>
         <Link href="/community">
           <li>
             <p>전체</p>
