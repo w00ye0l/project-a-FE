@@ -85,9 +85,11 @@ export default function BoardList() {
 
       <ul className="box" style={{ flex: "1", listStyle: "none" }}>
         <Link href="/community">
-          <li>
-            <p>전체</p>
-          </li>
+          <li>전체</li>
+        </Link>
+
+        <Link href="/community/best">
+          <li>베스트</li>
         </Link>
 
         {boardList.map((board: { boardPk: number; boardName: string }) => (
