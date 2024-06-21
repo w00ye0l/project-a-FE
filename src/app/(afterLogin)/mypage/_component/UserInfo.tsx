@@ -36,6 +36,19 @@ export default function UserInfo({ me }: Props) {
 
       const result = await response.json();
 
+      console.log({ result });
+
+      if (result.statusCode === 403) {
+        signOut({ redirect: false }).then(() => {
+          // 로그아웃 후 페이지 이동
+          router.replace("/");
+          // 캐시 데이터 제거
+          router.refresh();
+        });
+
+        return;
+      }
+
       // 유저 정보를 state에 저장
       setUserInfo({ ...result.data });
     } catch (error) {
