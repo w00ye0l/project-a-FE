@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getArticleList } from "./_lib/getArticleList";
 import Link from "next/link";
 import { Article } from "@/model/Article";
+import ArticleActionButtonBox from "./_component/ArticleActionButtonBox";
 
 export default function CommunityPage() {
   const [articleList, setArticleList] = useState([] as Article[]);
@@ -24,40 +25,33 @@ export default function CommunityPage() {
     <>
       <h1>전체 글 목록</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>게시판 이름</th>
-            <th>게시글 번호</th>
-            <th>제목</th>
-            <th>내용</th>
-            <th>조회수</th>
-            <th>좋아요 수</th>
-            <th>작성일</th>
-            <th>작성자</th>
-          </tr>
-        </thead>
-        <tbody>
-          {articleList.map((article) => (
-            <tr key={article.articlePk}>
-              <td>{article.boardName}</td>
-              <td>{article.articlePk}</td>
-              <td>
-                <Link
-                  href={`/community/${article.boardName}/${article.articlePk}`}
-                >
-                  {article.title}
-                </Link>
-              </td>
-              <td>{article.content}</td>
-              <td>{article.readCount}</td>
-              <td>{article.likeCount}</td>
-              <td>{article.createdAt}</td>
-              <td>{article.nickname}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {articleList.map((article) => (
+        <div className="box" key={article.articlePk}>
+          <Link
+            style={{ color: "black", textDecoration: "none" }}
+            href={`/community/${article.boardName}/${article.articlePk}`}
+          >
+            <p>
+              [{article.boardName} 게시판] {article.articlePk}번 글 [닉네임:{" "}
+              {article.user.nickname}] 조회수: {article.readCount}
+            </p>
+            <p style={{ fontSize: "20px" }}>{article.title}</p>
+            <p className="box">{article.content}</p>
+            <p>작성일: {article.createdAt}</p>
+          </Link>
+
+          <ArticleActionButtonBox
+            articlePk={article.articlePk}
+            boardName={article.boardName}
+            reactionCount={
+              article.likeCount + article.neutralCount + article.dislikeCount
+            }
+            reactions={article.reactions}
+            scrapCount={article.scrapCount}
+            scraps={article.scraps}
+          />
+        </div>
+      ))}
     </>
   );
 }

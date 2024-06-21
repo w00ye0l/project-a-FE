@@ -1,40 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function WriteNavMenu() {
-  const pathname = usePathname();
   const { boardName } = useParams();
+  const router = useRouter();
 
-  console.log(pathname);
-  console.log(boardName);
+  const handleWriteButtonClick = () => {
+    router.push(`/community/${boardName}/write1`);
+  };
 
   return (
     <>
-      {boardName && (
-        <nav>
-          <ul style={{ display: "flex", listStyleType: "none", gap: "10px" }}>
-            <li>
-              <Link href={`/community/${boardName}/write1`}>
-                {pathname.endsWith("write1") ? (
-                  <b>글 쓰기(v1)</b>
-                ) : (
-                  "글 쓰기(v1)"
-                )}
-              </Link>
-            </li>
-            <li>
-              <Link href={`/community/${boardName}/write2`}>
-                {pathname.endsWith("write2") ? (
-                  <b>글 쓰기(v2)</b>
-                ) : (
-                  "글 쓰기(v2)"
-                )}
-              </Link>
-            </li>
-          </ul>
-        </nav>
+      {boardName && boardName != "best" && (
+        <button onClick={handleWriteButtonClick}>게시글 작성</button>
       )}
     </>
   );

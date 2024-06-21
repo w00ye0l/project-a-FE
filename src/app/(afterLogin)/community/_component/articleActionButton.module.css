@@ -1,0 +1,42 @@
+.reactionUserContainer {
+  position: relative;
+}
+
+.reactionUserList {
+  position: absolute;
+  bottom: 24px;
+  /* width: 120px; */
+  background-color: #eee;
+  border: 2px solid red;
+  display: none;
+}
+
+.reactionUser:hover {
+  font-weight: bold;
+}
+
+.reactionUserContainer:hover .reactionUserList {
+  display: block;
+}
+
+.reactionContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.reactionActionList {
+  position: absolute;
+  bottom: -24px;
+  width: 120px;
+  border: 2px solid red;
+  display: none;
+}
+
+.reactionButton {
+  font-size: 14px;
+  border: 1px solid #ccc;
+}
+
+.reactionContainer:hover .reactionActionList {
+  display: block;
+}
