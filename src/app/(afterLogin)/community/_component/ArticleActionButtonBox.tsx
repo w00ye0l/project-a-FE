@@ -3,12 +3,12 @@
 import style from "./articleActionButton.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { createReaction } from "../_lib/createReaction";
+import { createReaction } from "../_lib/postReaction";
 import { Reaction } from "@/model/Reaction";
 import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 import { Scrap } from "@/model/Scrap";
-import { createScrap } from "../_lib/createScrap";
+import { createScrap } from "../_lib/postScrap";
 
 interface Props {
   articlePk: number;
