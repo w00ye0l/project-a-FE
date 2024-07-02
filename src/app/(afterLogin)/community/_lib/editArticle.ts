@@ -3,18 +3,12 @@
 import { auth } from "@/auth";
 import { CustomUser } from "@/model/CustomUser";
 
-interface ArticleData {
-  title: string;
-  content: string;
-  originContent: string;
-}
-
 interface Props {
   articlePk: number;
-  ArticleData: ArticleData;
+  formData: FormData;
 }
 
-export const editArticle = async ({ articlePk, ArticleData }: Props) => {
+export const editArticle = async ({ articlePk, formData }: Props) => {
   const session = await auth();
   const user = session as CustomUser;
 
@@ -24,10 +18,9 @@ export const editArticle = async ({ articlePk, ArticleData }: Props) => {
     {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${user.accessToken}`,
       },
-      body: JSON.stringify(ArticleData),
+      body: formData,
     }
   );
 

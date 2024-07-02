@@ -4,7 +4,9 @@ import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import Quill from "quill";
 import { ImageResize } from "quill-image-resize-module-ts";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import { useSession } from "next-auth/react";
+import { CustomUser } from "@/model/CustomUser";
 
 Quill.register("modules/imageResize", ImageResize);
 
@@ -20,6 +22,10 @@ export default function QuillEditor({
   onOriginChange,
   onChange,
 }: QuillEditorProps) {
+  const { data: session } = useSession();
+  const user = session as CustomUser;
+  const quillRef = useRef<ReactQuill | null>(null);
+
   // Quill 모듈 설정
   const modules = useMemo(
     () => ({
@@ -58,6 +64,57 @@ export default function QuillEditor({
           ],
           ["link", "image", "video"],
         ],
+        handlers: {
+          image: () => {
+            const input = document.createElement("input");
+            input.setAttribute("type", "file");
+            input.setAttribute(
+              "accept",
+              "image/jpg, image/jpeg, image/png, image/gif, image/webp"
+            );
+            input.click();
+
+            input.onchange = async () => {
+              console.log(input.files);
+              const file = input.files?.[0];
+              console.log(file);
+
+              if (file) {
+                const formData = new FormData();
+                formData.append("images", file);
+
+                console.log(formData);
+
+                const response = await fetch(
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/community/article/image`,
+                  {
+                    method: "POST",
+                    headers: {
+                      Authorization: `Bearer ${user.accessToken}`,
+                    },
+                    body: formData,
+                  }
+                );
+
+                const result = await response.json();
+
+                console.log({ result });
+
+                const imageUrl = result.data.imageUrls[0];
+
+                const editor = quillRef.current?.getEditor();
+
+                if (editor) {
+                  const range = editor.getSelection(true);
+                  editor.insertEmbed(range.index, "image", imageUrl);
+                  // const imageHtml = `<img src="${imageUrl}" alt="${imageUrl}" width={100} height={40} />`;
+                  // editor.clipboard.dangerouslyPasteHTML(range.index, imageHtml);
+                  editor.setSelection(range.index + 1, 0);
+                }
+              }
+            };
+          },
+        },
       },
       imageResize: {
         modules: ["Resize", "DisplaySize"],
@@ -89,6 +146,7 @@ export default function QuillEditor({
       value={value}
       onChange={handleChange}
       modules={modules}
+      ref={quillRef}
     />
   );
 }

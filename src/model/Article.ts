@@ -24,4 +24,6 @@ export interface Article {
 
   reactions: Reaction[];
   scraps: Scrap[];
+
+  videos: string[];
 }
