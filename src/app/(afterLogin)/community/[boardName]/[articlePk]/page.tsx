@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { getArticleDetail } from "../../_lib/getArticleDetail";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { Article } from "@/model/Article";
 import { deleteArticle } from "../../_lib/deleteArticle";
 import cx from "classnames";
@@ -13,11 +12,6 @@ import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 import { deleteComment } from "../../_lib/deleteComment";
 import DOMPurify from "isomorphic-dompurify";
-
-const ViewerComponent = dynamic(() => import("./_component/Viewer"), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
 
 export default function ArticleDetailPage() {
   const { data: session } = useSession();
@@ -55,7 +49,7 @@ export default function ArticleDetailPage() {
 
   // 뒤로가기 버튼 클릭
   const handleBackButtonClick = () => {
-    router.back();
+    router.push(`/community/${article?.boardName}`);
   };
 
   // 수정 버튼 클릭
@@ -114,23 +108,28 @@ export default function ArticleDetailPage() {
           <div className="box">
             <p>게시글 번호: {article.articlePk}</p>
             <p>게시글 제목: {article.title}</p>
-            <p>게시글 내용: {article.content}</p>
-            <p>게시글 내용 원본: {article.originContent}</p>
 
-            <div
-              className={cx("box", "ql-content")}
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(article.originContent),
-              }}
-            />
+            <div className="box">
+              {article.videos &&
+                article.videos.length > 0 &&
+                article.videos.map((videoUrl, index) => (
+                  <div key={index} className="video-container">
+                    <video src={videoUrl} controls width="20%" />
+                  </div>
+                ))}
+              <div
+                className={cx("ql-content")}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(article.originContent),
+                }}
+              />
+            </div>
 
             <p>조회수: {article.readCount}</p>
             <p>좋아요 수: {article.likeCount}</p>
             <p>작성일: {article.createdAt}</p>
             <p>수정일: {article.updatedAt}</p>
           </div>
-
-          {/* <ViewerComponent originContent={article.originContent} /> */}
 
           <div className="box">
             <h2>댓글</h2>
@@ -144,22 +143,24 @@ export default function ArticleDetailPage() {
             </div>
 
             <div>
-              {commentList.map((comment) => (
-                <div className="box" key={comment.commentPk}>
-                  {comment.member.userPk === user.userPk && (
-                    <button
-                      onClick={() => {
-                        handleCommentDeleteButtonClick(comment.commentPk);
-                      }}
-                    >
-                      삭제
-                    </button>
-                  )}
-                  <p>작성자: {comment.member.nickname}</p>
-                  <p>댓글 내용: {comment.content}</p>
-                  <p>댓글 작성일: {comment.createdAt}</p>
-                </div>
-              ))}
+              {commentList &&
+                commentList.length &&
+                commentList.map((comment) => (
+                  <div className="box" key={comment.commentPk}>
+                    {comment.member.userPk === user.userPk && (
+                      <button
+                        onClick={() => {
+                          handleCommentDeleteButtonClick(comment.commentPk);
+                        }}
+                      >
+                        삭제
+                      </button>
+                    )}
+                    <p>작성자: {comment.member.nickname}</p>
+                    <p>댓글 내용: {comment.content}</p>
+                    <p>댓글 작성일: {comment.createdAt}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </>

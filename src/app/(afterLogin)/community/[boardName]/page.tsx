@@ -7,6 +7,8 @@ import Link from "next/link";
 import { Article } from "@/model/Article";
 import ArticleActionButtonBox from "../_component/ArticleActionButtonBox";
 import WriteNavMenu from "../_component/WriteNavMenu";
+import cx from "classnames";
+import DOMPurify from "isomorphic-dompurify";
 
 export default function CommunityBoardPage() {
   // 동적 경로 매개변수
@@ -16,9 +18,7 @@ export default function CommunityBoardPage() {
   const getData = async ({ boardName }: { boardName: string | string[] }) => {
     const result = await getArticleList({ boardName });
 
-    // console.log({ result });
-
-    setArticleList(result.data);
+    setArticleList(result.data.content);
   };
 
   useEffect(() => {
@@ -31,33 +31,49 @@ export default function CommunityBoardPage() {
 
       <h1>{boardName} 게시판</h1>
 
-      {articleList.map((article) => (
-        <div className="box" key={article.articlePk}>
-          <Link
-            style={{ color: "black", textDecoration: "none" }}
-            href={`/community/${article.boardName}/${article.articlePk}`}
-          >
-            <p>
-              [{article.boardName} 게시판] {article.articlePk}번 글 [닉네임:{" "}
-              {article.user.nickname}] 조회수: {article.readCount}
-            </p>
-            <p style={{ fontSize: "20px" }}>{article.title}</p>
-            <p className="box">{article.content}</p>
-            <p>작성일: {article.createdAt}</p>
-          </Link>
+      {articleList &&
+        articleList.length > 0 &&
+        articleList.map((article) => (
+          <div className="box" key={article.articlePk}>
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              href={`/community/${article.boardName}/${article.articlePk}`}
+            >
+              <p>
+                [{article.boardName} 게시판] {article.articlePk}번 글 [닉네임:{" "}
+                {article.user.nickname}] 조회수: {article.readCount}
+              </p>
+              <p>작성일: {article.createdAt}</p>
+              <p style={{ fontSize: "20px" }}>{article.title}</p>
+              <div className="box">
+                {article.videos &&
+                  article.videos.length > 0 &&
+                  article.videos.map((videoUrl, index) => (
+                    <div key={index} className="video-container">
+                      <video src={videoUrl} controls width="20%" />
+                    </div>
+                  ))}
+                <div
+                  className={cx("ql-content")}
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(article.originContent),
+                  }}
+                />
+              </div>
+            </Link>
 
-          <ArticleActionButtonBox
-            articlePk={article.articlePk}
-            boardName={article.boardName}
-            reactionCount={
-              article.likeCount + article.neutralCount + article.dislikeCount
-            }
-            reactions={article.reactions}
-            scrapCount={article.scrapCount}
-            scraps={article.scraps}
-          />
-        </div>
-      ))}
+            <ArticleActionButtonBox
+              articlePk={article.articlePk}
+              boardName={article.boardName}
+              reactionCount={
+                article.likeCount + article.neutralCount + article.dislikeCount
+              }
+              reactions={article.reactions}
+              scrapCount={article.scrapCount}
+              scraps={article.scraps}
+            />
+          </div>
+        ))}
     </>
   );
 }
