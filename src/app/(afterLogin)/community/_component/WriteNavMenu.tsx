@@ -7,7 +7,7 @@ export default function WriteNavMenu() {
   const router = useRouter();
 
   const handleWriteButtonClick = () => {
-    router.push(`/community/${boardName}/write1`);
+    router.push(`/community/${boardName}/write`);
   };
 
   return (
