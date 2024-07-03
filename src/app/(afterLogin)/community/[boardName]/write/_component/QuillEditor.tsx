@@ -3,12 +3,12 @@
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import Quill from "quill";
-import { ImageResize } from "quill-image-resize-module-ts";
+import imageCompressor from "quill-image-compress";
 import { useMemo, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 
-Quill.register("modules/imageResize", ImageResize);
+Quill.register("modules/imageCompressor", imageCompressor);
 
 interface QuillEditorProps {
   value: string;
@@ -112,8 +112,11 @@ export default function QuillEditor({
           },
         },
       },
-      imageResize: {
-        modules: ["Resize", "DisplaySize"],
+      imageCompressor: {
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 600,
+        imageType: "image/jpeg, image/png, image/webp, image/gif, image/jpg",
       },
     }),
     []
