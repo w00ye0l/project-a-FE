@@ -88,7 +88,7 @@ const onSubmit = async (prevState: any, rawFormData: FormData) => {
 
     console.log(result);
 
-    if (result.statusCode === 200) {
+    if (result.statusCode === 201) {
       console.log("회원가입 성공");
       return { message: "SUCCESS" };
     } else if (result.statusCode === 404) {
