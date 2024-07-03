@@ -124,3 +124,19 @@ body {
   margin: 10px 5px;
   border: 1px solid #000;
 }
+
+.articleTitle {
+  padding: 10px;
+}
+
+.articleBox {
+  width: 800px;
+}
+
+.contentBox {
+  overflow: auto;
+}
+
+.articleSmallBox {
+  max-height: 500px;
+}

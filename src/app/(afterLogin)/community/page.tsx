@@ -36,7 +36,7 @@ export default function CommunityPage() {
       {articleList &&
         articleList.length > 0 &&
         articleList.map((article) => (
-          <div className="box" key={article.articlePk}>
+          <div className={cx("box", "articleBox")} key={article.articlePk}>
             <Link
               style={{ color: "black", textDecoration: "none" }}
               href={`/community/${article.boardName}/${article.articlePk}`}
@@ -46,21 +46,24 @@ export default function CommunityPage() {
                 {article.user.nickname}] 조회수: {article.readCount}
               </p>
               <p>작성일: {article.createdAt}</p>
-              <p style={{ fontSize: "20px" }}>{article.title}</p>
-              <div className="box">
-                {article.videos &&
-                  article.videos.length > 0 &&
-                  article.videos.map((videoUrl, index) => (
-                    <div key={index} className="video-container">
-                      <video src={videoUrl} controls width="20%" />
-                    </div>
-                  ))}
-                <div
-                  className={cx("ql-content")}
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(article.originContent),
-                  }}
-                />
+
+              <div className={cx("box")}>
+                <h2 className="articleTitle">{article.title}</h2>
+                <div className={cx("box", "contentBox")}>
+                  {article.videos &&
+                    article.videos.length > 0 &&
+                    article.videos.map((videoUrl, index) => (
+                      <div key={index} className="video-container">
+                        <video src={videoUrl} controls width="20%" />
+                      </div>
+                    ))}
+                  <div
+                    className={cx("ql-content")}
+                    dangerouslySetInnerHTML={{
+                      __html: sanitizeHtml(article.originContent),
+                    }}
+                  />
+                </div>
               </div>
             </Link>
 
