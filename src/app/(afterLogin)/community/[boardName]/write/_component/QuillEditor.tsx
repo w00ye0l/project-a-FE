@@ -75,7 +75,6 @@ export default function QuillEditor({
             input.click();
 
             input.onchange = async () => {
-              console.log(input.files);
               const file = input.files?.[0];
               console.log(file);
 
@@ -101,14 +100,11 @@ export default function QuillEditor({
                 console.log({ result });
 
                 const imageUrl = result.data.imageUrls[0];
-
                 const editor = quillRef.current?.getEditor();
 
                 if (editor) {
                   const range = editor.getSelection(true);
                   editor.insertEmbed(range.index, "image", imageUrl);
-                  // const imageHtml = `<img src="${imageUrl}" alt="${imageUrl}" width={100} height={40} />`;
-                  // editor.clipboard.dangerouslyPasteHTML(range.index, imageHtml);
                   editor.setSelection(range.index + 1, 0);
                 }
               }
