@@ -68,7 +68,14 @@ export default function BoardList() {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "5px",
+        height: "100%",
+      }}
+    >
       <div>
         <label htmlFor="boardName">게시판 이름</label>
         <input
@@ -81,23 +88,25 @@ export default function BoardList() {
         <button onClick={handleBoardCreate}>게시판 생성</button>
       </div>
 
-      <h3>게시판 목록</h3>
+      <div className="box">
+        <h3>게시판 목록</h3>
 
-      <ul className="box" style={{ flex: "1", listStyle: "none" }}>
-        <Link href="/community">
-          <li>전체</li>
-        </Link>
-
-        <Link href="/community/best">
-          <li>베스트</li>
-        </Link>
-
-        {boardList.map((board: { boardPk: number; boardName: string }) => (
-          <Link href={`/community/${board.boardName}`} key={board.boardPk}>
-            <li>{board.boardName} 게시판</li>
+        <ul style={{ flex: "1", listStyle: "none", padding: "10px" }}>
+          <Link href="/community">
+            <li>전체</li>
           </Link>
-        ))}
-      </ul>
+
+          <Link href="/community/best">
+            <li>베스트</li>
+          </Link>
+
+          {boardList.map((board: { boardPk: number; boardName: string }) => (
+            <Link href={`/community/${board.boardName}`} key={board.boardPk}>
+              <li>{board.boardName} 게시판</li>
+            </Link>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

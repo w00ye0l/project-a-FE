@@ -183,24 +183,27 @@ export default function ArticleDetailPage() {
             <button onClick={handleDeleteButtonClick}>삭제</button>
           </div>
 
-          <div className="box">
+          <div className={cx("box", "articleBox")}>
             <p>게시글 번호: {article.articlePk}</p>
             <p>게시글 제목: {article.title}</p>
 
-            <div className="box">
-              {article.videos &&
-                article.videos.length > 0 &&
-                article.videos.map((videoUrl, index) => (
-                  <div key={index} className="video-container">
-                    <video src={videoUrl} controls width="20%" />
-                  </div>
-                ))}
-              <div
-                className={cx("ql-content")}
-                dangerouslySetInnerHTML={{
-                  __html: sanitizeHtml(article.originContent),
-                }}
-              />
+            <div className={cx("box")}>
+              <h2 className="articleTitle">{article.title}</h2>
+              <div className={cx("box", "contentBox")}>
+                {article.videos &&
+                  article.videos.length > 0 &&
+                  article.videos.map((videoUrl, index) => (
+                    <div key={index} className="video-container">
+                      <video src={videoUrl} controls width="20%" />
+                    </div>
+                  ))}
+                <div
+                  className={cx("ql-content")}
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(article.originContent),
+                  }}
+                />
+              </div>
             </div>
 
             <p>조회수: {article.readCount}</p>
@@ -209,7 +212,7 @@ export default function ArticleDetailPage() {
             <p>수정일: {article.updatedAt}</p>
           </div>
 
-          <div className="box">
+          <div className={cx("box", "articleBox")}>
             <h2>댓글</h2>
             <div>
               <input
@@ -235,8 +238,8 @@ export default function ArticleDetailPage() {
                       </button>
                     )}
                     <p>작성자: {comment.member.nickname}</p>
-                    <p>댓글 내용: {comment.content}</p>
                     <p>댓글 작성일: {comment.createdAt}</p>
+                    <p>댓글 내용: {comment.content}</p>
 
                     {comment.recommentCount > 0 && (
                       <button
@@ -278,8 +281,8 @@ export default function ArticleDetailPage() {
                       recommentList.map((recomment) => (
                         <div key={recomment.recommentPk} className="box">
                           <p>작성자: {recomment.member.nickname}</p>
-                          <p>답글 내용: {recomment.content}</p>
                           <p>답글 작성일: {recomment.createdAt}</p>
+                          <p>답글 내용: {recomment.content}</p>
 
                           {recomment.member.userPk === user.userPk && (
                             <button
