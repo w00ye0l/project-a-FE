@@ -8,7 +8,7 @@ export async function middleware() {
   const session = await auth();
 
   if (!session) {
-    return NextResponse.redirect("http://localhost:3000/auth/login");
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/auth/login`);
   }
 }
 
