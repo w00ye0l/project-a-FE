@@ -21,6 +21,14 @@ export default function CommunityBoardPage() {
     setArticleList(result.data.content);
   };
 
+  // iframe 태그 허용
+  const sanitizeHtml = (dirty: string) => {
+    return DOMPurify.sanitize(dirty, {
+      ADD_TAGS: ["iframe"],
+      ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
+    });
+  };
+
   useEffect(() => {
     getData({ boardName });
   }, [boardName]);
@@ -56,7 +64,7 @@ export default function CommunityBoardPage() {
                 <div
                   className={cx("ql-content")}
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(article.originContent),
+                    __html: sanitizeHtml(article.originContent),
                   }}
                 />
               </div>
