@@ -126,7 +126,7 @@ export default function CommunityWritePage() {
         </div>
 
         <div className={style.previewContainer}>
-          <h2>미리보기</h2>
+          {/* <h2>미리보기</h2>
           <p>제목: {title}</p>
           <div
             className={cx(style.preview, "ql-content")}
@@ -134,25 +134,28 @@ export default function CommunityWritePage() {
               // __html: DOMPurify.sanitize(originContent),
               __html: originContent,
             }}
-          />
-          <div
-            className={cx("box", style.videoPreviewContainer)}
-            style={{ display: "flex" }}
-          >
-            {videos.map((video, index) => (
-              <div
-                key={index}
-                className={style.videoPreview}
-                style={{ display: "inline-block" }}
-              >
-                <p>
-                  {video.name}
-                  <button onClick={() => removeVideo(index)}>제거</button>
-                </p>
-                <video src={video.preview} controls width="50%" />
-              </div>
-            ))}
-          </div>
+          /> */}
+
+          {videos && videos.length > 0 && (
+            <div
+              className={cx("box", style.videoPreviewContainer)}
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              {videos.map((video, index) => (
+                <div
+                  key={index}
+                  className={style.videoPreview}
+                  style={{ display: "inline-block" }}
+                >
+                  <p>
+                    {video.name}
+                    <button onClick={() => removeVideo(index)}>제거</button>
+                  </p>
+                  <video src={video.preview} controls width="300px" />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
