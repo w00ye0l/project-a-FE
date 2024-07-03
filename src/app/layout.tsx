@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import AuthSession from "./_component/AuthSession";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <link
           rel="stylesheet"
           href="https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css"
         />
-      </Head>
+      </head>
       <body className={inter.className}>
         <AuthSession>
           {children}
