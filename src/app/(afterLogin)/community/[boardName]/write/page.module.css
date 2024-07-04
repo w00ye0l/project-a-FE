@@ -2,11 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-}
-
-.editorContainer,
-.previewContainer {
-  width: 50%;
+  flex-direction: column;
 }
 
 .editor,
