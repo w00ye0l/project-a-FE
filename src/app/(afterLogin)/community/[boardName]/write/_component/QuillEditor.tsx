@@ -3,12 +3,12 @@
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import Quill from "quill";
-import imageCompressor from "quill-image-compress";
+import { ImageResize } from "quill-image-resize-module-ts";
 import { useMemo, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 
-Quill.register("modules/imageCompressor", imageCompressor);
+Quill.register("modules/imageResize", ImageResize);
 
 interface QuillEditorProps {
   value: string;
@@ -104,20 +104,35 @@ export default function QuillEditor({
 
                 if (editor) {
                   const range = editor.getSelection(true);
-                  editor.insertEmbed(range.index, "image", imageUrl);
-                  editor.setSelection(range.index + 1, 0);
+
+                  const img = new Image();
+                  img.src = imageUrl;
+                  img.onload = () => {
+                    const maxWidth = 500;
+
+                    let { width, height } = img;
+
+                    if (width > maxWidth) {
+                      height = Math.round((maxWidth * height) / width);
+                      width = maxWidth;
+                    }
+
+                    const imageHtml = `<img src="${imageUrl}" width="${width}" height="${height}" />`;
+                    editor.clipboard.dangerouslyPasteHTML(
+                      range.index,
+                      imageHtml
+                    );
+                    editor.setSelection(range.index + 1, 0);
+                  };
                 }
               }
             };
           },
         },
       },
-      imageCompressor: {
-        quality: 0.7,
-        maxWidth: 800,
-        maxHeight: 600,
-        imageType: "image/jpeg, image/png, image/webp, image/gif, image/jpg",
-      },
+      // imageResize: {
+      //   modules: ["Resize", "DisplaySize"],
+      // },
     }),
     []
   );

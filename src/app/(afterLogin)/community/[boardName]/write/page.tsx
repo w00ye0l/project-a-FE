@@ -94,7 +94,7 @@ export default function CommunityWritePage() {
         <button onClick={onSubmit}>작성하기</button>
       </div>
 
-      <div className={style.main}>
+      <div className={"articleBox"}>
         <div className={style.editorContainer}>
           <h2>글쓰기</h2>
 
@@ -138,15 +138,11 @@ export default function CommunityWritePage() {
 
           {videos && videos.length > 0 && (
             <div
-              className={cx("box", style.videoPreviewContainer)}
+              className={cx("box")}
               style={{ display: "flex", flexDirection: "column" }}
             >
               {videos.map((video, index) => (
-                <div
-                  key={index}
-                  className={style.videoPreview}
-                  style={{ display: "inline-block" }}
-                >
+                <div key={index} style={{ display: "inline-block" }}>
                   <p>
                     {video.name}
                     <button onClick={() => removeVideo(index)}>제거</button>
