@@ -7,14 +7,25 @@ import { Article } from "@/model/Article";
 import ArticleActionButtonBox from "./_component/ArticleActionButtonBox";
 import cx from "classnames";
 import DOMPurify from "isomorphic-dompurify";
+import ArticlePagination from "./_component/ArticlePagination";
+import { PageInfo } from "@/model/PageInfo";
 
 export default function CommunityPage() {
   const [articleList, setArticleList] = useState([] as Article[]);
+  const [pageInfo, setPageInfo] = useState<PageInfo>();
 
   const getData = async () => {
     const result = await getArticleList({});
 
     setArticleList(result.data.content);
+    setPageInfo({
+      number: result.data.number,
+      totalElements: result.data.totalElements,
+      totalPages: result.data.totalPages,
+      first: result.data.first,
+      size: result.data.size,
+      last: result.data.last,
+    });
   };
 
   // iframe 태그 허용
@@ -23,6 +34,29 @@ export default function CommunityPage() {
       ADD_TAGS: ["iframe"],
       ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
     });
+  };
+
+  // 페이지네이션 핸들러
+  const handlePageMove = async (pageNumber: number) => {
+    const result = await getArticleList({
+      boardName: "",
+      pageNumber: pageNumber - 1,
+    });
+    console.log(pageNumber);
+    console.log(result.data.content);
+
+    setArticleList(result.data.content);
+    setPageInfo({
+      number: result.data.number,
+      totalElements: result.data.totalElements,
+      totalPages: result.data.totalPages,
+      first: result.data.first,
+      size: result.data.size,
+      last: result.data.last,
+    });
+
+    // 스크롤을 상단으로 이동
+    window.scrollTo({ top: 0, left: 0 });
   };
 
   useEffect(() => {
@@ -74,11 +108,28 @@ export default function CommunityPage() {
                 article.likeCount + article.neutralCount + article.dislikeCount
               }
               reactions={article.reactions}
+              commentCount={article.commentCount}
               scrapCount={article.scrapCount}
               scraps={article.scraps}
             />
           </div>
         ))}
+
+      {pageInfo && (
+        <div
+          style={{
+            width: "800px",
+            padding: "60px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <ArticlePagination
+            handlePageMove={handlePageMove}
+            pageInfo={pageInfo}
+          />
+        </div>
+      )}
     </>
   );
 }
