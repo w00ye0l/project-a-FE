@@ -14,6 +14,8 @@ export interface Article {
   originContent: string;
 
   readCount: number;
+  commentCount: number;
+
   likeCount: number;
   neutralCount: number;
   dislikeCount: number;
