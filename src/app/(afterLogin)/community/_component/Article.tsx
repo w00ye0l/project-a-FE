@@ -3,7 +3,7 @@ import Link from "next/link";
 import cx from "classnames";
 import DOMPurify from "isomorphic-dompurify";
 
-export default function Article({ article }: { article: Article }) {
+export default function CArticle({ article }: { article: Article }) {
   // iframe 태그 허용
   const sanitizeHtml = (dirty: string) => {
     return DOMPurify.sanitize(dirty, {
