@@ -15,6 +15,7 @@ interface Props {
   boardName: string;
   reactionCount: number;
   reactions: Reaction[];
+  commentCount: number;
   scrapCount: number;
   scraps: Scrap[];
 }
@@ -24,6 +25,7 @@ export default function ArticleActionButtonBox({
   boardName,
   reactionCount,
   reactions,
+  commentCount,
   scrapCount,
   scraps,
 }: Props) {
@@ -180,7 +182,9 @@ export default function ArticleActionButtonBox({
         </div>
       </div>
 
-      <button onClick={handleCommentButtonClick}>댓글</button>
+      <button onClick={handleCommentButtonClick}>
+        댓글 ({commentCount}개)
+      </button>
       <button onClick={handleScrapButtonClick}>스크랩</button>
     </div>
   );
