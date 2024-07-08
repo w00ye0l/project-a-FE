@@ -179,8 +179,12 @@ export default function ArticleDetailPage() {
         <>
           <div>
             <button onClick={handleBackButtonClick}>뒤로가기</button>
-            <button onClick={handleEditButtonClick}>수정</button>
-            <button onClick={handleDeleteButtonClick}>삭제</button>
+            {article.user.userPk === user.userPk && (
+              <>
+                <button onClick={handleEditButtonClick}>수정</button>
+                <button onClick={handleDeleteButtonClick}>삭제</button>
+              </>
+            )}
           </div>
 
           <div className={cx("box", "articleBox")}>
@@ -228,15 +232,16 @@ export default function ArticleDetailPage() {
                 commentList.length > 0 &&
                 commentList.map((comment) => (
                   <div className="box" key={comment.commentPk}>
-                    {comment.member.userPk === user.userPk && (
-                      <button
-                        onClick={() => {
-                          handleCommentDeleteButtonClick(comment.commentPk);
-                        }}
-                      >
-                        삭제
-                      </button>
-                    )}
+                    {comment.member.userPk === user.userPk &&
+                      comment.deleteCheck && (
+                        <button
+                          onClick={() => {
+                            handleCommentDeleteButtonClick(comment.commentPk);
+                          }}
+                        >
+                          삭제
+                        </button>
+                      )}
                     <p>작성자: {comment.member.nickname}</p>
                     <p>댓글 작성일: {comment.createdAt}</p>
                     <p>댓글 내용: {comment.content}</p>
