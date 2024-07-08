@@ -9,16 +9,27 @@ import ArticleActionButtonBox from "../_component/ArticleActionButtonBox";
 import WriteNavMenu from "../_component/WriteNavMenu";
 import cx from "classnames";
 import DOMPurify from "isomorphic-dompurify";
+import { PageInfo } from "@/model/PageInfo";
+import ArticlePagination from "../_component/ArticlePagination";
 
 export default function CommunityBoardPage() {
   // 동적 경로 매개변수
-  const { boardName } = useParams();
+  const { boardName }: { boardName: string } = useParams();
   const [articleList, setArticleList] = useState([] as Article[]);
+  const [pageInfo, setPageInfo] = useState<PageInfo>();
 
-  const getData = async ({ boardName }: { boardName: string | string[] }) => {
-    const result = await getArticleList({ boardName });
+  const getData = async ({ boardName }: { boardName: string }) => {
+    const result = await getArticleList({ boardName, pageNumber: 0 });
 
     setArticleList(result.data.content);
+    setPageInfo({
+      number: result.data.number,
+      totalElements: result.data.totalElements,
+      totalPages: result.data.totalPages,
+      first: result.data.first,
+      size: result.data.size,
+      last: result.data.last,
+    });
   };
 
   // iframe 태그 허용
@@ -27,6 +38,29 @@ export default function CommunityBoardPage() {
       ADD_TAGS: ["iframe"],
       ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
     });
+  };
+
+  // 페이지네이션 핸들러
+  const handlePageMove = async (pageNumber: number) => {
+    const result = await getArticleList({
+      boardName: "",
+      pageNumber: pageNumber - 1,
+    });
+    console.log(pageNumber);
+    console.log(result.data.content);
+
+    setArticleList(result.data.content);
+    setPageInfo({
+      number: result.data.number,
+      totalElements: result.data.totalElements,
+      totalPages: result.data.totalPages,
+      first: result.data.first,
+      size: result.data.size,
+      last: result.data.last,
+    });
+
+    // 스크롤을 상단으로 이동
+    window.scrollTo({ top: 0, left: 0 });
   };
 
   useEffect(() => {
@@ -80,11 +114,28 @@ export default function CommunityBoardPage() {
                 article.likeCount + article.neutralCount + article.dislikeCount
               }
               reactions={article.reactions}
+              commentCount={article.commentCount}
               scrapCount={article.scrapCount}
               scraps={article.scraps}
             />
           </div>
         ))}
+
+      {pageInfo && (
+        <div
+          style={{
+            width: "800px",
+            padding: "60px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <ArticlePagination
+            handlePageMove={handlePageMove}
+            pageInfo={pageInfo}
+          />
+        </div>
+      )}
     </>
   );
 }
