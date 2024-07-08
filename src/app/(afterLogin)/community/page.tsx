@@ -27,15 +27,17 @@ export default function CommunityPage() {
     }
     const result = await getArticleList({ pageNumber: page });
 
-    setArticleList(result.data.content);
-    setPageInfo({
-      number: result.data.number,
-      totalElements: result.data.totalElements,
-      totalPages: result.data.totalPages,
-      first: result.data.first,
-      size: result.data.size,
-      last: result.data.last,
-    });
+    if (result.data !== null) {
+      setArticleList(result.data.content);
+      setPageInfo({
+        number: result.data.number,
+        totalElements: result.data.totalElements,
+        totalPages: result.data.totalPages,
+        first: result.data.first,
+        size: result.data.size,
+        last: result.data.last,
+      });
+    }
   };
 
   // iframe 태그 허용
@@ -87,8 +89,7 @@ export default function CommunityPage() {
     <>
       <h1>전체 글 목록</h1>
 
-      {articleList &&
-        articleList.length > 0 &&
+      {articleList && articleList.length > 0 ? (
         articleList.map((article) => (
           <div className={cx("box", "articleBox")} key={article.articlePk}>
             <Link
@@ -133,7 +134,10 @@ export default function CommunityPage() {
               scraps={article.scraps}
             />
           </div>
-        ))}
+        ))
+      ) : (
+        <p>게시글이 없습니다.</p>
+      )}
 
       {pageInfo && (
         <div

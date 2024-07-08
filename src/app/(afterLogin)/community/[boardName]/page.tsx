@@ -35,15 +35,17 @@ export default function CommunityBoardPage() {
     }
     const result = await getArticleList({ boardName, pageNumber: page });
 
-    setArticleList(result.data.content);
-    setPageInfo({
-      number: result.data.number,
-      totalElements: result.data.totalElements,
-      totalPages: result.data.totalPages,
-      first: result.data.first,
-      size: result.data.size,
-      last: result.data.last,
-    });
+    if (result.data !== null) {
+      setArticleList(result.data.content);
+      setPageInfo({
+        number: result.data.number,
+        totalElements: result.data.totalElements,
+        totalPages: result.data.totalPages,
+        first: result.data.first,
+        size: result.data.size,
+        last: result.data.last,
+      });
+    }
   };
 
   // iframe 태그 허용
@@ -97,8 +99,7 @@ export default function CommunityBoardPage() {
 
       <h1>{boardName} 게시판</h1>
 
-      {articleList &&
-        articleList.length > 0 &&
+      {articleList && articleList.length > 0 ? (
         articleList.map((article) => (
           <div className={cx("box", "articleBox")} key={article.articlePk}>
             <Link
@@ -143,7 +144,10 @@ export default function CommunityBoardPage() {
               scraps={article.scraps}
             />
           </div>
-        ))}
+        ))
+      ) : (
+        <p>게시글이 없습니다.</p>
+      )}
 
       {pageInfo && (
         <div
