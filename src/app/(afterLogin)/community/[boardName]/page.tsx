@@ -1,6 +1,11 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { getArticleList } from "../_lib/getArticleList";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -17,9 +22,18 @@ export default function CommunityBoardPage() {
   const { boardName }: { boardName: string } = useParams();
   const [articleList, setArticleList] = useState([] as Article[]);
   const [pageInfo, setPageInfo] = useState<PageInfo>();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
+  // 게시글 목록 가져오기
   const getData = async ({ boardName }: { boardName: string }) => {
-    const result = await getArticleList({ boardName, pageNumber: 0 });
+    // 페이지네이션
+    let page = 0;
+    if (searchParams.has("page")) {
+      page = Number(searchParams.get("page")) - 1;
+    }
+    const result = await getArticleList({ boardName, pageNumber: page });
 
     setArticleList(result.data.content);
     setPageInfo({
@@ -61,6 +75,16 @@ export default function CommunityBoardPage() {
 
     // 스크롤을 상단으로 이동
     window.scrollTo({ top: 0, left: 0 });
+
+    /// url에 page 쿼리 추가
+    // url 객체 생성
+    const params = new URLSearchParams(searchParams);
+
+    // page 쿼리 추가
+    params.set("page", pageNumber.toString());
+
+    // url 변경
+    replace(`${pathname}?${params.toString()}`);
   };
 
   useEffect(() => {

@@ -9,13 +9,23 @@ import cx from "classnames";
 import DOMPurify from "isomorphic-dompurify";
 import ArticlePagination from "./_component/ArticlePagination";
 import { PageInfo } from "@/model/PageInfo";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CommunityPage() {
   const [articleList, setArticleList] = useState([] as Article[]);
   const [pageInfo, setPageInfo] = useState<PageInfo>();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
+  // 게시글 목록 가져오기
   const getData = async () => {
-    const result = await getArticleList({});
+    // 페이지네이션
+    let page = 0;
+    if (searchParams.has("page")) {
+      page = Number(searchParams.get("page")) - 1;
+    }
+    const result = await getArticleList({ pageNumber: page });
 
     setArticleList(result.data.content);
     setPageInfo({
@@ -57,6 +67,16 @@ export default function CommunityPage() {
 
     // 스크롤을 상단으로 이동
     window.scrollTo({ top: 0, left: 0 });
+
+    /// url에 page 쿼리 추가
+    // url 객체 생성
+    const params = new URLSearchParams(searchParams);
+
+    // page 쿼리 추가
+    params.set("page", pageNumber.toString());
+
+    // url 변경
+    replace(`${pathname}?${params.toString()}`);
   };
 
   useEffect(() => {
