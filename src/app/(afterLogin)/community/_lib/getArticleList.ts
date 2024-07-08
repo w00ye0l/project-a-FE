@@ -1,12 +1,17 @@
 interface Props {
-  boardName?: string | string[];
+  boardName?: string;
+  pageNumber?: number;
 }
 
-export const getArticleList = async ({ boardName }: Props) => {
+export const getArticleList = async ({ boardName, pageNumber }: Props) => {
+  if (pageNumber === undefined) {
+    pageNumber = 0;
+  }
+
   const response = await fetch(
     boardName
-      ? `${process.env.NEXT_PUBLIC_BASE_URL}/community?boardName=${boardName}`
-      : `${process.env.NEXT_PUBLIC_BASE_URL}/community`,
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}/community?boardName=${boardName}&page=${pageNumber}`
+      : `${process.env.NEXT_PUBLIC_BASE_URL}/community?page=${pageNumber}`,
     {
       method: "GET",
     }
