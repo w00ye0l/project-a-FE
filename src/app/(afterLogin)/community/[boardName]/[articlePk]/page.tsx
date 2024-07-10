@@ -67,7 +67,7 @@ export default function ArticleDetailPage() {
       const result = await getRecommentList({ articlePk, commentPk });
       console.log({ result });
 
-      if (result.data.content) {
+      if (result.data) {
         const recommentList = result.data.filter(
           (recomment: any) => recomment.commentPk === commentPk
         );
