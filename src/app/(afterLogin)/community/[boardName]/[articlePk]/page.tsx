@@ -53,7 +53,7 @@ export default function ArticleDetailPage() {
       const result = await getCommentList({ articlePk });
       console.log({ result });
 
-      if (result.data.content) {
+      if (result.data) {
         setCommentList(result.data.content);
       }
     } catch (error) {
@@ -98,6 +98,7 @@ export default function ArticleDetailPage() {
       console.log("삭제");
       deleteArticle({ articlePk });
       router.push(`/community/${article?.boardName}`);
+      router.refresh();
     }
   };
 
