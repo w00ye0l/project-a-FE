@@ -237,7 +237,7 @@ export default function ArticleDetailPage() {
                 commentList.map((comment) => (
                   <div className="box" key={comment.commentPk}>
                     {comment.member.userPk === user.userPk &&
-                      comment.deleteCheck && (
+                      !comment.deleteCheck && (
                         <button
                           onClick={() => {
                             handleCommentDeleteButtonClick(comment.commentPk);
