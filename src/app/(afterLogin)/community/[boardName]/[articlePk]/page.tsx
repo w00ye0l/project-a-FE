@@ -52,7 +52,10 @@ export default function ArticleDetailPage() {
     try {
       const result = await getCommentList({ articlePk });
       console.log({ result });
-      setCommentList(result.data.content);
+
+      if (result.data.content) {
+        setCommentList(result.data.content);
+      }
     } catch (error) {
       console.error("Error fetching comment list:", error);
     }
@@ -63,11 +66,14 @@ export default function ArticleDetailPage() {
     try {
       const result = await getRecommentList({ articlePk, commentPk });
       console.log({ result });
-      const recommentList = result.data.filter(
-        (recomment: any) => recomment.commentPk === commentPk
-      );
 
-      setRecommentList(recommentList);
+      if (result.data.content) {
+        const recommentList = result.data.filter(
+          (recomment: any) => recomment.commentPk === commentPk
+        );
+
+        setRecommentList(recommentList);
+      }
 
       console.log({ recommentList });
     } catch (error) {
@@ -236,7 +242,7 @@ export default function ArticleDetailPage() {
                 commentList.length > 0 &&
                 commentList.map((comment) => (
                   <div className="box" key={comment.commentPk}>
-                    {comment.member.userPk === user.userPk &&
+                    {comment.user.userPk === user.userPk &&
                       !comment.deleteCheck && (
                         <button
                           onClick={() => {
@@ -246,7 +252,7 @@ export default function ArticleDetailPage() {
                           삭제
                         </button>
                       )}
-                    <p>작성자: {comment.member.nickname}</p>
+                    <p>작성자: {comment.user.nickname}</p>
                     <p>댓글 작성일: {comment.createdAt}</p>
                     <p>댓글 내용: {comment.content}</p>
 
@@ -289,11 +295,11 @@ export default function ArticleDetailPage() {
                     {visibleRecomments === comment.commentPk &&
                       recommentList.map((recomment) => (
                         <div key={recomment.recommentPk} className="box">
-                          <p>작성자: {recomment.member.nickname}</p>
+                          <p>작성자: {recomment.user.nickname}</p>
                           <p>답글 작성일: {recomment.createdAt}</p>
                           <p>답글 내용: {recomment.content}</p>
 
-                          {recomment.member.userPk === user.userPk && (
+                          {recomment.user.userPk === user.userPk && (
                             <button
                               onClick={() => {
                                 handleRecommentDeleteButtonClick(
