@@ -1,0 +1,17 @@
+.navTitle {
+  margin: 20px 0;
+}
+
+.mainNav {
+  list-style: none;
+}
+
+.mainNav li {
+  padding: 10px 18px;
+  border-radius: 10px;
+}
+
+.mainLi.active {
+  background-color: #fff;
+  color: #000;
+}
