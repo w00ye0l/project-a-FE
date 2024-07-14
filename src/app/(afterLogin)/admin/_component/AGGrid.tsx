@@ -120,6 +120,10 @@ const RadioButtonCellEditor = forwardRef((params: ICellEditorParams, ref) => {
   );
 });
 
+// 디스플레이 이름 추가
+RadioButtonCellRenderer.displayName = "RadioButtonCellRenderer";
+RadioButtonCellEditor.displayName = "RadioButtonCellEditor";
+
 export default function AGGrid() {
   // const gridRef = useRef<AgGridReact<IRow[]>>(null);
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
