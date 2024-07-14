@@ -15,6 +15,9 @@ export default async function MainNavBar() {
         <Link href="/community" className={style.link}>
           커뮤니티
         </Link>
+        <Link href="/admin" className={style.link}>
+          ADMIN
+        </Link>
       </div>
 
       <div className={style.logo}>로고</div>
