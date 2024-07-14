@@ -90,7 +90,7 @@ const RadioButtonGroup = ({
 const RadioButtonCellRenderer = (params: ICellRendererParams) => {
   useEffect(() => {
     params.api.refreshCells({ rowNodes: [params.node] });
-  }, [params.value]);
+  }, [params.api, params.node, params.value]);
 
   return (
     <RadioButtonGroup
