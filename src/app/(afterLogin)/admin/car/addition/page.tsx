@@ -1,7 +1,7 @@
 "use client";
 
 import style from "../../admin.module.css";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import CarDefaultProvider from "../../_component/CarDefaultProvider";
 import CarDefaultOption from "../../_component/CarDefaultOption";
@@ -535,20 +535,18 @@ export default function CarAdditionPage() {
   }, [tab]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CarDefaultProvider>
-        <article className={style.mainSection}>
-          <UploadButtons />
+    <CarDefaultProvider>
+      <article className={style.mainSection}>
+        <UploadButtons />
 
-          <div className={style.mainContainer}>
-            <CarDefaultOption />
+        <div className={style.mainContainer}>
+          <CarDefaultOption />
 
-            <div className={style.dataSection}>
-              <AGGrid data={gridData} />
-            </div>
+          <div className={style.dataSection}>
+            <AGGrid data={gridData} />
           </div>
-        </article>
-      </CarDefaultProvider>
-    </Suspense>
+        </div>
+      </article>
+    </CarDefaultProvider>
   );
 }

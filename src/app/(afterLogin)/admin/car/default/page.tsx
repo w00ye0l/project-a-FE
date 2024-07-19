@@ -1,7 +1,7 @@
 "use client";
 
 import style from "../../admin.module.css";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import CarDefaultProvider from "../../_component/CarDefaultProvider";
 import CarDefaultOption from "../../_component/CarDefaultOption";
