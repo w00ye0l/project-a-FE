@@ -1,0 +1,53 @@
+.buttonSection {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #0082e1;
+  gap: 30px;
+}
+
+.excelButtonSection {
+  display: flex;
+  gap: 5px;
+}
+
+.excelButtonSection .excelFile {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  color: #808080;
+  font-size: 14px;
+  border: 1px solid #808080;
+  border-radius: 5px;
+}
+
+.excelButtonSection input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.button {
+  padding: 5px 10px;
+  width: 120px;
+  border: 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+.excelOpen {
+  color: #3a7d45;
+  background-color: #fff;
+  border: 1px solid #3a7d45;
+}
+
+.excelUpload {
+  color: #fff;
+  background-color: #3a7d45;
+}
