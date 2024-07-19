@@ -1,19 +1,12 @@
 "use client";
 
 import style from "../../admin.module.css";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
-const CarDefaultProvider = React.lazy(
-  () => import("../../_component/CarDefaultProvider")
-);
-const CarDefaultOption = React.lazy(
-  () => import("../../_component/CarDefaultOption")
-);
-const AGGrid = React.lazy(() => import("../../_component/AGGrid"));
-const UploadButtons = React.lazy(
-  () => import("../../_component/UploadButtons")
-);
+import CarDefaultProvider from "../../_component/CarDefaultProvider";
+import CarDefaultOption from "../../_component/CarDefaultOption";
+import AGGrid from "../../_component/AGGrid";
+import UploadButtons from "../../_component/UploadButtons";
 
 export default function CarAdditionPage() {
   const searchParams = useSearchParams();
