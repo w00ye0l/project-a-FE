@@ -1,19 +1,23 @@
 "use client";
 
-import { useContext } from "react";
 import style from "./mainNav.module.css";
 import cx from "classnames";
-import { NavContext } from "./NavProvider";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function MainNav() {
-  const { mainTab, setMainTab } = useContext(NavContext);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const onClickCarDefault = () => {
-    setMainTab("carDefault");
+    router.push("/admin/car/default?tab=country");
   };
 
   const onClickCarAddition = () => {
-    setMainTab("carAddition");
+    router.push("/admin/car/addition?tab=carInfo");
+  };
+
+  const onClickHome = () => {
+    router.push("/");
   };
 
   return (
@@ -26,19 +30,22 @@ export default function MainNav() {
             onClick={onClickCarDefault}
             className={cx(
               style.mainLi,
-              mainTab === "carDefault" ? style.active : ""
+              pathname === "/admin/car/default" ? style.active : ""
             )}
           >
-            기본 옵션 관리
+            차량 기본 데이터
           </li>
           <li
             className={cx(
               style.mainLi,
-              mainTab === "carAddition" ? style.active : ""
+              pathname === "/admin/car/addition" ? style.active : ""
             )}
             onClick={onClickCarAddition}
           >
-            차량 데이터 관리
+            차량 추가 데이터
+          </li>
+          <li className={cx(style.mainLi)} onClick={onClickHome}>
+            홈으로
           </li>
         </ul>
       </nav>
