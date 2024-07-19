@@ -1,10 +1,10 @@
-export const getBrandList = async ({
-  countryName,
+export const getDetailModelList = async ({
+  modelName,
 }: {
-  countryName: string;
+  modelName: string;
 }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/car/brand?countryName=${countryName}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/car/detail-model?modelName=${modelName}`,
     {
       method: "GET",
     }

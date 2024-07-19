@@ -28,3 +28,29 @@
 .radioButton input {
   display: none;
 }
+
+.gridHeader {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gridButtonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 5px 10px;
+  width: 120px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dbUpload {
+  color: #fff;
+  background-color: #0082e1;
+  border: 0;
+  font-weight: bold;
+}

@@ -1,0 +1,20 @@
+.subNav {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  list-style: none;
+  background-color: #a9dbff;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.subNav li {
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.subLi.active {
+  background-color: #fff;
+  font-weight: bold;
+}

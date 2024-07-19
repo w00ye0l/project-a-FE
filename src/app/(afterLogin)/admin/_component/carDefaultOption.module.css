@@ -1,0 +1,42 @@
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.codeContainer {
+  margin-bottom: 14px;
+}
+
+.codeTitle {
+  padding: 4px 10px;
+  width: 100%;
+  background-color: #004b82;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.codeInput {
+  padding: 4px;
+  width: 100%;
+  border: 1px solid #004b82;
+  border-radius: 5px;
+}
+
+.infoContainer {
+  width: 200px;
+}
+
+.infoTitle {
+  padding: 4px 10px;
+  width: 100%;
+  background-color: #a9dbff;
+  border-radius: 5px;
+}
+
+.select {
+  padding: 4px;
+  width: 100%;
+  border: 1px solid #a9dbff;
+  border-radius: 5px;
+}
