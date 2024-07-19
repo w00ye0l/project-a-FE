@@ -2,7 +2,7 @@
 
 import style from "../../admin.module.css";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import CarDefaultProvider from "../../_component/CarDefaultProvider";
 import CarDefaultOption from "../../_component/CarDefaultOption";
 import AGGrid from "../../_component/AGGrid";
