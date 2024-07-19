@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import MainNav from "./_component/MainNav";
 import SubNav from "./_component/SubNav";
 import style from "./admin.module.css";
@@ -24,7 +23,7 @@ export default function AdminLayout({
       <section className={style.right}>
         <SubNav />
 
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        {children}
       </section>
     </main>
   );
