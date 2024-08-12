@@ -1,0 +1,80 @@
+.brandSection {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.brandContainer {
+  width: 100%;
+}
+
+.countryName {
+  position: relative;
+  padding: 10px 24px;
+  width: 100%;
+  font-size: 20px;
+  color: #bbbbbb;
+  border: 1px solid #222222;
+  border-bottom: 0;
+}
+
+.countryName::after {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: translate(-50%, -50%) rotate(135deg);
+  content: "";
+}
+
+.countryName:hover,
+.countryNameActive {
+  color: #fff;
+}
+
+.countryNameActive.countryName::after {
+  transform: rotate(-45deg);
+  right: 28px;
+}
+
+.brandBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  border: 1px solid #222222;
+  border-bottom: 0;
+}
+
+.brandItem {
+  flex: 0 1 33.333%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.brandItem:hover {
+  background-color: #222222;
+}
+
+.brandImg {
+  width: 40px;
+  height: 40px;
+  background-color: #eee;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.brandName {
+  font-size: 12px;
+}

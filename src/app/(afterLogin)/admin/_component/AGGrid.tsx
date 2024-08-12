@@ -165,7 +165,7 @@ export default function AGGrid({ data }: { data: any }) {
           deleteUploadRowData(url, pkValue, row);
         }
 
-        // location.reload();
+        location.reload();
       }
     }
   };
