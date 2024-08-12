@@ -1,0 +1,75 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleModelImgSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.modelImg {
+  width: 400px;
+  height: 300px;
+  background-color: #222222;
+}
+
+.trimSection {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.yearEngineName {
+  position: relative;
+  padding: 10px 24px;
+  font-size: 20px;
+  color: #bbbbbb;
+  border: 1px solid #222222;
+  cursor: pointer;
+}
+
+.yearEngineName::after {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: translate(-50%, -50%) rotate(135deg);
+  content: "";
+}
+
+.yearEngineName:hover,
+.yearEngineNameActive {
+  color: #fff;
+}
+
+.yearEngineNameActive.yearEngineName::after {
+  transform: rotate(-45deg);
+  right: 28px;
+}
+
+.trimBox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  list-style: none;
+  border: 1px solid #222222;
+}
+
+.trimItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  width: 100%;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.trimItem:hover {
+  background-color: #222222;
+}

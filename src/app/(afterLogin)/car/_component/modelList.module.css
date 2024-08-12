@@ -1,0 +1,73 @@
+.main {
+  margin: 0 20px;
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
+}
+
+.modelSection {
+  padding: 40px 0;
+}
+
+.modelInfoSection {
+  margin: 20px 0;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border: 1px solid #222222;
+}
+
+.modelInfoContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.modelImage {
+  width: 200px;
+  height: 100px;
+  background-color: #222222;
+}
+
+.modelInfoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandImg {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.modelName {
+  font-weight: bold;
+}
+
+.modelSpec {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.priceEstimateContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.estimateBtn {
+  padding: 14px 22px;
+  color: #222222;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}

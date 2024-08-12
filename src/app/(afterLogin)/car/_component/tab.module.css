@@ -1,0 +1,31 @@
+.navTab {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.tab {
+  width: 120px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.tabName {
+  color: #808080;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tabActive {
+  font-weight: bold;
+  color: #eee;
+}
+
+.next {
+  height: 100%;
+  color: #808080;
+  vertical-align: middle;
+}
