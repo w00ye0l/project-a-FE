@@ -67,25 +67,4 @@ export default function Tab() {
       </ul>
     );
   }
-
-  return (
-    <ul className={style.navTab}>
-      <li className={cx(style.tab)}>
-        <Link
-          href={"/car"}
-          className={cx(
-            style.tabName,
-            pathname.startsWith("/car") && style.tabActive
-          )}
-        >
-          신차
-        </Link>
-      </li>
-      <li className={style.tab}>
-        <Link href={"/community"} className={cx(style.tabName)}>
-          커뮤니티
-        </Link>
-      </li>
-    </ul>
-  );
 }

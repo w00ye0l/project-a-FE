@@ -4,6 +4,7 @@ import { ModelInfo } from "@/model/car/Info/ModelInfo";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import style from "./modelList.module.css";
+import cx from "classnames";
 import Image from "next/image";
 import { useCarPriceStore } from "@/store/carPrice";
 
@@ -57,7 +58,13 @@ export default function ModelList() {
 
   return (
     <div className={style.main}>
-      <h1>시판모델</h1>
+      <div className={style.sortContainer}>
+        <p className={cx(style.sort, style.sortActive)}>인기순</p>
+        <div className={style.divider}></div>
+        <p className={cx(style.sort)}>가격순</p>
+        <div className={style.divider}></div>
+        <p className={cx(style.sort)}>최근출시순</p>
+      </div>
 
       {modelInfoList
         .filter((modelInfo) => modelInfo.modelList.length > 0)
@@ -67,85 +74,54 @@ export default function ModelList() {
               <div className={style.modelContainer} key={model.modelName}>
                 {/* 차량 정보 */}
                 {model.detailModelList.map((detailModel) => (
-                  <div
-                    className={style.modelInfoSection}
-                    key={detailModel.detailModelName}
-                  >
-                    <div className={style.modelInfoContainer}>
-                      {/* 모델 이미지 */}
-                      {/* <Image
-                        className={style.modelImage}
-                        src=""
-                        alt=""
-                        width={200}
-                        height={100}
-                      /> */}
-                      <div className={style.modelImage}></div>
+                  <div key={detailModel.detailModelName}>
+                    <div className={style.modelInfoSection}>
+                      <div className={style.modelInfoContainer}>
+                        <div className={style.modelImage}></div>
 
-                      {/* 브랜드, 모델 이름 및 차량 스펙 요약 */}
-                      <div className={style.modelInfoBox}>
-                        <div className={style.infoTitle}>
-                          <Image
-                            className={style.brandImg}
-                            src={`/brand/${modelInfo.brandName}.jpg`}
-                            alt=""
-                            width={30}
-                            height={30}
-                          />
-                          <p className={style.modelName}>
-                            {modelInfo.brandName} {detailModel.detailModelName}
-                          </p>
-                        </div>
+                        <div className={style.modelInfoBox}>
+                          <div className={style.brandBox}>
+                            <Image
+                              className={style.brandImg}
+                              src={`/brand/${modelInfo.brandName}.jpg`}
+                              alt=""
+                              width={90}
+                              height={60}
+                            />
+                            <p>{modelInfo.brandName}</p>
+                          </div>
 
-                        <div className={style.modelSpec}>
-                          <span>{detailModel.detailModelSpec.carClass}</span>
-                          <span>
-                            {detailModel.detailModelSpec.fuelTypes.map(
-                              (fuelType, idx) =>
-                                detailModel.detailModelSpec.fuelTypes.length -
-                                  1 !==
-                                idx
-                                  ? fuelType + "+"
-                                  : fuelType
-                            )}
-                          </span>
-                          <span>
-                            {detailModel.detailModelSpec.minEngineDisplacement +
-                              "~" +
-                              detailModel.detailModelSpec
-                                .maxEngineDisplacement +
-                              "cc"}
-                          </span>
-                          <span>
-                            {"복합연비 " +
-                              detailModel.detailModelSpec.minFuelEfficiency +
-                              "~" +
-                              detailModel.detailModelSpec.maxFuelEfficiency +
-                              "㎞/ℓ"}
-                          </span>
+                          <button
+                            onClick={() =>
+                              onClickEstimateBtn(detailModel.detailModelName)
+                            }
+                            className={style.infoBtn}
+                          >
+                            정보 보기
+                          </button>
                         </div>
                       </div>
-                    </div>
 
-                    {/* 출고가 및 견적내기 버튼 */}
-                    <div className={style.priceEstimateContainer}>
+                      <h2 className={style.carName}>
+                        {detailModel.detailModelName}
+                      </h2>
+
                       <p className={style.carPrice}>
-                        {"출고가 " +
-                          Math.round(
-                            detailModel.detailModelSpec.minCarPrice / 10000
-                          ).toLocaleString() +
-                          "만원 ~"}
+                        {Math.round(
+                          detailModel.detailModelSpec.minCarPrice / 10000
+                        ).toLocaleString()}
+                        <span className={style.priceUnit}> 만원 ~</span>
                       </p>
-
-                      <button
-                        onClick={() =>
-                          onClickEstimateBtn(detailModel.detailModelName)
-                        }
-                        className={style.estimateBtn}
-                      >
-                        견적내기
-                      </button>
                     </div>
+
+                    <button
+                      onClick={() =>
+                        onClickEstimateBtn(detailModel.detailModelName)
+                      }
+                      className={style.estimateBtn}
+                    >
+                      견적 내기
+                    </button>
                   </div>
                 ))}
               </div>

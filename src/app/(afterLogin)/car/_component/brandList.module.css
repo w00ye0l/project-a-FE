@@ -1,80 +1,71 @@
-.brandSection {
-  width: 260px;
+.brandVisibleSection {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   list-style: none;
 }
 
-.brandContainer {
-  width: 100%;
-}
-
-.countryName {
-  position: relative;
-  padding: 10px 24px;
-  width: 100%;
-  font-size: 20px;
-  color: #bbbbbb;
-  border: 1px solid #222222;
-  border-bottom: 0;
-}
-
-.countryName::after {
-  position: absolute;
-  top: 50%;
-  right: 24px;
-  width: 6px;
-  height: 6px;
-  border-top: 2px solid #fff;
-  border-right: 2px solid #fff;
-  transform: translate(-50%, -50%) rotate(135deg);
-  content: "";
-}
-
-.countryName:hover,
-.countryNameActive {
-  color: #fff;
-}
-
-.countryNameActive.countryName::after {
-  transform: rotate(-45deg);
-  right: 28px;
-}
-
-.brandBox {
+.visibleBtn {
+  padding: 15px 0;
+  width: 50%;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  list-style: none;
-  border: 1px solid #222222;
-  border-bottom: 0;
-}
-
-.brandItem {
-  flex: 0 1 33.333%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  color: #0b2369;
+  font-family: "SUITE";
+  font-size: 24px;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid #0b2369;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.brandItem:hover {
-  background-color: #222222;
+.activeBrandSection {
+  color: #fff;
+  background-color: #0b2369;
 }
 
-.brandImg {
-  width: 40px;
-  height: 40px;
-  background-color: #eee;
-  border-radius: 50%;
-  object-fit: contain;
+.brandSection {
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-.brandName {
-  font-size: 12px;
+.brandContainer {
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brandBox {
+  padding: 6px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  height: 130px;
+  gap: 7px;
+  border: 1px solid #ececec;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .activeBrand {
+  border: 2px solid #0733a1;
+} */
+
+.moreBrand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.activeBrand {
+  transform: rotate(180deg);
 }

@@ -11,19 +11,16 @@ import style from "./brandList.module.css";
 import { useRouter } from "next/navigation";
 import { useCarPriceStore } from "@/store/carPrice";
 
-interface BrandListItem {
-  country: Country;
-  brands: Brand[];
-}
-
 export default function BrandList({
   setBrandName,
 }: {
   setBrandName: (brandName: string) => void;
 }) {
   const router = useRouter();
-  const [brandList, setBrandList] = useState<BrandListItem[]>([]);
-  const [visibleSections, setVisibleSections] = useState<string[]>([]);
+  const [visibleDomestic, setVisibleDomestic] = useState<Boolean>(true);
+  const [domesticBrands, setDomesticBrands] = useState<Brand[]>([]);
+  const [importedBrands, setImportedBrands] = useState<Brand[]>([]);
+  const [visibleBrandCount, setVisibleBrandCount] = useState<number>(18);
   const carPriceStore = useCarPriceStore();
 
   // 제조국에 대한 브랜드 리스트 갱신
@@ -33,35 +30,44 @@ export default function BrandList({
       (res) => res.data
     );
 
-    // countryList를 돌면서 brandList에 해당하는 브랜드만 필터링
-    // country를 키로 하는 객체들의 리스트를 만들어서 렌더링
-    const filteredBrandList = countryList.map((country: Country) => {
-      const brands = brandList.filter(
-        (brand: Brand) => brand.countryPk === country.countryPk
+    // '한국'인 브랜드는 국산으로, 나머지는 수입으로 분류
+    const domestic: Brand[] = [];
+    const imported: Brand[] = [];
+
+    brandList.forEach((brand: Brand) => {
+      const country = countryList.find(
+        (country: Country) => country.countryPk === brand.countryPk
       );
-      return { country: country, brands: brands };
+
+      if (country.countryName === "한국") {
+        domestic.push(brand);
+      } else {
+        imported.push(brand);
+      }
     });
 
-    console.log(filteredBrandList);
-
-    setBrandList(filteredBrandList);
-  };
-
-  // 제조국 클릭 시 해당 브랜드 리스트 렌더링
-  const toggleVisibility = (countryPk: string) => {
-    if (visibleSections.includes(countryPk)) {
-      setVisibleSections(visibleSections.filter((pk) => pk !== countryPk));
-    } else {
-      setVisibleSections([...visibleSections, countryPk]);
-    }
+    setDomesticBrands(domestic);
+    setImportedBrands(imported);
   };
 
   // 브랜드 클릭 시 해당 브랜드 정보 페이지로 이동
   const onClickBrand = (brandItem: Brand) => {
-    // localStorage.setItem("brandName", brandItem.brandName);
     carPriceStore.setSelectedBrand(brandItem.brandName);
     setBrandName(brandItem.brandName);
     router.push(`/car?b=${brandItem.brandName}`);
+  };
+
+  // 전체 브랜드 표시하기
+  const showMoreBrands = () => {
+    if (visibleBrandCount > 18) {
+      setVisibleBrandCount(18);
+    } else {
+      if (visibleDomestic) {
+        setVisibleBrandCount(domesticBrands.length);
+      } else {
+        setVisibleBrandCount(importedBrands.length);
+      }
+    }
   };
 
   useEffect(() => {
@@ -69,42 +75,86 @@ export default function BrandList({
   }, []);
 
   return (
-    <ul className={style.brandSection}>
-      {brandList.map((brand: BrandListItem) => (
-        <li key={brand.country.countryPk} className={style.brandContainer}>
-          <h2
-            className={cx(
-              style.countryName,
-              visibleSections.includes(brand.country.countryPk) &&
-                style.countryNameActive
-            )}
-            onClick={() => toggleVisibility(brand.country.countryPk)}
-          >
-            {brand.country.countryName}
-          </h2>
+    <>
+      <ul className={style.brandVisibleSection}>
+        <li
+          className={cx(style.visibleBtn, {
+            [style.activeBrandSection]: visibleDomestic,
+          })}
+          onClick={() => {
+            setVisibleDomestic(!visibleDomestic);
+            // 섹션 변경시 브랜드 수 초기화
+            setVisibleBrandCount(18);
+          }}
+        >
+          국산
+        </li>
+        <li
+          className={cx(style.visibleBtn, {
+            [style.activeBrandSection]: !visibleDomestic,
+          })}
+          onClick={() => {
+            setVisibleDomestic(!visibleDomestic);
+            // 섹션 변경시 브랜드 수 초기화
+            setVisibleBrandCount(18);
+          }}
+        >
+          수입
+        </li>
+      </ul>
 
-          {visibleSections.includes(brand.country.countryPk) && (
-            <ul className={style.brandBox}>
-              {brand.brands.map((brandItem) => (
-                <li
-                  onClick={() => onClickBrand(brandItem)}
-                  className={style.brandItem}
-                  key={brandItem.brandPk}
-                >
+      <div className={style.brandSection}>
+        <div className={style.brandContainer}>
+          {visibleDomestic &&
+            domesticBrands
+              .slice(0, visibleBrandCount)
+              .map((brandItem: Brand) => (
+                <div key={brandItem.brandPk} className={style.brandBox}>
                   <Image
-                    className={style.brandImg}
+                    className={style.brandImage}
                     src={`/brand/${brandItem.brandName}.jpg`}
-                    width={40}
-                    height={40}
+                    width={90}
+                    height={60}
                     alt={brandItem.brandName}
+                    onClick={() => onClickBrand(brandItem)}
                   />
                   <p className={style.brandName}>{brandItem.brandName}</p>
-                </li>
+                </div>
               ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ul>
+
+          {!visibleDomestic &&
+            importedBrands
+              .slice(0, visibleBrandCount)
+              .map((brandItem: Brand) => (
+                <div key={brandItem.brandPk} className={style.brandBox}>
+                  <Image
+                    className={style.brandImage}
+                    src={`/brand/${brandItem.brandName}.jpg`}
+                    width={90}
+                    height={60}
+                    alt={brandItem.brandName}
+                    onClick={() => onClickBrand(brandItem)}
+                  />
+                  <p className={style.brandName}>{brandItem.brandName}</p>
+                </div>
+              ))}
+        </div>
+
+        {visibleBrandCount <=
+          (visibleDomestic ? domesticBrands.length : importedBrands.length) && (
+          <div className={cx(style.moreBrand)} onClick={showMoreBrands}>
+            <Image
+              className={cx({
+                [style.activeBrand]: visibleBrandCount > 18,
+              })}
+              src="/icon/more_brand.png"
+              width={20}
+              height={20}
+              alt="more_brand"
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 }

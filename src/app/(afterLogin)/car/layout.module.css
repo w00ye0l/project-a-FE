@@ -1,24 +1,10 @@
 .main {
-  width: 100vw;
+  /* width: 100vw; */
   min-height: 100vh;
-  background-color: #111111;
-  color: #fff;
-}
-
-.nav {
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #222222;
-}
-
-.logoImg {
-  width: 140px;
-  height: 40px;
 }
 
 .section {
   padding: 40px 0;
   margin: auto;
-  width: 1250px;
+  width: 1200px;
 }
