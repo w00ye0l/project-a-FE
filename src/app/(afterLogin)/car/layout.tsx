@@ -10,11 +10,6 @@ export default function CarLayoutPage({
 }) {
   return (
     <main className={cx(style.main)}>
-      <nav className={style.nav}>
-        <img className={style.logoImg} src="" alt="" />
-        <Tab />
-      </nav>
-
       <Suspense fallback={<p>Loading...</p>}>
         <section className={cx(style.section)}>{children}</section>
       </Suspense>
