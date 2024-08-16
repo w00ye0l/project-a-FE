@@ -3,6 +3,7 @@ import cx from "classnames";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { auth } from "@/auth";
+import Image from "next/image";
 
 export default async function MainNavBar() {
   const session = await auth();
@@ -10,21 +11,35 @@ export default async function MainNavBar() {
   return (
     <div className={style.main}>
       <div className={style.contentSection}>
-        <div className={style.logo}>로고</div>
-
-        <div className={`${style.linkSection} ${style.left}`}>
-          <Link href="/car" className={style.link}>
-            차량정보
-          </Link>
-          <Link href="/community" className={style.link}>
-            커뮤니티
+        <div className={style.logoMenuSection}>
+          <Link href="/" className={style.logo}>
+            <Image src="/logo_blue.png" width={68} height={34} alt="AZERO" />
+            <h1 className={style.logoName}>으라차차</h1>
           </Link>
 
-          {session?.user && (
-            <Link href="/admin" className={style.link}>
-              ADMIN
+          <div className={`${style.linkSection} ${style.left}`}>
+            <Link href="/car" className={cx(style.link, style.activeLink)}>
+              내 차 할래?
             </Link>
-          )}
+            <Link href="/car" className={style.link}>
+              차량정보
+            </Link>
+            <Link href="/" className={style.link}>
+              옥션이름
+            </Link>
+            <Link href="/community" className={style.link}>
+              커뮤니티
+            </Link>
+            <Link href="/" className={style.link}>
+              고객지원
+            </Link>
+
+            {session?.user && (
+              <Link href="/admin" className={style.link}>
+                ADMIN
+              </Link>
+            )}
+          </div>
         </div>
 
         <div className={cx(style.linkSection, style.right)}>
@@ -48,6 +63,14 @@ export default async function MainNavBar() {
               <LogoutButton me={session} />
             </>
           )}
+
+          <div className={style.divider}></div>
+
+          <div>
+            <Link href="/" className={cx(style.btn, style.outlineBtn)}>
+              제휴사 로그인
+            </Link>
+          </div>
         </div>
       </div>
     </div>
