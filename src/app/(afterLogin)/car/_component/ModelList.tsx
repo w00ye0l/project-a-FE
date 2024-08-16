@@ -66,68 +66,70 @@ export default function ModelList() {
         <p className={cx(style.sort)}>최근출시순</p>
       </div>
 
-      {modelInfoList
-        .filter((modelInfo) => modelInfo.modelList.length > 0)
-        .map((modelInfo) => (
-          <div className={style.modelSection} key={modelInfo.brandName}>
-            {modelInfo.modelList.map((model) => (
-              <div className={style.modelContainer} key={model.modelName}>
-                {/* 차량 정보 */}
-                {model.detailModelList.map((detailModel) => (
-                  <div key={detailModel.detailModelName}>
-                    <div className={style.modelInfoSection}>
-                      <div className={style.modelInfoContainer}>
-                        <div className={style.modelImage}></div>
+      <div className={style.modelPart}>
+        {modelInfoList
+          .filter((modelInfo) => modelInfo.modelList.length > 0)
+          .map((modelInfo) => (
+            <div className={style.modelSection} key={modelInfo.brandName}>
+              {modelInfo.modelList.map((model) => (
+                <div className={style.modelContainer} key={model.modelName}>
+                  {/* 차량 정보 */}
+                  {model.detailModelList.map((detailModel) => (
+                    <div key={detailModel.detailModelName}>
+                      <div className={style.modelInfoSection}>
+                        <div className={style.modelInfoContainer}>
+                          <div className={style.modelImage}></div>
 
-                        <div className={style.modelInfoBox}>
-                          <div className={style.brandBox}>
-                            <Image
-                              className={style.brandImg}
-                              src={`/brand/${modelInfo.brandName}.jpg`}
-                              alt=""
-                              width={90}
-                              height={60}
-                            />
-                            <p>{modelInfo.brandName}</p>
+                          <div className={style.modelInfoBox}>
+                            <div className={style.brandBox}>
+                              <Image
+                                className={style.brandImg}
+                                src={`/brand/${modelInfo.brandName}.jpg`}
+                                alt=""
+                                width={90}
+                                height={60}
+                              />
+                              <p>{modelInfo.brandName}</p>
+                            </div>
+
+                            <button
+                              onClick={() =>
+                                onClickEstimateBtn(detailModel.detailModelName)
+                              }
+                              className={style.infoBtn}
+                            >
+                              정보 보기
+                            </button>
                           </div>
-
-                          <button
-                            onClick={() =>
-                              onClickEstimateBtn(detailModel.detailModelName)
-                            }
-                            className={style.infoBtn}
-                          >
-                            정보 보기
-                          </button>
                         </div>
+
+                        <h2 className={style.carName}>
+                          {detailModel.detailModelName}
+                        </h2>
+
+                        <p className={style.carPrice}>
+                          {Math.round(
+                            detailModel.detailModelSpec.minCarPrice / 10000
+                          ).toLocaleString()}
+                          <span className={style.priceUnit}> 만원 ~</span>
+                        </p>
                       </div>
 
-                      <h2 className={style.carName}>
-                        {detailModel.detailModelName}
-                      </h2>
-
-                      <p className={style.carPrice}>
-                        {Math.round(
-                          detailModel.detailModelSpec.minCarPrice / 10000
-                        ).toLocaleString()}
-                        <span className={style.priceUnit}> 만원 ~</span>
-                      </p>
+                      <button
+                        onClick={() =>
+                          onClickEstimateBtn(detailModel.detailModelName)
+                        }
+                        className={style.estimateBtn}
+                      >
+                        견적 내기
+                      </button>
                     </div>
-
-                    <button
-                      onClick={() =>
-                        onClickEstimateBtn(detailModel.detailModelName)
-                      }
-                      className={style.estimateBtn}
-                    >
-                      견적 내기
-                    </button>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
