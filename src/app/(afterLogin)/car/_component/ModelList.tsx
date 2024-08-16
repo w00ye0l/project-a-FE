@@ -69,9 +69,9 @@ export default function ModelList() {
       <div className={style.modelPart}>
         {modelInfoList
           .filter((modelInfo) => modelInfo.modelList.length > 0)
-          .map((modelInfo) => (
-            <div className={style.modelSection} key={modelInfo.brandName}>
-              {modelInfo.modelList.map((model) => (
+          .map((modelInfo) =>
+            modelInfo.modelList.map((model) => (
+              <div className={style.modelSection} key={modelInfo.brandName}>
                 <div className={style.modelContainer} key={model.modelName}>
                   {/* 차량 정보 */}
                   {model.detailModelList.map((detailModel) => (
@@ -126,9 +126,9 @@ export default function ModelList() {
                     </div>
                   ))}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))
+          )}
       </div>
     </div>
   );
