@@ -18,7 +18,7 @@ export default function CarPage() {
         alt="ads"
       />
 
-      <BrandList setBrandName={setBrandName} />
+      <BrandList brandName={brandName} setBrandName={setBrandName} />
 
       <ModelList />
     </main>
