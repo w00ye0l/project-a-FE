@@ -52,6 +52,29 @@
   font-style: normal;
 }
 
+/** 
+  * Cafe24 Ohsquare
+  */
+@font-face {
+  font-family: "Cafe24 Ohsquare";
+  src: url("/fonts/Cafe24Ohsquare-v2.0/webfont/Cafe24Ohsquare-v2.0.woff")
+      format("woff"),
+    url("/fonts/Cafe24Ohsquare-v2.0/webfont/Cafe24Ohsquare-v2.0.woff2")
+      format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/**
+  * Jalnan2
+  */
+@font-face {
+  font-family: "Jalnan2";
+  src: url("/fonts/Jalnan2/Jalnan2.oft") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 /**
   * SUITE font family
   */
