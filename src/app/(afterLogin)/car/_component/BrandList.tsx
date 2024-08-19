@@ -12,8 +12,10 @@ import { useRouter } from "next/navigation";
 import { useCarPriceStore } from "@/store/carPrice";
 
 export default function BrandList({
+  brandName,
   setBrandName,
 }: {
+  brandName: string;
   setBrandName: (brandName: string) => void;
 }) {
   const router = useRouter();
@@ -109,14 +111,19 @@ export default function BrandList({
             domesticBrands
               .slice(0, visibleBrandCount)
               .map((brandItem: Brand) => (
-                <div key={brandItem.brandPk} className={style.brandBox}>
+                <div
+                  key={brandItem.brandPk}
+                  className={cx(style.brandBox, {
+                    [style.activeBrandBox]: brandName === brandItem.brandName,
+                  })}
+                  onClick={() => onClickBrand(brandItem)}
+                >
                   <Image
                     className={style.brandImage}
                     src={`/brand/${brandItem.brandName}.jpg`}
                     width={90}
                     height={60}
                     alt={brandItem.brandName}
-                    onClick={() => onClickBrand(brandItem)}
                   />
                   <p className={style.brandName}>{brandItem.brandName}</p>
                 </div>
@@ -126,14 +133,19 @@ export default function BrandList({
             importedBrands
               .slice(0, visibleBrandCount)
               .map((brandItem: Brand) => (
-                <div key={brandItem.brandPk} className={style.brandBox}>
+                <div
+                  key={brandItem.brandPk}
+                  className={cx(style.brandBox, {
+                    [style.activeBrandBox]: brandName === brandItem.brandName,
+                  })}
+                  onClick={() => onClickBrand(brandItem)}
+                >
                   <Image
                     className={style.brandImage}
                     src={`/brand/${brandItem.brandName}.jpg`}
                     width={90}
                     height={60}
                     alt={brandItem.brandName}
-                    onClick={() => onClickBrand(brandItem)}
                   />
                   <p className={style.brandName}>{brandItem.brandName}</p>
                 </div>

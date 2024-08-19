@@ -7,10 +7,11 @@ import style from "./modelList.module.css";
 import cx from "classnames";
 import Image from "next/image";
 import { useCarPriceStore } from "@/store/carPrice";
+import DotSpinner from "@/app/_component/DotSpinner";
 
 export default function ModelList() {
-  // const [brandName, setBrandName] = useState<string>("");
   const [modelInfoList, setModelInfoList] = useState<ModelInfo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
   const searchParams = useSearchParams();
   const brandName = searchParams.get("b");
@@ -19,6 +20,8 @@ export default function ModelList() {
 
   // 모델 리스트 가져오기
   const getDetailModelList = async () => {
+    setLoading(true);
+
     try {
       const response = await fetch(
         `${
@@ -39,6 +42,8 @@ export default function ModelList() {
       setModelInfoList(result.data);
     } catch (error) {
       console.error("Failed to fetch model details:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,68 +72,70 @@ export default function ModelList() {
       </div>
 
       <div className={style.modelPart}>
-        {modelInfoList
-          .filter((modelInfo) => modelInfo.modelList.length > 0)
-          .map((modelInfo) =>
-            modelInfo.modelList.map((model) => (
-              <div className={style.modelSection} key={modelInfo.brandName}>
-                <div className={style.modelContainer} key={model.modelName}>
-                  {/* 차량 정보 */}
-                  {model.detailModelList.map((detailModel) => (
-                    <div key={detailModel.detailModelName}>
-                      <div className={style.modelInfoSection}>
-                        <div className={style.modelInfoContainer}>
-                          <div className={style.modelImage}></div>
+        {loading ? (
+          <DotSpinner size={40} />
+        ) : (
+          modelInfoList.map((modelInfo) =>
+            modelInfo.modelList.map((model) =>
+              model.detailModelList.map((detailModel) => (
+                <div
+                  className={style.modelSection}
+                  key={detailModel.detailModelName}
+                >
+                  <div className={style.modelContainer}>
+                    <div className={style.modelInfoSection}>
+                      <div className={style.modelInfoContainer}>
+                        <div className={style.modelImage}></div>
 
-                          <div className={style.modelInfoBox}>
-                            <div className={style.brandBox}>
-                              <Image
-                                className={style.brandImg}
-                                src={`/brand/${modelInfo.brandName}.jpg`}
-                                alt=""
-                                width={90}
-                                height={60}
-                              />
-                              <p>{modelInfo.brandName}</p>
-                            </div>
-
-                            <button
-                              onClick={() =>
-                                onClickEstimateBtn(detailModel.detailModelName)
-                              }
-                              className={style.infoBtn}
-                            >
-                              정보 보기
-                            </button>
+                        <div className={style.modelInfoBox}>
+                          <div className={style.brandBox}>
+                            <Image
+                              className={style.brandImg}
+                              src={`/brand/${modelInfo.brandName}.jpg`}
+                              alt=""
+                              width={90}
+                              height={60}
+                            />
+                            <p>{modelInfo.brandName}</p>
                           </div>
+
+                          <button
+                            onClick={() =>
+                              onClickEstimateBtn(detailModel.detailModelName)
+                            }
+                            className={style.infoBtn}
+                          >
+                            정보 보기
+                          </button>
                         </div>
-
-                        <h2 className={style.carName}>
-                          {detailModel.detailModelName}
-                        </h2>
-
-                        <p className={style.carPrice}>
-                          {Math.round(
-                            detailModel.detailModelSpec.minCarPrice / 10000
-                          ).toLocaleString()}
-                          <span className={style.priceUnit}> 만원 ~</span>
-                        </p>
                       </div>
 
-                      <button
-                        onClick={() =>
-                          onClickEstimateBtn(detailModel.detailModelName)
-                        }
-                        className={style.estimateBtn}
-                      >
-                        견적 내기
-                      </button>
+                      <h2 className={style.carName}>
+                        {detailModel.detailModelName}
+                      </h2>
+
+                      <p className={style.carPrice}>
+                        {Math.round(
+                          detailModel.detailModelSpec.minCarPrice / 10000
+                        ).toLocaleString()}
+                        <span className={style.priceUnit}> 만원 ~</span>
+                      </p>
                     </div>
-                  ))}
+
+                    <button
+                      onClick={() =>
+                        onClickEstimateBtn(detailModel.detailModelName)
+                      }
+                      className={style.estimateBtn}
+                    >
+                      견적 내기
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              ))
+            )
+          )
+        )}
       </div>
     </div>
   );
