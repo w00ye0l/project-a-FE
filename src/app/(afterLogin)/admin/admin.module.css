@@ -1,5 +1,5 @@
 .main {
-  height: 100vh;
+  height: calc(100vh - 64px);
   padding: 20px;
   display: flex;
   background-color: #ebf5ff;
