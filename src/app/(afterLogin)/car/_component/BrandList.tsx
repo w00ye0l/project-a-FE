@@ -8,7 +8,7 @@ import { getBrandList } from "../../admin/_lib/getBrandList";
 import Image from "next/image";
 import cx from "classnames";
 import style from "./brandList.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCarPriceStore } from "@/store/carPrice";
 
 export default function BrandList({
@@ -19,6 +19,7 @@ export default function BrandList({
   setBrandName: (brandName: string) => void;
 }) {
   const router = useRouter();
+  const selectedBrand = useSearchParams().get("b");
   const [visibleDomestic, setVisibleDomestic] = useState<Boolean>(true);
   const [domesticBrands, setDomesticBrands] = useState<Brand[]>([]);
   const [importedBrands, setImportedBrands] = useState<Brand[]>([]);
@@ -114,7 +115,9 @@ export default function BrandList({
                 <div
                   key={brandItem.brandPk}
                   className={cx(style.brandBox, {
-                    [style.activeBrandBox]: brandName === brandItem.brandName,
+                    [style.activeBrandBox]:
+                      selectedBrand === brandItem.brandName &&
+                      carPriceStore.selectedBrand === brandItem.brandName,
                   })}
                   onClick={() => onClickBrand(brandItem)}
                 >
@@ -136,7 +139,9 @@ export default function BrandList({
                 <div
                   key={brandItem.brandPk}
                   className={cx(style.brandBox, {
-                    [style.activeBrandBox]: brandName === brandItem.brandName,
+                    [style.activeBrandBox]:
+                      selectedBrand === brandItem.brandName &&
+                      carPriceStore.selectedBrand === brandItem.brandName,
                   })}
                   onClick={() => onClickBrand(brandItem)}
                 >
