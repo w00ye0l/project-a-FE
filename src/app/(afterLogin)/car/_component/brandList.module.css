@@ -52,9 +52,10 @@
   cursor: pointer;
 }
 
-/* .activeBrand {
+.activeBrandBox {
+  background-color: #f3f8ff;
   border: 2px solid #0733a1;
-} */
+}
 
 .moreBrand {
   display: flex;
