@@ -7,6 +7,7 @@ import style from "./modelList.module.css";
 import cx from "classnames";
 import Image from "next/image";
 import { useCarPriceStore } from "@/store/carPrice";
+import DotSpinner from "@/app/_component/DotSpinner";
 
 export default function ModelList() {
   const [modelInfoList, setModelInfoList] = useState<ModelInfo[]>([]);
@@ -72,7 +73,7 @@ export default function ModelList() {
 
       <div className={style.modelPart}>
         {loading ? (
-          <p>Loading...</p>
+          <DotSpinner size={40} />
         ) : (
           modelInfoList.map((modelInfo) =>
             modelInfo.modelList.map((model) =>
