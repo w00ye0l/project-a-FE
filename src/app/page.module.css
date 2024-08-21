@@ -142,10 +142,10 @@
 }
 
 .rotate {
+  display: inline-block;
   font-size: 30px;
   font-weight: 500;
-  /* [MEMO] 회전 실패 */
-  transform: rotate(-15deg);
+  transform: rotate(15deg) translate(-3px, -2px);
 }
 
 .right {
