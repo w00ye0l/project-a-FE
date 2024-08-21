@@ -108,53 +108,51 @@ export default function BrandList({
 
       <div className={style.brandSection}>
         <div className={style.brandContainer}>
-          {visibleDomestic &&
-            domesticBrands
-              .slice(0, visibleBrandCount)
-              .map((brandItem: Brand) => (
-                <div
-                  key={brandItem.brandPk}
-                  className={cx(style.brandBox, {
-                    [style.activeBrandBox]:
-                      selectedBrand === brandItem.brandName &&
-                      carPriceStore.selectedBrand === brandItem.brandName,
-                  })}
-                  onClick={() => onClickBrand(brandItem)}
-                >
-                  <Image
-                    className={style.brandImage}
-                    src={`/brand/${brandItem.brandName}.jpg`}
-                    width={90}
-                    height={60}
-                    alt={brandItem.brandName}
-                  />
-                  <p className={style.brandName}>{brandItem.brandName}</p>
-                </div>
-              ))}
-
-          {!visibleDomestic &&
-            importedBrands
-              .slice(0, visibleBrandCount)
-              .map((brandItem: Brand) => (
-                <div
-                  key={brandItem.brandPk}
-                  className={cx(style.brandBox, {
-                    [style.activeBrandBox]:
-                      selectedBrand === brandItem.brandName &&
-                      carPriceStore.selectedBrand === brandItem.brandName,
-                  })}
-                  onClick={() => onClickBrand(brandItem)}
-                >
-                  <Image
-                    className={style.brandImage}
-                    src={`/brand/${brandItem.brandName}.jpg`}
-                    width={90}
-                    height={60}
-                    alt={brandItem.brandName}
-                  />
-                  <p className={style.brandName}>{brandItem.brandName}</p>
-                </div>
-              ))}
+          {visibleDomestic
+            ? domesticBrands
+                .slice(0, visibleBrandCount)
+                .map((brandItem: Brand) => (
+                  <div
+                    key={brandItem.brandPk}
+                    className={cx(style.brandBox, {
+                      [style.activeBrandBox]:
+                        selectedBrand === brandItem.brandName &&
+                        carPriceStore.selectedBrand === brandItem.brandName,
+                    })}
+                    onClick={() => onClickBrand(brandItem)}
+                  >
+                    <Image
+                      className={style.brandImage}
+                      src={`/brand/${brandItem.brandName}.jpg`}
+                      width={90}
+                      height={60}
+                      alt={brandItem.brandName}
+                    />
+                    <p className={style.brandName}>{brandItem.brandName}</p>
+                  </div>
+                ))
+            : importedBrands
+                .slice(0, visibleBrandCount)
+                .map((brandItem: Brand) => (
+                  <div
+                    key={brandItem.brandPk}
+                    className={cx(style.brandBox, {
+                      [style.activeBrandBox]:
+                        selectedBrand === brandItem.brandName &&
+                        carPriceStore.selectedBrand === brandItem.brandName,
+                    })}
+                    onClick={() => onClickBrand(brandItem)}
+                  >
+                    <Image
+                      className={style.brandImage}
+                      src={`/brand/${brandItem.brandName}.jpg`}
+                      width={90}
+                      height={60}
+                      alt={brandItem.brandName}
+                    />
+                    <p className={style.brandName}>{brandItem.brandName}</p>
+                  </div>
+                ))}
         </div>
 
         {visibleBrandCount <=
