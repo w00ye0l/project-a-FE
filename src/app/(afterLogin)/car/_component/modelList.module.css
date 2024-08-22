@@ -84,7 +84,8 @@
   width: 100%;
   height: 120px;
   object-fit: cover;
-  object-position: center;
+  object-position: 10px -40px;
+  transform: scale(1.3);
 }
 
 .modelInfoBox {
