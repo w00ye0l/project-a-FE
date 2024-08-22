@@ -15,6 +15,8 @@ export interface ModelInfo {
             fuelTypes: string[];
             carClass: string;
           };
+          detailModelMainImage: string;
+          detailModelNormalImages: string[];
         }
       ];
     }
