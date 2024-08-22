@@ -89,8 +89,8 @@ export default function ModelList() {
                           <Image
                             className={style.modelImage}
                             src={detailModel.detailModelMainImage}
-                            width={320}
-                            height={120}
+                            width={940}
+                            height={515}
                             alt={detailModel.detailModelName}
                           />
                         ) : (
