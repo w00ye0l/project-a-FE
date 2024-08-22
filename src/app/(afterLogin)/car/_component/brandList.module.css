@@ -53,8 +53,16 @@
 }
 
 .activeBrandBox {
+  font-weight: 600;
   background-color: #f3f8ff;
   border: 2px solid #0733a1;
+}
+
+.brandName {
+  font-family: "SUITE";
+  font-size: 20px;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .moreBrand {

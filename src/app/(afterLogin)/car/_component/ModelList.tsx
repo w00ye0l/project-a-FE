@@ -85,7 +85,17 @@ export default function ModelList() {
                   <div className={style.modelContainer}>
                     <div className={style.modelInfoSection}>
                       <div className={style.modelInfoContainer}>
-                        <div className={style.modelImage}></div>
+                        {detailModel.detailModelMainImage ? (
+                          <Image
+                            className={style.modelImage}
+                            src={detailModel.detailModelMainImage}
+                            width={320}
+                            height={120}
+                            alt={detailModel.detailModelName}
+                          />
+                        ) : (
+                          <div className={style.modelImage}></div>
+                        )}
 
                         <div className={style.modelInfoBox}>
                           <div className={style.brandBox}>

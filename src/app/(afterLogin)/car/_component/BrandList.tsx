@@ -55,9 +55,15 @@ export default function BrandList({
 
   // 브랜드 클릭 시 해당 브랜드 정보 페이지로 이동
   const onClickBrand = (brandItem: Brand) => {
-    carPriceStore.setSelectedBrand(brandItem.brandName);
-    setBrandName(brandItem.brandName);
-    router.push(`/car?b=${brandItem.brandName}`);
+    if (carPriceStore.selectedBrand === brandItem.brandName) {
+      carPriceStore.setSelectedBrand("");
+      setBrandName("");
+      router.push("/car");
+    } else {
+      carPriceStore.setSelectedBrand(brandItem.brandName);
+      setBrandName(brandItem.brandName);
+      router.push(`/car?b=${brandItem.brandName}`);
+    }
   };
 
   // 전체 브랜드 표시하기
@@ -108,53 +114,51 @@ export default function BrandList({
 
       <div className={style.brandSection}>
         <div className={style.brandContainer}>
-          {visibleDomestic &&
-            domesticBrands
-              .slice(0, visibleBrandCount)
-              .map((brandItem: Brand) => (
-                <div
-                  key={brandItem.brandPk}
-                  className={cx(style.brandBox, {
-                    [style.activeBrandBox]:
-                      selectedBrand === brandItem.brandName &&
-                      carPriceStore.selectedBrand === brandItem.brandName,
-                  })}
-                  onClick={() => onClickBrand(brandItem)}
-                >
-                  <Image
-                    className={style.brandImage}
-                    src={`/brand/${brandItem.brandName}.jpg`}
-                    width={90}
-                    height={60}
-                    alt={brandItem.brandName}
-                  />
-                  <p className={style.brandName}>{brandItem.brandName}</p>
-                </div>
-              ))}
-
-          {!visibleDomestic &&
-            importedBrands
-              .slice(0, visibleBrandCount)
-              .map((brandItem: Brand) => (
-                <div
-                  key={brandItem.brandPk}
-                  className={cx(style.brandBox, {
-                    [style.activeBrandBox]:
-                      selectedBrand === brandItem.brandName &&
-                      carPriceStore.selectedBrand === brandItem.brandName,
-                  })}
-                  onClick={() => onClickBrand(brandItem)}
-                >
-                  <Image
-                    className={style.brandImage}
-                    src={`/brand/${brandItem.brandName}.jpg`}
-                    width={90}
-                    height={60}
-                    alt={brandItem.brandName}
-                  />
-                  <p className={style.brandName}>{brandItem.brandName}</p>
-                </div>
-              ))}
+          {visibleDomestic
+            ? domesticBrands
+                .slice(0, visibleBrandCount)
+                .map((brandItem: Brand) => (
+                  <div
+                    key={brandItem.brandPk}
+                    className={cx(style.brandBox, {
+                      [style.activeBrandBox]:
+                        selectedBrand === brandItem.brandName &&
+                        carPriceStore.selectedBrand === brandItem.brandName,
+                    })}
+                    onClick={() => onClickBrand(brandItem)}
+                  >
+                    <Image
+                      className={style.brandImage}
+                      src={`/brand/${brandItem.brandName}.jpg`}
+                      width={90}
+                      height={60}
+                      alt={brandItem.brandName}
+                    />
+                    <p className={style.brandName}>{brandItem.brandName}</p>
+                  </div>
+                ))
+            : importedBrands
+                .slice(0, visibleBrandCount)
+                .map((brandItem: Brand) => (
+                  <div
+                    key={brandItem.brandPk}
+                    className={cx(style.brandBox, {
+                      [style.activeBrandBox]:
+                        selectedBrand === brandItem.brandName &&
+                        carPriceStore.selectedBrand === brandItem.brandName,
+                    })}
+                    onClick={() => onClickBrand(brandItem)}
+                  >
+                    <Image
+                      className={style.brandImage}
+                      src={`/brand/${brandItem.brandName}.jpg`}
+                      width={90}
+                      height={60}
+                      alt={brandItem.brandName}
+                    />
+                    <p className={style.brandName}>{brandItem.brandName}</p>
+                  </div>
+                ))}
         </div>
 
         {visibleBrandCount <=

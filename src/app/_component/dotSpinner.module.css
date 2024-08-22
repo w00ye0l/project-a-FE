@@ -1,4 +1,5 @@
 .container {
+  margin: auto;
   /* --uib-size: 40px; */
   --uib-color: black;
   --uib-speed: 0.9s;
