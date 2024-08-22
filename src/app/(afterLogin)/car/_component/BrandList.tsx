@@ -55,9 +55,15 @@ export default function BrandList({
 
   // 브랜드 클릭 시 해당 브랜드 정보 페이지로 이동
   const onClickBrand = (brandItem: Brand) => {
-    carPriceStore.setSelectedBrand(brandItem.brandName);
-    setBrandName(brandItem.brandName);
-    router.push(`/car?b=${brandItem.brandName}`);
+    if (carPriceStore.selectedBrand === brandItem.brandName) {
+      carPriceStore.setSelectedBrand("");
+      setBrandName("");
+      router.push("/car");
+    } else {
+      carPriceStore.setSelectedBrand(brandItem.brandName);
+      setBrandName(brandItem.brandName);
+      router.push(`/car?b=${brandItem.brandName}`);
+    }
   };
 
   // 전체 브랜드 표시하기
