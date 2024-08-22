@@ -109,14 +109,14 @@ export default function Home() {
             <div className={style.rankBox}>
               <p>1</p>
               <Image
-                src="/main/car/sonata.png"
-                width={100}
-                height={100}
-                alt="sonata"
+                src="/main/car/cona.png"
+                width={120}
+                height={70}
+                alt="cona"
               />
               <div>
                 <div>
-                  <p>소나타</p>
+                  <p>코나</p>
                   <p>현대</p>
                 </div>
                 <p>2024년 가솔린 터보 1.6</p>
@@ -125,14 +125,14 @@ export default function Home() {
             <div className={style.rankBox}>
               <p>2</p>
               <Image
-                src="/main/car/sonata.png"
-                width={100}
-                height={100}
-                alt="sonata"
+                src="/main/car/cona.png"
+                width={120}
+                height={70}
+                alt="cona"
               />
               <div>
                 <div>
-                  <p>소나타</p>
+                  <p>코나</p>
                   <p>현대</p>
                 </div>
                 <p>2024년 가솔린 터보 1.6</p>
@@ -141,14 +141,14 @@ export default function Home() {
             <div className={style.rankBox}>
               <p>3</p>
               <Image
-                src="/main/car/sonata.png"
-                width={100}
-                height={100}
-                alt="sonata"
+                src="/main/car/cona.png"
+                width={120}
+                height={70}
+                alt="cona"
               />
               <div>
                 <div>
-                  <p>소나타</p>
+                  <p>코나</p>
                   <p>현대</p>
                 </div>
                 <p>2024년 가솔린 터보 1.6</p>
