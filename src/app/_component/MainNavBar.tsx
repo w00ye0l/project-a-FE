@@ -64,13 +64,15 @@ export default async function MainNavBar() {
             </>
           )}
 
-          <div className={style.divider}></div>
+          {!session?.user ?? (
+            <>
+              <div className={style.divider}></div>
 
-          <div>
-            <Link href="/" className={cx(style.btn, style.outlineBtn)}>
-              제휴사 로그인
-            </Link>
-          </div>
+              <Link href="/" className={cx(style.btn, style.outlineBtn)}>
+                제휴사 로그인
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
