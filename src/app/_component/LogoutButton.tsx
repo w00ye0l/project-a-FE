@@ -6,6 +6,8 @@ import logout from "../(beforeLogin)/auth/_lib/logout";
 import { toast } from "sonner";
 import { signOut } from "next-auth/react";
 import { Session } from "@auth/core/types";
+import style from "./mainNavBar.module.css";
+import cx from "classnames";
 
 type Props = {
   me: Session;
@@ -40,5 +42,12 @@ export default function LogoutButton({ me }: Props) {
     return null;
   }
 
-  return <button onClick={onLogout}>로그아웃</button>;
+  return (
+    <button
+      className={cx(style.link, style.btn, style.outlineBtn)}
+      onClick={onLogout}
+    >
+      로그아웃
+    </button>
+  );
 }
