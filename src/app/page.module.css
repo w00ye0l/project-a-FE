@@ -49,6 +49,18 @@
   background-color: #fff;
 }
 
+.ads {
+  margin-bottom: 30px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.contentTitle {
+  margin-bottom: 32px;
+  font-family: "ONE Mobile Title";
+  font-weight: 400;
+}
+
 .contentContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -61,17 +73,14 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  width: 240px;
-  height: 240px;
+  width: 230px;
+  height: 230px;
   overflow: hidden;
   cursor: pointer;
-  background-color: #033491;
-  border-radius: 20px;
+  background-color: #eaf2ff;
+  border-radius: 50%;
   box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.contentImg {
-  margin: 30px 55px 20px 55px;
+  border: 10px solid #0733a1;
 }
 
 .contentNameBox {
@@ -80,7 +89,8 @@
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: #fff;
+  color: #fff;
+  background-color: #0733a1;
 }
 
 .contentName {
@@ -105,10 +115,6 @@
 
 .left {
   justify-content: space-between;
-}
-
-.titleBox {
-  text-align: center;
 }
 
 .title {
@@ -142,6 +148,7 @@
 }
 
 .rotate {
+  margin-left: 10px;
   display: inline-block;
   font-size: 30px;
   font-weight: 500;
@@ -159,15 +166,8 @@
   margin-bottom: 20px;
 }
 
-.hotDealPreview {
-  margin-bottom: 80px;
-  width: 100%;
-  height: 280px;
-  border-radius: 10px;
-  box-shadow: 0px 8px 30px rgba(34, 59, 84, 20%);
-}
-
 .previewTitle {
+  margin-bottom: 20px;
   font-family: "ONE Mobile Title";
   font-size: 32px;
 }
@@ -191,11 +191,70 @@
   z-index: -10;
 }
 
+.hotDealPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  padding: 50px 26px;
+  width: 100%;
+  height: 280px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 30px rgba(34, 59, 84, 20%);
+}
+
+.hotDealContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hotDealInfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 27px;
+  font-family: "Pretendard";
+  gap: 8px;
+}
+
+.hotDealBrand {
+  color: #666666;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hotDealCar {
+  width: 140px;
+  font-size: 22px;
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+.hotDealDotButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.hotDealDot {
+  width: 10px;
+  height: 10px;
+  background-color: #c6d0e7;
+  border-radius: 50%;
+}
+
+.activeDot {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #0733a1;
+}
+
 .rankPreview {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 20px;
   width: 100%;
 }
 
@@ -207,6 +266,46 @@
   height: 100px;
   box-shadow: 0px 8px 30px rgba(34, 59, 84, 10%);
   border-radius: 10px;
+}
+
+.rank {
+  margin-right: 50px;
+  width: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rankInfo {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard";
+  gap: 4px;
+}
+
+.rankCar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.rankName {
+  font-weight: 500;
+  font-size: 17px;
+  color: #1b2a40;
+}
+
+.rankBrand {
+  font-weight: 400;
+  font-size: 12px;
+  color: #888888;
+}
+
+.rankTrim {
+  font-weight: 400;
+  font-size: 14px;
+  color: #888888;
 }
 
 .featureSection {
