@@ -4,6 +4,8 @@ import Link from "next/link";
 import cx from "classnames";
 import style from "./page.module.css";
 import LoginForm from "./_component/LoginForm";
+import Image from "next/image";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const onKakaoLogin = () => {
@@ -19,7 +21,8 @@ export default function LoginPage() {
   };
 
   const onFacebookLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/facebook`;
+    toast.warning("페이스북 로그인은 준비 중입니다.");
+    // window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/facebook`;
   };
 
   return (
@@ -39,37 +42,62 @@ export default function LoginPage() {
       </div>
 
       <div className={style.socialLoginSection}>
-        <div
-          onClick={onNaverLogin}
-          className={cx(style.socialLoginBtn, style.naverLogin)}
-        >
-          <div className={style.socialLoginImg}></div>
-          <p className={style.loginName}>네이버 로그인</p>
-        </div>
-        <div
-          onClick={onKakaoLogin}
-          className={cx(style.socialLoginBtn, style.kakaoLogin)}
-        >
-          <div className={style.socialLoginImg}></div>
+        <div onClick={onKakaoLogin} className={style.socialLoginBtn}>
+          <div className={cx(style.socialLoginImg, style.kakaoLogin)}>
+            <Image
+              src="/icon/kakao.png"
+              width={60}
+              height={60}
+              alt="naver_login"
+            />
+          </div>
           <p className={style.loginName}>카카오 로그인</p>
         </div>
-        <div
-          onClick={onFacebookLogin}
-          className={cx(style.socialLoginBtn, style.facebookLogin)}
-        >
-          <div className={style.socialLoginImg}></div>
-          <p className={style.loginName}>페이스북 로그인</p>
+
+        <div onClick={onNaverLogin} className={style.socialLoginBtn}>
+          <div className={cx(style.socialLoginImg, style.naverLogin)}>
+            <Image
+              src="/icon/naver.png"
+              width={60}
+              height={60}
+              alt="naver_login"
+            />
+          </div>
+          <p className={style.loginName}>네이버 로그인</p>
         </div>
-        <div
-          onClick={onGoogleLogin}
-          className={cx(style.socialLoginBtn, style.googleLogin)}
-        >
-          <div className={style.socialLoginImg}></div>
+
+        <div onClick={onGoogleLogin} className={style.socialLoginBtn}>
+          <div className={cx(style.socialLoginImg, style.googleLogin)}>
+            <Image
+              src="/icon/google.png"
+              width={60}
+              height={60}
+              alt="naver_login"
+            />
+          </div>
           <p className={style.loginName}>구글 로그인</p>
+        </div>
+
+        <div onClick={onFacebookLogin} className={style.socialLoginBtn}>
+          <div className={cx(style.socialLoginImg, style.facebookLogin)}>
+            <Image
+              src="/icon/facebook.png"
+              width={60}
+              height={60}
+              alt="naver_login"
+            />
+          </div>
+          <p className={style.loginName}>페이스북 로그인</p>
         </div>
       </div>
 
-      <div className={style.eventSection}>Event & Ads</div>
+      <Image
+        className={style.eventSection}
+        src="/ad/login.png"
+        width={440}
+        height={120}
+        alt="login_ad"
+      />
     </>
   );
 }

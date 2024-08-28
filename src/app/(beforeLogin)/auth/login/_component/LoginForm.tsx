@@ -57,7 +57,7 @@ export default function LoginForm() {
   return (
     <form className={style.loginForm} onSubmit={onSubmit}>
       <div className={style.loginOption}>
-        <div className={style.saveOptionContainer}>
+        {/* <div className={style.saveOptionContainer}>
           <div className={cx(style.saveOption, style.saveLogin)}>
             <input type="checkbox" name="saveLogin" id="saveLogin" />
             <label htmlFor="saveLogin">로그인 상태 유지</label>
@@ -76,7 +76,7 @@ export default function LoginForm() {
             <input type="radio" name="userType" id="dealerUser" />
             <label htmlFor="dealerUser">딜러회원</label>
           </div>
-        </div>
+        </div> */}
       </div>
       <input
         className={cx(style.input, style.id)}

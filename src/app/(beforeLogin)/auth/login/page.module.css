@@ -96,7 +96,8 @@
 }
 
 .socialLoginSection {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin: 40px 0;
   width: 100%;
   height: 100px;
@@ -113,10 +114,34 @@
 }
 
 .socialLoginImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background-color: #eee;
+}
+
+.kakaoLogin {
+  background-color: #fde400;
+}
+
+.naverLogin {
+  background-color: rgb(28, 180, 2);
+}
+
+.googleLogin {
+  background-color: #e95561;
+}
+
+.facebookLogin {
+  background-color: #4c71c1;
+}
+
+.socialLoginImg > img {
+  width: 50px;
+  height: 50px;
 }
 
 .loginName {
@@ -125,7 +150,7 @@
 
 .eventSection {
   display: flex;
-  height: 240px;
+  height: 120px;
   justify-content: center;
   align-items: center;
   background-color: #eee;
