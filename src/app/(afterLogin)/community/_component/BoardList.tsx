@@ -5,6 +5,10 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import style from "./boardList.module.css";
+import cx from "classnames";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 interface IBoard {
   boardPk: number;
@@ -12,6 +16,7 @@ interface IBoard {
 }
 
 export default function BoardList() {
+  const pathname = usePathname();
   const [boardName, setBoardName] = useState("");
   const [boardList, setBoardList] = useState([]);
   const { data: session } = useSession();
@@ -68,15 +73,8 @@ export default function BoardList() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "5px",
-        height: "100%",
-      }}
-    >
-      <div>
+    <div className={style.main}>
+      {/* <div>
         <label htmlFor="boardName">게시판 이름</label>
         <input
           id="boardName"
@@ -86,27 +84,66 @@ export default function BoardList() {
         />
 
         <button onClick={handleBoardCreate}>게시판 생성</button>
-      </div>
+      </div> */}
 
-      <div className="box">
-        <h3>게시판 목록</h3>
-
-        <ul style={{ flex: "1", listStyle: "none", padding: "10px" }}>
-          <Link href="/community">
-            <li>전체</li>
+      <ul className={style.menuSection}>
+        <li>
+          <Link
+            className={cx(style.menu, {
+              [style.activeMenu]: pathname === "/community",
+            })}
+            href="/community"
+          >
+            <Image
+              className={style.menuIcon}
+              src={
+                pathname === "/community"
+                  ? "/icon/home_active.png"
+                  : "/icon/home.png"
+              }
+              width={22}
+              height={22}
+              alt="home"
+            />
+            커뮤니티홈
           </Link>
+        </li>
 
-          <Link href="/community/best">
-            <li>베스트</li>
+        <li>
+          <Link
+            className={cx(style.menu, {
+              [style.activeMenu]: pathname === "/community/best",
+            })}
+            href="/community/best"
+          >
+            <Image
+              className={style.menuIcon}
+              src={
+                pathname === "/community/best"
+                  ? "/icon/best_active.png"
+                  : "/icon/best.png"
+              }
+              width={22}
+              height={22}
+              alt="best"
+            />
+            인기글
           </Link>
+        </li>
 
-          {boardList.map((board: { boardPk: number; boardName: string }) => (
-            <Link href={`/community/${board.boardName}`} key={board.boardPk}>
-              <li>{board.boardName} 게시판</li>
+        <hr className={style.hr} />
+
+        {boardList.map((board: IBoard) => (
+          <li key={board.boardPk}>
+            <Link
+              className={style.subMenu}
+              href={`/community/${board.boardName}`}
+            >
+              {board.boardName} 게시판
             </Link>
-          ))}
-        </ul>
-      </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
