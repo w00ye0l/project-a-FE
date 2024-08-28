@@ -93,7 +93,7 @@ export default function LoginPage() {
 
       <Image
         className={style.eventSection}
-        src="/ad/login.png"
+        src="/ad/440x120.png"
         width={440}
         height={120}
         alt="login_ad"

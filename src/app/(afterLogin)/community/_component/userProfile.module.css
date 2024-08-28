@@ -1,0 +1,103 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 24px;
+  width: 260px;
+  height: 130px;
+  font-family: "Pretendard";
+  letter-spacing: -0.01em;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+}
+
+.empty {
+  padding: 30px 24px;
+  align-items: center;
+}
+
+.infoContainer {
+  display: flex;
+}
+
+.profileImage {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: center;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1b2a40;
+}
+
+.nicknameContainer {
+  display: flex;
+  align-items: center;
+  width: 120px;
+}
+
+.nickname {
+  width: 110px;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sir {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #676767;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.divider {
+  margin: 0 8px;
+  width: 1px;
+  height: 8px;
+  background-color: #dddddd;
+}
+
+.alarm {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.writeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #012b94;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signUp {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #005aff;
+}

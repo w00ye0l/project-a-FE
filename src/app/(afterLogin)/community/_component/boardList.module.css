@@ -1,0 +1,55 @@
+.main {
+  margin-top: 30px;
+  margin-right: 20px;
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 14px;
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 16px;
+  list-style: none;
+  letter-spacing: -0.01em;
+}
+
+.menu {
+  position: relative;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 38px;
+  color: #1b2a40;
+  text-decoration: none;
+  /* background-color: #eee; */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.activeMenu {
+  background-color: #147fff1a;
+  color: #0b2369;
+}
+
+.menuIcon {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+}
+
+.hr {
+  margin-top: 16px;
+  margin-bottom: 26px;
+  height: 1px;
+  border: 0;
+  background-color: #eeeeee;
+}
+
+.subMenu {
+  margin-left: 14px;
+  color: #1b2a40;
+  text-decoration: none;
+}

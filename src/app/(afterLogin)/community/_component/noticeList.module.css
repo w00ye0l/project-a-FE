@@ -1,0 +1,46 @@
+.section {
+  margin-top: 20px;
+  padding: 20px;
+  width: 260px;
+  height: 156px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  font-family: "Pretendard";
+  overflow: hidden;
+}
+
+.titleContainer {
+  height: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+}
+
+.title {
+  line-height: 140%;
+  margin-left: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1b2a40;
+}
+
+.more {
+  margin-left: auto;
+  font-size: 12px;
+  color: #888888;
+  cursor: pointer;
+  line-height: 130%;
+}
+
+.notice {
+  height: 20px;
+  font-size: 13px;
+  color: #666666;
+  line-height: 140%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
