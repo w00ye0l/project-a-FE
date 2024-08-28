@@ -1,0 +1,47 @@
+.layout {
+  margin: auto;
+  display: flex;
+  width: 1200px;
+}
+
+.main {
+  padding: 30px;
+  width: 700px;
+  min-height: calc(100vh - 64px);
+  border-left: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+}
+
+.infoPanel {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.adSection {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.smallAd {
+  width: 260px;
+  height: 68px;
+}
+
+.bigAd {
+  width: 260px;
+  height: 300px;
+}
+
+.smallAdImage {
+  transform: scale(0.6);
+}
