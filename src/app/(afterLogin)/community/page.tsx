@@ -2,13 +2,19 @@
 
 import { Suspense } from "react";
 import ArticleList from "./_component/ArticleList";
+import style from "./page.module.css";
+import BestArticleList from "./_component/BestArticleList";
 
 export default function CommunityPage() {
   return (
-    <Suspense>
-      <h1>전체 글 목록</h1>
+    <div className={style.main}>
+      <Suspense>
+        {/* <ArticleList boardName={""} /> */}
 
-      <ArticleList boardName={""} />
-    </Suspense>
+        <h1 className={style.title}>커뮤니티</h1>
+
+        <BestArticleList />
+      </Suspense>
+    </div>
   );
 }
