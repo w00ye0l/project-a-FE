@@ -18,7 +18,7 @@ export default async function AuthLayout({
   return (
     <div className={style.mainSection}>
       <div className={style.logoSection}>
-        <div className={style.logoImg}>Logo</div>
+        {/* <div className={style.logoImg}>Logo</div> */}
         <Title />
       </div>
       {children}
