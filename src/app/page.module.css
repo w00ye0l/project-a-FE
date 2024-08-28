@@ -311,6 +311,8 @@
 .featureSection {
   width: 100%;
   background-color: rgba(248, 248, 248, 0.6);
+  font-family: "Pretendard";
+  letter-spacing: -0.02em;
 }
 
 .featureContainer {
@@ -335,6 +337,7 @@
   margin-bottom: 20px;
   font-size: 20px;
   color: #0042ff;
+  font-weight: 500;
 }
 
 .featureTitle {
