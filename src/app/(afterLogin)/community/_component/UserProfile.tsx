@@ -109,8 +109,14 @@ export default function UserProfile({ me }: Props) {
       </div>
 
       <button className={style.writeBtn}>
-        <Image src="/icon/plus.png" width={14} height={14} alt="write" />새 글
-        작성하기
+        <Image
+          className={style.writeIcon}
+          src="/icon/plus.png"
+          width={14}
+          height={14}
+          alt="write"
+        />
+        새 글 작성하기
       </button>
     </div>
   );
