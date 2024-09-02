@@ -5,6 +5,7 @@ import { getArticleDetail } from "../../_lib/getArticleDetail";
 import { useEffect, useState } from "react";
 import { Article } from "@/model/Article";
 import { deleteArticle } from "../../_lib/deleteArticle";
+import style from "./page.module.css";
 import cx from "classnames";
 import { getCommentList } from "../../_lib/getCommentList";
 import { createComment } from "../../_lib/createComment";
@@ -15,6 +16,16 @@ import DOMPurify from "isomorphic-dompurify";
 import { createRecomment } from "../../_lib/createRecomment";
 import { getRecommentList } from "../../_lib/getRecommentList";
 import { deleteRecomment } from "../../_lib/deleteRecomment";
+import DotSpinner from "@/app/_component/DotSpinner";
+import ArticleActionButtonBox from "../../_component/ArticleActionButtonBox";
+import Image from "next/image";
+import { toast } from "sonner";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 export default function ArticleDetailPage() {
   const { data: session } = useSession();
@@ -126,6 +137,11 @@ export default function ArticleDetailPage() {
 
   // 댓글 작성 버튼 클릭
   const handleCommentSubmitButtonClick = () => {
+    if (comment.length === 0) {
+      toast.warning("댓글을 입력해주세요.");
+
+      return;
+    }
     console.log("댓글작성");
     createComment({ articlePk, content: comment });
 
@@ -180,15 +196,13 @@ export default function ArticleDetailPage() {
 
   return (
     <>
-      <h1>게시글 상세</h1>
-
       {loading ? (
-        <p>Loading...</p>
+        <DotSpinner size={40} />
       ) : !article ? (
-        <p>Article not found</p>
+        <p>게시글을 찾을 수 없습니다.</p>
       ) : (
-        <>
-          <div>
+        <div className={style.main}>
+          {/* <div>
             <button onClick={handleBackButtonClick}>뒤로가기</button>
             {article.user.userPk === user.userPk && (
               <>
@@ -196,128 +210,228 @@ export default function ArticleDetailPage() {
                 <button onClick={handleDeleteButtonClick}>삭제</button>
               </>
             )}
+          </div> */}
+
+          <div>
+            <h1 className={style.title}>{article.title}</h1>
+
+            <div className={style.content}>
+              {article.videos &&
+                article.videos.length > 0 &&
+                article.videos.map((videoUrl, index) => (
+                  <div key={index} className="video-container">
+                    <video src={videoUrl} controls width="100%" />
+                  </div>
+                ))}
+              <div
+                className={cx("ql-content")}
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtml(article.originContent),
+                }}
+              />
+            </div>
+
+            <hr className={style.hr} />
+
+            <div className={style.actionContainer}>
+              <ArticleActionButtonBox
+                articlePk={article.articlePk}
+                boardName={article.boardName}
+                reactionCount={
+                  article.likeCount +
+                  article.neutralCount +
+                  article.dislikeCount
+                }
+                reactions={article.reactions}
+                commentCount={commentList.length}
+                scrapCount={article.scrapCount}
+                scraps={article.scraps}
+              />
+
+              <p>조회수 {article.readCount}회</p>
+            </div>
           </div>
 
-          <div className={cx("box", "articleBox")}>
-            <p>게시글 번호: {article.articlePk}</p>
-            <p>게시글 제목: {article.title}</p>
+          <div className={style.commentSection}>
+            <p>댓글 {commentList.length}개</p>
 
-            <div className={cx("box")}>
-              <h2 className="articleTitle">{article.title}</h2>
-              <div className={cx("box", "contentBox")}>
-                {article.videos &&
-                  article.videos.length > 0 &&
-                  article.videos.map((videoUrl, index) => (
-                    <div key={index} className="video-container">
-                      <video src={videoUrl} controls width="20%" />
-                    </div>
-                  ))}
-                <div
-                  className={cx("ql-content")}
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(article.originContent),
-                  }}
+            <div className={style.commentInputContainer}>
+              {user.profileImage !== "NoImage" ? (
+                <Image
+                  className={style.commentProfile}
+                  src={user.profileImage}
+                  width={30}
+                  height={30}
+                  alt="profile"
+                />
+              ) : (
+                <div className={style.commentProfile}></div>
+              )}
+              <div className={style.commentInputBox}>
+                <input
+                  className={style.commentInput}
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="댓글을 입력해주세요."
+                />
+                <Image
+                  className={style.commentBtn}
+                  onClick={handleCommentSubmitButtonClick}
+                  src="/icon/upload.png"
+                  width={22}
+                  height={22}
+                  alt="send"
                 />
               </div>
             </div>
 
-            <p>조회수: {article.readCount}</p>
-            <p>좋아요 수: {article.likeCount}</p>
-            <p>작성일: {article.createdAt}</p>
-            <p>수정일: {article.updatedAt}</p>
-          </div>
-
-          <div className={cx("box", "articleBox")}>
-            <h2>댓글</h2>
-            <div>
-              <input
-                type="text"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button onClick={handleCommentSubmitButtonClick}>댓글작성</button>
-            </div>
-
-            <div>
+            <div className={style.commentListSection}>
               {commentList &&
                 commentList.length > 0 &&
                 commentList.map((comment) => (
-                  <div className="box" key={comment.commentPk}>
-                    {comment.user.userPk === user.userPk &&
-                      !comment.deleteCheck && (
-                        <button
-                          onClick={() => {
-                            handleCommentDeleteButtonClick(comment.commentPk);
-                          }}
-                        >
-                          삭제
-                        </button>
-                      )}
-                    <p>작성자: {comment.user.nickname}</p>
-                    <p>댓글 작성일: {comment.createdAt}</p>
-                    <p>댓글 내용: {comment.content}</p>
-
-                    {comment.recommentCount > 0 && (
-                      <button
-                        onClick={() =>
-                          toggleRecommentsVisibility(comment.commentPk)
-                        }
-                      >
-                        {visibleRecomments === comment.commentPk
-                          ? "답글 숨기기"
-                          : `답글 보기 (${comment.recommentCount}개)`}
-                      </button>
-                    )}
-
-                    <button
-                      onClick={() =>
-                        handleRecommentFormToggle(comment.commentPk)
-                      }
-                    >
-                      답글 달기
-                    </button>
-                    {showRecommentForm === comment.commentPk && (
-                      <div>
-                        <input
-                          type="text"
-                          value={recomment}
-                          onChange={(e) => setRecomment(e.target.value)}
+                  <div
+                    className={style.commentContainer}
+                    key={comment.commentPk}
+                  >
+                    <div className={style.commentUserContainer}>
+                      {comment.user.profileImage !== "NoImage" ? (
+                        <Image
+                          className={style.commentProfile}
+                          src={comment.user.profileImage}
+                          width={30}
+                          height={30}
+                          alt="profile"
                         />
+                      ) : (
+                        <div className={style.commentProfile}></div>
+                      )}
+                      <div className={style.commentUserInfo}>
+                        <p className={style.commentNickname}>
+                          {comment.user.nickname}
+                        </p>
+                        <p className={style.commentLevelTime}>
+                          Lv. {comment.user.exp}{" "}
+                          {dayjs(comment.createdAt).fromNow()}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className={style.comment}>{comment.content}</p>
+
+                    <div className={style.commentMenuSection}>
+                      <div className={style.commentMenuContainer}>
+                        {comment.recommentCount > 0 && (
+                          <button
+                            onClick={() =>
+                              toggleRecommentsVisibility(comment.commentPk)
+                            }
+                          >
+                            {visibleRecomments === comment.commentPk
+                              ? "답글 숨기기"
+                              : `답글 보기 (${comment.recommentCount}개)`}
+                          </button>
+                        )}
+
                         <button
                           onClick={() =>
-                            handleRecommentSubmitButtonClick(comment.commentPk)
+                            handleRecommentFormToggle(comment.commentPk)
                           }
                         >
-                          답글 작성
+                          답글 달기
                         </button>
-                      </div>
-                    )}
-
-                    {visibleRecomments === comment.commentPk &&
-                      recommentList.map((recomment) => (
-                        <div key={recomment.recommentPk} className="box">
-                          <p>작성자: {recomment.user.nickname}</p>
-                          <p>답글 작성일: {recomment.createdAt}</p>
-                          <p>답글 내용: {recomment.content}</p>
-
-                          {recomment.user.userPk === user.userPk && (
+                        {comment.user.userPk === user.userPk &&
+                          !comment.deleteCheck && (
                             <button
                               onClick={() => {
-                                handleRecommentDeleteButtonClick(
-                                  recomment.recommentPk
+                                handleCommentDeleteButtonClick(
+                                  comment.commentPk
                                 );
                               }}
                             >
                               삭제
                             </button>
                           )}
+                      </div>
+
+                      {showRecommentForm === comment.commentPk && (
+                        <div className={style.commentInputBox}>
+                          <input
+                            className={style.commentInput}
+                            type="text"
+                            value={recomment}
+                            onChange={(e) => setRecomment(e.target.value)}
+                            placeholder="답글을 입력해주세요."
+                          />
+                          <Image
+                            className={style.commentBtn}
+                            onClick={() =>
+                              handleRecommentSubmitButtonClick(
+                                comment.commentPk
+                              )
+                            }
+                            src="/icon/upload.png"
+                            width={22}
+                            height={22}
+                            alt="send"
+                          />
                         </div>
-                      ))}
+                      )}
+                    </div>
+
+                    <div className={style.recommentSection}>
+                      {visibleRecomments === comment.commentPk &&
+                        recommentList.map((recomment) => (
+                          <div
+                            className={style.recommentContainer}
+                            key={recomment.recommentPk}
+                          >
+                            <div className={style.commentUserContainer}>
+                              {recomment.user.profileImage !== "NoImage" ? (
+                                <Image
+                                  className={style.commentProfile}
+                                  src={recomment.user.profileImage}
+                                  width={30}
+                                  height={30}
+                                  alt="profile"
+                                />
+                              ) : (
+                                <div className={style.commentProfile}></div>
+                              )}
+                              <div className={style.commentUserInfo}>
+                                <p className={style.commentNickname}>
+                                  {recomment.user.nickname}
+                                </p>
+                                <p className={style.commentLevelTime}>
+                                  Lv. {recomment.user.exp}{" "}
+                                  {dayjs(recomment.createdAt).fromNow()}
+                                </p>
+                              </div>
+                            </div>
+
+                            <p className={style.comment}>{recomment.content}</p>
+
+                            <div className={style.recommentMenuContainer}>
+                              {recomment.user.userPk === user.userPk && (
+                                <button
+                                  onClick={() => {
+                                    handleRecommentDeleteButtonClick(
+                                      recomment.recommentPk
+                                    );
+                                  }}
+                                >
+                                  삭제
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 ))}
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

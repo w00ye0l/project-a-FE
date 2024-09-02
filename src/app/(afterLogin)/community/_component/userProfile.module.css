@@ -26,7 +26,8 @@
   height: 40px;
   object-fit: cover;
   object-position: center;
-  background-color: #d9d9d9;
+  background-color: #eeeeee;
+  border: 1.2px solid #52667c;
   border-radius: 50%;
 }
 
@@ -89,10 +90,16 @@
   color: #fff;
   font-size: 16px;
   font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.01em;
   background-color: #012b94;
   border: 0;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.writeIcon {
+  margin-right: 8px;
 }
 
 .signUp {

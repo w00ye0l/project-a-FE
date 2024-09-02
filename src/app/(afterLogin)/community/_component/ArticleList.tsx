@@ -2,13 +2,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getArticleList } from "../_lib/getArticleList";
 import { PageInfo } from "@/model/PageInfo";
+import style from "./articleList.module.css";
 import cx from "classnames";
 import ArticleActionButtonBox from "./ArticleActionButtonBox";
 import ArticlePagination from "./ArticlePagination";
 import { Article } from "@/model/Article";
 import CArticle from "../../community/_component/Article";
+import DotSpinner from "@/app/_component/DotSpinner";
 
 export default function ArticleList({ boardName }: { boardName: string | "" }) {
+  const [loading, setLoading] = useState(true);
   const [articleList, setArticleList] = useState([] as Article[]);
   const [pageInfo, setPageInfo] = useState<PageInfo>();
   const searchParams = useSearchParams();
@@ -35,12 +38,13 @@ export default function ArticleList({ boardName }: { boardName: string | "" }) {
         last: result.data.last,
       });
     }
+    setLoading(false);
   };
 
   // 페이지네이션 핸들러
   const handlePageMove = async (pageNumber: number) => {
     const result = await getArticleList({
-      boardName: "",
+      boardName: boardName,
       pageNumber: pageNumber - 1,
     });
     console.log(pageNumber);
@@ -75,10 +79,12 @@ export default function ArticleList({ boardName }: { boardName: string | "" }) {
   }, []);
 
   return (
-    <>
-      {articleList && articleList.length > 0 ? (
+    <div className={style.articleSection}>
+      {loading ? (
+        <DotSpinner size={40} />
+      ) : articleList && articleList.length > 0 ? (
         articleList.map((article) => (
-          <div className={cx("box", "articleBox")} key={article.articlePk}>
+          <div className={style.articleContainer} key={article.articlePk}>
             <CArticle article={article} />
 
             <ArticleActionButtonBox
@@ -99,20 +105,13 @@ export default function ArticleList({ boardName }: { boardName: string | "" }) {
       )}
 
       {pageInfo && (
-        <div
-          style={{
-            width: "800px",
-            padding: "60px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
+        <div className={style.paginationSection}>
           <ArticlePagination
             handlePageMove={handlePageMove}
             pageInfo={pageInfo}
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

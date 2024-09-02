@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { createArticle } from "../../_lib/createArticle";
+import { createArticle } from "../_lib/createArticle";
 import {
   DropzoneInputProps,
   DropzoneRootProps,
@@ -94,7 +94,7 @@ export default function CommunityWritePage() {
         <button onClick={onSubmit}>작성하기</button>
       </div>
 
-      <div className={"articleBox"}>
+      <div>
         <div className={style.editorContainer}>
           <h2>글쓰기</h2>
 
@@ -137,10 +137,7 @@ export default function CommunityWritePage() {
           /> */}
 
           {videos && videos.length > 0 && (
-            <div
-              className={cx("box")}
-              style={{ display: "flex", flexDirection: "column" }}
-            >
+            <div style={{ display: "flex", flexDirection: "column" }}>
               {videos.map((video, index) => (
                 <div key={index} style={{ display: "inline-block" }}>
                   <p>

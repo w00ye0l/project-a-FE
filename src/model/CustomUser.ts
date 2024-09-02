@@ -28,6 +28,8 @@ export interface CustomUser extends Session {
   marketingTwo: boolean;
   marketingThree: boolean;
 
+  exp: number;
+
   cash: number;
   cashChargeCount: number;
   cashUsedCount: number;

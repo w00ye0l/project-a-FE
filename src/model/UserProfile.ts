@@ -6,6 +6,7 @@ export interface UserProfile {
   postCount: number;
   commentCount: number;
 
+  exp: number;
   point: number;
   eventPoint: number;
 

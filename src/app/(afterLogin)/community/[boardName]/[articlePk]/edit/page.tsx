@@ -17,7 +17,7 @@ interface VideoFile extends File {
 }
 
 const QuillEditor = dynamic(
-  () => import("../../write/_component/QuillEditor"),
+  () => import("../../../write/_component/QuillEditor"),
   {
     ssr: false,
     loading: () => <p>Loading...</p>,

@@ -1,0 +1,173 @@
+.main {
+  margin: 20px 10px;
+  font-family: "Pretendard";
+}
+
+.title {
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: #1b2a40;
+}
+
+.content {
+  margin: 30px 0;
+  min-height: 200px;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: #1b2a40;
+}
+
+.hr {
+  margin: 20px 0px;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background-color: #eeeeee;
+}
+
+.actionContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commentSection {
+  margin: 50px 0;
+}
+
+.commentInputContainer {
+  margin-top: 17px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  gap: 20px;
+}
+
+.commentProfile {
+  width: 30px;
+  height: 30px;
+  background-color: #eeeeee;
+  border: 1.2px solid #52667c;
+  border-radius: 50%;
+}
+
+.commentInputBox {
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.commentInput {
+  padding: 10px 20px;
+  width: 100%;
+  height: 100%;
+  font-family: "Pretendard";
+  letter-spacing: -0.02em;
+  border: 0;
+  background-color: #012b940d;
+  border-radius: 5px;
+}
+
+.commentBtn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translate(0, -50%);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.commentListSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.commentContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard";
+  letter-spacing: -0.02em;
+}
+
+.commentUserContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.commentUserInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.commentNickname {
+  font-weight: 500;
+  font-size: 14px;
+  color: #1b2a40;
+}
+
+.commentLevelTime {
+  font-size: 12px;
+  color: #888888;
+}
+
+.comment {
+  margin-top: 10px;
+  margin-left: 40px;
+  font-size: 14px;
+  color: #1b2a40;
+}
+
+.commentMenuSection {
+  margin-top: 16px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentMenuContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.commentMenuContainer > button,
+.recommentMenuContainer > button {
+  background-color: transparent;
+  border: 0;
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+}
+
+.recommentSection {
+  margin-top: 20px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recommentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.recommentMenuContainer {
+  margin-top: 10px;
+  margin-left: 40px;
+}
