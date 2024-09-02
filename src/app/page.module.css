@@ -67,6 +67,13 @@
   height: 230px;
   border-radius: 50%;
   overflow: hidden;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease-in-out;
+}
+
+.contentBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.6);
 }
 
 .contentImageBox {
@@ -80,7 +87,6 @@
   cursor: pointer;
   background-color: #eaf2ff;
   border-radius: 50%;
-  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
   border: 10px solid #0733a1;
 }
 
