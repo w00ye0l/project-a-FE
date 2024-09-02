@@ -32,51 +32,62 @@ export default function Home() {
 
         <div className={style.contentContainer}>
           <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/estimate.png"
-              alt=""
-              width={200}
-              height={160}
-            />
+            <div className={style.contentImageBox}>
+              <Image
+                className={style.contentImg}
+                src="/main/icon/estimate.png"
+                alt=""
+                width={200}
+                height={160}
+              />
+            </div>
             <div className={style.contentNameBox}>
               <p className={style.contentName}>신차견적</p>
             </div>
           </div>
+
           <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/info.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>차량정보</p>
+            <div className={style.contentImageBox}>
+              <Image
+                className={style.contentImg}
+                src="/main/icon/info.png"
+                alt=""
+                width={200}
+                height={160}
+              />
+              <div className={style.contentNameBox}>
+                <p className={style.contentName}>차량정보</p>
+              </div>
             </div>
           </div>
+
           <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/community.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>커뮤니티</p>
+            <div className={style.contentImageBox}>
+              <Image
+                className={style.contentImg}
+                src="/main/icon/community.png"
+                alt=""
+                width={200}
+                height={160}
+              />
+              <div className={style.contentNameBox}>
+                <p className={style.contentName}>커뮤니티</p>
+              </div>
             </div>
           </div>
+
           <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/auction.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>딜러옥션</p>
+            <div className={style.contentImageBox}>
+              <Image
+                className={style.contentImg}
+                src="/main/icon/auction.png"
+                alt=""
+                width={200}
+                height={160}
+              />
+              <div className={style.contentNameBox}>
+                <p className={style.contentName}>딜러옥션</p>
+              </div>
             </div>
           </div>
         </div>
