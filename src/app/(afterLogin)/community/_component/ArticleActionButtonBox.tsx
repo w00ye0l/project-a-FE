@@ -1,6 +1,7 @@
 "use client";
 
 import style from "./articleActionButton.module.css";
+import cx from "classnames";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createReaction } from "../_lib/postReaction";
@@ -9,6 +10,8 @@ import { useSession } from "next-auth/react";
 import { CustomUser } from "@/model/CustomUser";
 import { Scrap } from "@/model/Scrap";
 import { createScrap } from "../_lib/postScrap";
+import Image from "next/image";
+import DotSpinner from "@/app/_component/DotSpinner";
 
 interface Props {
   articlePk: number;
@@ -40,6 +43,24 @@ export default function ArticleActionButtonBox({
   // 스크랩 수와 상태 관리
   const [scrapCountState, setScrapCountState] = useState(scrapCount);
   const [scrapsState, setScrapsState] = useState(scraps);
+
+  console.log(scrapsState);
+
+  if (!session) {
+    return <DotSpinner size={30} />;
+  }
+
+  const reactionImageSrc = reactionsState.find(
+    (reaction) => reaction.user.userPk === user.userPk
+  )
+    ? reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
+        ?.reactionType === "LIKE"
+      ? "/icon/article/like.png"
+      : reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
+          ?.reactionType === "NEUTRAL"
+      ? "/icon/article/neutral.png"
+      : "/icon/article/dislike.png"
+    : "/icon/article/reaction.png";
 
   // 현재 사용자의 리액션 타입을 업데이트하는 함수
   const updateReactionsState = (reactionType: string) => {
@@ -83,10 +104,10 @@ export default function ArticleActionButtonBox({
   const handleReactionButtonClick = async (reactionType: string) => {
     const result = await createReaction({ articlePk, reactionType });
 
-    if (result.responseCode === "REACTION_POST_SUCCESS") {
+    if (result.statusCode === 200 && result.data !== null) {
       // 리액션이 성공적으로 게시된 경우, 리액션 상태와 수 업데이트
       updateReactionsState(reactionType);
-    } else if (result.responseCode === "REACTION_DELETE") {
+    } else if (result.statusCode === 200 && result.data === null) {
       // 리액션이 성공적으로 삭제된 경우, 리액션 상태와 수 업데이트
       setReactionsState((prev) =>
         prev.filter((reaction) => reaction.user.userPk !== user.userPk)
@@ -104,7 +125,7 @@ export default function ArticleActionButtonBox({
   const handleScrapButtonClick = async () => {
     const result = await createScrap({ articlePk, scrapDisclosure: true });
 
-    if (result.responseCode === "SCRAP_ADD_SUCCESS") {
+    if (result.statusCode === 200 && result.data !== null) {
       // 스크랩이 성공적으로 추가된 경우, 스크랩 상태와 수 업데이트
       setScrapCountState((prev) => prev + 1);
       setScrapsState((prev) => [
@@ -124,7 +145,7 @@ export default function ArticleActionButtonBox({
           },
         },
       ]);
-    } else if (result.responseCode === "SCRAP_DELETE_SUCCESS") {
+    } else if (result.statusCode === 200 && result.data === null) {
       // 스크랩이 성공적으로 삭제된 경우, 스크랩 상태와 수 업데이트
       setScrapCountState((prev) => prev - 1);
       setScrapsState((prev) =>
@@ -134,58 +155,101 @@ export default function ArticleActionButtonBox({
   };
 
   return (
-    <div>
-      <div className={style.reactionUserContainer}>
-        <div className={style.reactionUser}>따봉 {reactionCountState}</div>
-        {reactionsState.length > 0 && (
-          <div className={style.reactionUserList}>
-            <p>감정표현 남긴 유저들</p>
-            {reactionsState.map((reaction) => (
-              <p key={reaction.user.userPk}>
-                {reaction.reactionType} {reaction.user.nickname}
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
+    <div className={style.section}>
+      <div className={cx(style.actionSection, style.reaction)}>
+        <div className={style.reactionContainer}>
+          <Image
+            className={style.actionButton}
+            src={reactionImageSrc}
+            width={24}
+            height={24}
+            alt="reaction"
+          />
 
-      <div className={style.reactionUserContainer}>
-        <div className={style.reactionUser}>스크랩 {scrapCountState}회</div>
-        {scrapsState.filter((scrap) => scrap.scrapDisclosure === true).length >
-          0 && (
-          <div className={style.reactionUserList}>
-            <p>스크랩한 유저들</p>
-            {/* 스크랩 유저 목록
-              스크랩 공개 여부에 따른 유저 닉네임 노출
-            */}
-            {scrapsState
-              .filter((scrap) => scrap.scrapDisclosure === true)
-              .map((scrap) => (
-                <p key={scrap.user.userPk}>{scrap.user.nickname}</p>
-              ))}
+          <div className={style.reactionActionSection}>
+            <div className={style.reactionActionList}>
+              <button
+                className={cx(style.reactionBtn, style.like)}
+                onClick={() => handleReactionButtonClick("LIKE")}
+              >
+                <Image
+                  src="/icon/article/like.png"
+                  width={30}
+                  height={30}
+                  alt="like"
+                />
+              </button>
+              <button
+                className={cx(style.reactionBtn, style.neutral)}
+                onClick={() => handleReactionButtonClick("NEUTRAL")}
+              >
+                <Image
+                  src="/icon/article/neutral.png"
+                  width={30}
+                  height={30}
+                  alt="neutral"
+                />
+              </button>
+              <button
+                className={cx(style.reactionBtn, style.dislike)}
+                onClick={() => handleReactionButtonClick("DISLIKE")}
+              >
+                <Image
+                  src="/icon/article/dislike.png"
+                  width={30}
+                  height={30}
+                  alt="dislike"
+                />
+              </button>
+            </div>
           </div>
-        )}
-      </div>
-
-      <div className={style.reactionContainer}>
-        <div className={style.reactionButton}>리액션</div>
-        <div className={style.reactionActionList}>
-          <button onClick={() => handleReactionButtonClick("LIKE")}>
-            좋아요
-          </button>
-          <button onClick={() => handleReactionButtonClick("NEUTRAL")}>
-            중립요
-          </button>
-          <button onClick={() => handleReactionButtonClick("DISLIKE")}>
-            싫어요
-          </button>
         </div>
+
+        <p>{reactionCountState}</p>
       </div>
 
-      <button onClick={handleCommentButtonClick}>
-        댓글 ({commentCount}개)
-      </button>
-      <button onClick={handleScrapButtonClick}>스크랩</button>
+      <div className={style.actionSection}>
+        <button
+          className={style.actionButton}
+          onClick={handleCommentButtonClick}
+        >
+          <Image
+            src="/icon/article/comment_active.png"
+            width={24}
+            height={24}
+            alt="comment"
+          />
+        </button>
+        <p>{commentCount}</p>
+      </div>
+
+      <div className={style.actionSection}>
+        <button className={style.actionButton} onClick={handleScrapButtonClick}>
+          <Image
+            src={
+              scrapsState.find((scrap) => scrap.user.userPk === user.userPk)
+                ? "/icon/article/scrap_active.png"
+                : "/icon/article/scrap.png"
+            }
+            width={24}
+            height={24}
+            alt="scrap"
+          />
+        </button>
+
+        <p>{scrapCountState}</p>
+      </div>
+
+      <div className={style.actionSection}>
+        <button className={style.actionButton}>
+          <Image
+            src="/icon/article/social_active.png"
+            width={24}
+            height={24}
+            alt="social"
+          />
+        </button>
+      </div>
     </div>
   );
 }

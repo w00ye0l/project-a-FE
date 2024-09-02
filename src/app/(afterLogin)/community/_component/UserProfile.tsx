@@ -63,6 +63,10 @@ export default function UserProfile({ me }: Props) {
     }
   }, [preUserInfo.userPk, preUserInfo.accessToken, router]);
 
+  const handleWriteBtn = () => {
+    router.push("/community/write");
+  };
+
   useEffect(() => {
     console.log("useEffect called");
     getUserInfo();
@@ -108,7 +112,7 @@ export default function UserProfile({ me }: Props) {
         />
       </div>
 
-      <button className={style.writeBtn}>
+      <button className={style.writeBtn} onClick={handleWriteBtn}>
         <Image
           className={style.writeIcon}
           src="/icon/plus.png"

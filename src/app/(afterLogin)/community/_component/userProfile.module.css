@@ -26,7 +26,8 @@
   height: 40px;
   object-fit: cover;
   object-position: center;
-  background-color: #d9d9d9;
+  background-color: #eeeeee;
+  border: 1.2px solid #52667c;
   border-radius: 50%;
 }
 
