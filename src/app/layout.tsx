@@ -31,7 +31,7 @@ export default function RootLayout({
           <MainNavBar />
 
           {children}
-          <Toaster richColors position="top-center" />
+          <Toaster richColors position="bottom-right" />
         </AuthSession>
       </body>
     </html>
