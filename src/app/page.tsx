@@ -2,6 +2,7 @@ import Image from "next/image";
 import style from "./page.module.css";
 import cx from "classnames";
 import EmblaCarousel from "./_component/EmblaCarousel";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -31,54 +32,73 @@ export default function Home() {
         />
 
         <div className={style.contentContainer}>
-          <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/estimate.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>신차견적</p>
+          <Link href="/car">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/estimate.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+              </div>
+              <div className={style.contentNameBox}>
+                <p className={style.contentName}>신차견적</p>
+              </div>
             </div>
-          </div>
-          <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/info.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>차량정보</p>
+          </Link>
+
+          <Link href="/car">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/info.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>차량정보</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/community.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>커뮤니티</p>
+          </Link>
+
+          <Link href="/community">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/community.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>커뮤니티</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className={style.contentBox}>
-            <Image
-              className={style.contentImg}
-              src="/main/icon/auction.png"
-              alt=""
-              width={200}
-              height={160}
-            />
-            <div className={style.contentNameBox}>
-              <p className={style.contentName}>딜러옥션</p>
+          </Link>
+
+          <Link href="/auction">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/auction.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>딜러옥션</p>
+                </div>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 

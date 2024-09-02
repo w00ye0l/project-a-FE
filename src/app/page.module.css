@@ -55,23 +55,31 @@
   object-position: center;
 }
 
-.contentTitle {
-  margin-bottom: 32px;
-  font-family: "ONE Mobile Title";
-  font-weight: 400;
-}
-
 .contentContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 80px;
-  font-family: "ONE Mobile Title";
 }
 
 .contentBox {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease-in-out;
+}
+
+.contentBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+.contentImageBox {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   width: 230px;
   height: 230px;
@@ -79,22 +87,26 @@
   cursor: pointer;
   background-color: #eaf2ff;
   border-radius: 50%;
-  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
   border: 10px solid #0733a1;
 }
 
 .contentNameBox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 14px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  width: 230px;
   height: 60px;
   color: #fff;
   background-color: #0733a1;
 }
 
 .contentName {
-  font-size: 26px;
+  font-family: "ONE Mobile Title";
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .previewSection {
