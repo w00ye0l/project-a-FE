@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AdminPage() {
-  redirect("/admin/car/default?tab=country");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/admin/car/default?tab=country");
+  }, []);
 }
