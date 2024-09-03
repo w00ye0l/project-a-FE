@@ -22,7 +22,7 @@ export default function ProfileImage({
   imageProp,
   onImageUploadSuccess,
 }: ProfileImageProps) {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   // 초기 이미지를 props로 설정
   const [image, setImage] = useState<string>(imageProp || "");
@@ -90,6 +90,12 @@ export default function ProfileImage({
       setImage(result.data.imageUrl);
       // 부모 컴포넌트의 상태를 업데이트하는 콜백 함수 호출
       onImageUploadSuccess(result.data.imageUrl);
+
+      // 이미지 업로드 후 파일 초기화
+      setSelectedFile(null);
+
+      // 세션 정보 업데이트
+      update({ ...user, profileImage: result.data.imageUrl });
     } catch (error) {
       console.error(error);
     }
