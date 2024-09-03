@@ -133,13 +133,25 @@ export default function CarDefaultPage() {
               field: "detailModelName",
               headerName: "세부 모델명",
               editable: true,
-              width: 350,
+              width: 250,
             },
             {
               field: "modelPk",
               headerName: "모델 코드",
               editable: true,
-              width: 180,
+              width: 120,
+            },
+            {
+              field: "mainImage",
+              headerName: "대표 이미지",
+              editable: true,
+              width: 300,
+            },
+            {
+              field: "normalImage",
+              headerName: "일반 이미지",
+              editable: true,
+              width: 300,
             },
           ],
         };
