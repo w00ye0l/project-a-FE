@@ -8,7 +8,7 @@ interface Props {
   handlePageMove: (pageNumber: number) => void;
 }
 
-export default function ArticlePagination({ pageInfo, handlePageMove }: Props) {
+export default function CPagination({ pageInfo, handlePageMove }: Props) {
   console.log(pageInfo);
 
   return (

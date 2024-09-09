@@ -1,11 +1,12 @@
+"use client";
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getArticleList } from "../_lib/getArticleList";
 import { PageInfo } from "@/model/PageInfo";
 import style from "./articleList.module.css";
-import cx from "classnames";
 import ArticleActionButtonBox from "./ArticleActionButtonBox";
-import ArticlePagination from "./ArticlePagination";
+import CPagination from "./Pagination";
 import { Article } from "@/model/Article";
 import CArticle from "../../community/_component/Article";
 import DotSpinner from "@/app/_component/DotSpinner";
@@ -106,10 +107,7 @@ export default function ArticleList({ boardName }: { boardName: string | "" }) {
 
       {pageInfo && (
         <div className={style.paginationSection}>
-          <ArticlePagination
-            handlePageMove={handlePageMove}
-            pageInfo={pageInfo}
-          />
+          <CPagination handlePageMove={handlePageMove} pageInfo={pageInfo} />
         </div>
       )}
     </div>
