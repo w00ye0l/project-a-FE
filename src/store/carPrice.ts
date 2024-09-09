@@ -6,7 +6,12 @@ import { persist } from "zustand/middleware";
 interface CarPriceState {
   defaultPrice: number;
   selectedBrand: string;
-  selectedDetailModel: string;
+  selectedDetailModel: {
+    detailModelName: string;
+    detailModelMainImage: string;
+    detailModelNormalImages: string[];
+    detailModelColorImages: string[];
+  };
   selectedCarInfo: {
     carYear: string;
     engineInfo: string;
@@ -29,7 +34,12 @@ interface CarPriceState {
   selectedCarBasicOption: BasicOption;
   setDefaultPrice: (price: number) => void;
   setSelectedBrand: (brand: string) => void;
-  setSelectedDetailModel: (model: string) => void;
+  setSelectedDetailModel: (model: {
+    detailModelName: string;
+    detailModelMainImage: string;
+    detailModelNormalImages: string[];
+    detailModelColorImages: string[];
+  }) => void;
   setSelectedCarInfo: (info: {
     carYear: string;
     engineInfo: string;
@@ -60,7 +70,12 @@ export const useCarPriceStore = create(
     (set) => ({
       defaultPrice: 0,
       selectedBrand: "",
-      selectedDetailModel: "",
+      selectedDetailModel: {
+        detailModelName: "",
+        detailModelMainImage: "",
+        detailModelNormalImages: [],
+        detailModelColorImages: [],
+      },
       selectedCarInfo: {
         detailModelName: "",
         carYear: "",
@@ -74,8 +89,12 @@ export const useCarPriceStore = create(
       selectedCarBasicOption: {} as BasicOption,
       setDefaultPrice: (price: number) => set({ defaultPrice: price }),
       setSelectedBrand: (brand: string) => set({ selectedBrand: brand }),
-      setSelectedDetailModel: (model: string) =>
-        set({ selectedDetailModel: model }),
+      setSelectedDetailModel: (model: {
+        detailModelName: string;
+        detailModelMainImage: string;
+        detailModelNormalImages: string[];
+        detailModelColorImages: string[];
+      }) => set({ selectedDetailModel: model }),
       setSelectedCarInfo: (info: {
         carYear: string;
         engineInfo: string;

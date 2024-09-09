@@ -9,9 +9,9 @@ export default function CarLayoutPage({
   children: React.ReactNode;
 }) {
   return (
-    <main className={cx(style.main)}>
+    <main className={style.main}>
       <Suspense fallback={<p>Loading...</p>}>
-        <section className={cx(style.section)}>{children}</section>
+        <section className={style.section}>{children}</section>
       </Suspense>
     </main>
   );

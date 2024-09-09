@@ -1,0 +1,11 @@
+.imgSection {
+  margin-top: 100px;
+  width: calc(100% - 700px);
+  display: flex;
+  flex-direction: column;
+}
+
+.modelImg {
+  width: 100%;
+  height: auto;
+}

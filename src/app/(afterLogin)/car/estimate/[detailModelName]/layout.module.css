@@ -1,0 +1,28 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.contentSection {
+  height: calc(100vh - 135px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.optionSection {
+  width: 700px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid #dddddd;
+  background-color: #fff;
+  font-family: "Pretendard";
+}
+
+.optionContainer {
+  height: calc(100% - 140px);
+  padding: 30px 50px;
+  padding-bottom: 0;
+}

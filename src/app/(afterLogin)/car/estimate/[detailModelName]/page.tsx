@@ -1,19 +1,19 @@
 "use client";
 
 import { TrimList } from "@/model/car/Info/TrimList";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import cx from "classnames";
 import style from "./page.module.css";
 import { useCarPriceStore } from "@/store/carPrice";
 
 export default function EstimatePage() {
-  const router = useRouter();
   const params = useParams();
   // 문자 한글로 인코딩
   const detailModelName = params.detailModelName;
   const [trimList, setTrimList] = useState<TrimList[]>([]);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
+  const [selectedTrim, setSelectedTrim] = useState<string>("");
   const carPriceStore = useCarPriceStore();
 
   const getTrimList = async () => {
@@ -45,7 +45,7 @@ export default function EstimatePage() {
     }
   };
 
-  // 트림 클릭 시 옵션 페이지로 이동
+  // 트림 클릭 시
   const onClickTrimName = (
     carYear: string,
     engineInfo: string,
@@ -59,23 +59,23 @@ export default function EstimatePage() {
       trimName,
     });
     carPriceStore.setDefaultPrice(carPrice);
-    // 견적 페이지로 이동
-    router.push(
-      `/car/estimate/option/${detailModelName}?carYear=${carYear}&engineInfo=${engineInfo}&trimName=${trimName}`
-    );
   };
 
   useEffect(() => {
     getTrimList();
   }, []);
 
-  return (
-    <div className={style.main}>
-      <div className={style.titleModelImgSection}>
-        <h1>세부모델을 선택하세요.</h1>
+  useEffect(() => {
+    setSelectedTrim(
+      carPriceStore.selectedCarInfo.carYear +
+        carPriceStore.selectedCarInfo.engineInfo +
+        carPriceStore.selectedCarInfo.trimName
+    );
+  }, [carPriceStore]);
 
-        <div className={style.modelImg}></div>
-      </div>
+  return (
+    <>
+      <h1 className={style.title}>세부 모델 선택</h1>
 
       <div className={style.trimSection}>
         {trimList.map((trim) => (
@@ -95,25 +95,50 @@ export default function EstimatePage() {
             </h2>
 
             {visibleSections.includes(trim.carYear + trim.engineInfo) && (
-              <ul className={style.trimBox}>
+              <ul
+                className={style.trimBox}
+                onClick={(event) => {
+                  event.stopPropagation(); // 부모로 이벤트 전파를 막음
+                }}
+              >
                 {trim.trimNameList.map((trimName) => (
                   <li
-                    onClick={() =>
+                    onClick={(event) => {
+                      event.stopPropagation();
                       onClickTrimName(
                         trim.carYear,
                         trim.engineInfo,
                         trimName.trimName,
                         trimName.carPrice
-                      )
-                    }
-                    className={style.trimItem}
+                      );
+                      setSelectedTrim(
+                        trim.carYear + trim.engineInfo + trimName.trimName
+                      );
+                    }}
+                    className={cx(style.trimItem, {
+                      [style.trimItemActive]:
+                        selectedTrim ===
+                        trim.carYear + trim.engineInfo + trimName.trimName,
+                    })}
                     key={trimName.trimName}
                   >
-                    <span>{trimName.trimName}</span>
-                    <span>
-                      {Math.round(trimName.carPrice / 10000).toLocaleString() +
-                        "만원"}
-                    </span>
+                    <span className={style.name}>{trimName.trimName}</span>
+
+                    <div className={style.priceSection}>
+                      <div className={style.discountContainer}>
+                        <p className={style.discount}>
+                          2<span className={style.percent}>%</span>
+                        </p>
+                      </div>
+                      <p className={style.priceBox}>
+                        <span className={style.price}>
+                          {Math.round(
+                            trimName.carPrice / 10000
+                          ).toLocaleString()}
+                        </span>
+                        만원
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -121,6 +146,6 @@ export default function EstimatePage() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

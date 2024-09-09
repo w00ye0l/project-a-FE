@@ -5,19 +5,30 @@ import style from "./tab.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useCarPriceStore } from "@/store/carPrice";
+import Image from "next/image";
 
 export default function Tab() {
   const pathname = usePathname();
   const carPriceStore = useCarPriceStore();
   const brandName = carPriceStore.selectedBrand;
-  const detailModelName = carPriceStore.selectedDetailModel;
+  const detailModelName = carPriceStore.selectedDetailModel.detailModelName;
 
-  console.log(pathname);
-  console.log(brandName);
-  console.log(detailModelName);
+  return (
+    <div className={style.main}>
+      <div className={style.title}>
+        {brandName && (
+          <Image
+            src={`/brand/${brandName}.jpg`}
+            width={90}
+            height={60}
+            alt={brandName}
+          />
+        )}
+        <p>
+          <b>{brandName}</b> {detailModelName}
+        </p>
+      </div>
 
-  if (pathname.startsWith("/car/estimate")) {
-    return (
       <ul className={style.navTab}>
         <li className={cx(style.tab)}>
           <Link
@@ -25,7 +36,6 @@ export default function Tab() {
             className={cx(
               style.tabName,
               decodeURI(pathname) === `/car/estimate/${detailModelName}` &&
-                pathname !== "/car/estimate/end" &&
                 style.tabActive
             )}
           >
@@ -39,12 +49,48 @@ export default function Tab() {
           <Link
             href={
               carPriceStore.selectedCarInfo
-                ? `/car/estimate/option/${carPriceStore.selectedDetailModel}?carYear=${carPriceStore.selectedCarInfo.carYear}&engineInfo=${carPriceStore.selectedCarInfo.engineInfo}&trimName=${carPriceStore.selectedCarInfo.trimName}`
+                ? `/car/estimate/${detailModelName}/exterior?carYear=${carPriceStore.selectedCarInfo.carYear}&engineInfo=${carPriceStore.selectedCarInfo.engineInfo}&trimName=${carPriceStore.selectedCarInfo.trimName}`
                 : "/car"
             }
             className={cx(
               style.tabName,
-              pathname.startsWith(`/car/estimate/option`) && style.tabActive
+              pathname.includes("/exterior") && style.tabActive
+            )}
+          >
+            익스테리어
+          </Link>
+        </li>
+
+        <span className={style.next}>&gt;</span>
+
+        <li className={style.tab}>
+          <Link
+            href={
+              carPriceStore.selectedCarInfo
+                ? `/car/estimate/${detailModelName}/interior?carYear=${carPriceStore.selectedCarInfo.carYear}&engineInfo=${carPriceStore.selectedCarInfo.engineInfo}&trimName=${carPriceStore.selectedCarInfo.trimName}`
+                : "/car"
+            }
+            className={cx(
+              style.tabName,
+              pathname.includes("/interior") && style.tabActive
+            )}
+          >
+            인테리어
+          </Link>
+        </li>
+
+        <span className={style.next}>&gt;</span>
+
+        <li className={style.tab}>
+          <Link
+            href={
+              carPriceStore.selectedCarInfo
+                ? `/car/estimate/${detailModelName}/option?carYear=${carPriceStore.selectedCarInfo.carYear}&engineInfo=${carPriceStore.selectedCarInfo.engineInfo}&trimName=${carPriceStore.selectedCarInfo.trimName}`
+                : "/car"
+            }
+            className={cx(
+              style.tabName,
+              pathname.includes("/option") && style.tabActive
             )}
           >
             옵션
@@ -61,10 +107,10 @@ export default function Tab() {
               pathname === `/car/estimate/end` && style.tabActive
             )}
           >
-            견적서
+            견적 완료
           </Link>
         </li>
       </ul>
-    );
-  }
+    </div>
+  );
 }
