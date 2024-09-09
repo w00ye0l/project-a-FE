@@ -1,7 +1,10 @@
 .main {
+  margin: auto;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 1200px;
 }
 
 .ads {

@@ -1,0 +1,78 @@
+.title {
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.trimSection {
+  padding: 0 5px;
+  height: calc(100% - 170px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 5px;
+}
+
+.colorOptionContainer {
+  margin-top: 40px;
+  display: flex;
+  list-style: none;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.colorOptionBoxActive {
+  position: relative;
+  outline: 5px solid #147fff;
+  border-radius: 10px;
+}
+
+.colorOptionBoxActive .colorBox {
+  border: 0;
+}
+
+.colorOptionBoxActive::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background-image: url("/icon/check_active.png");
+  background-size: contain;
+}
+
+.colorBox {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #aaaaaa;
+  border-radius: 5px;
+}
+
+.twoColor {
+  width: 50%;
+  height: 100%;
+}
+
+.hr {
+  margin-top: 30px;
+  height: 1px;
+  border: 0;
+  background-color: #b5b5b5;
+}
+
+.selectColorSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colorName {
+  font-size: 20px;
+}
+
+.colorPrice {
+  font-family: "Cafe24 Ohsquare";
+  font-size: 20px;
+}

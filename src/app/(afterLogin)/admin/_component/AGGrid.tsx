@@ -267,6 +267,7 @@ export default function AGGrid({ data }: { data: any }) {
       default:
         result = { data: [] };
     }
+    console.log(result.data);
     setRowData(result.data);
   };
 
@@ -337,6 +338,9 @@ export default function AGGrid({ data }: { data: any }) {
         rowSelection={"multiple"}
         onGridReady={onGridReady}
         onCellValueChanged={onCellValueChanged}
+        pagination={true}
+        paginationPageSize={10}
+        paginationPageSizeSelector={[10, 20, 30, 40, 50]}
       />
     </div>
   );

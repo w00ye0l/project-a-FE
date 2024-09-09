@@ -1,0 +1,35 @@
+.btnSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 70px;
+  height: 140px;
+  border-top: 1px solid #dddddd;
+}
+
+.btn {
+  width: 260px;
+  height: 60px;
+  font-family: "Pretendard";
+  font-size: 24px;
+  font-weight: 600;
+  background-color: transparent;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: #0733a180;
+}
+
+.pre {
+  border: 2px solid #0733a1;
+  color: #0733a1;
+}
+
+.next {
+  background-color: #0733a1;
+  color: #ffffff;
+  box-shadow: inset 2px -3px 4px 0 rgba(0, 0, 0, 0.4),
+    inset -2px 3px 4px 0 rgba(255, 255, 255, 0.25);
+}

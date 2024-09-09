@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -60,6 +61,10 @@ export default function ArticleDetailPage() {
 
   // 댓글 목록 API 호출
   const getCommentListData = async () => {
+    if (!user) {
+      return;
+    }
+
     try {
       const result = await getCommentList({ articlePk });
       console.log({ result });
@@ -74,6 +79,10 @@ export default function ArticleDetailPage() {
 
   // 대댓글 목록 API 호출
   const getRecommentListData = async (commentPk: number) => {
+    if (!user) {
+      return;
+    }
+
     try {
       const result = await getRecommentList({ articlePk, commentPk });
       console.log({ result });
@@ -190,10 +199,6 @@ export default function ArticleDetailPage() {
     getCommentListData();
   }, []);
 
-  if (!session) {
-    return;
-  }
-
   return (
     <>
       {loading ? (
@@ -243,7 +248,7 @@ export default function ArticleDetailPage() {
                   article.dislikeCount
                 }
                 reactions={article.reactions}
-                commentCount={commentList.length}
+                commentCount={article.commentCount}
                 scrapCount={article.scrapCount}
                 scraps={article.scraps}
               />
@@ -252,185 +257,194 @@ export default function ArticleDetailPage() {
             </div>
           </div>
 
-          <div className={style.commentSection}>
-            <p>댓글 {commentList.length}개</p>
+          {user ? (
+            <div className={style.commentSection}>
+              <p>댓글 {commentList.length}개</p>
 
-            <div className={style.commentInputContainer}>
-              {user.profileImage !== "NoImage" ? (
-                <Image
-                  className={style.commentProfile}
-                  src={user.profileImage}
-                  width={30}
-                  height={30}
-                  alt="profile"
-                />
-              ) : (
-                <div className={style.commentProfile}></div>
-              )}
-              <div className={style.commentInputBox}>
-                <input
-                  className={style.commentInput}
-                  type="text"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="댓글을 입력해주세요."
-                />
-                <Image
-                  className={style.commentBtn}
-                  onClick={handleCommentSubmitButtonClick}
-                  src="/icon/upload.png"
-                  width={22}
-                  height={22}
-                  alt="send"
-                />
+              <div className={style.commentInputContainer}>
+                {user.profileImage !== "NoImage" ? (
+                  <Image
+                    className={style.commentProfile}
+                    src={user.profileImage}
+                    width={30}
+                    height={30}
+                    alt="profile"
+                  />
+                ) : (
+                  <div className={style.commentProfile}></div>
+                )}
+                <div className={style.commentInputBox}>
+                  <input
+                    className={style.commentInput}
+                    type="text"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="댓글을 입력해주세요."
+                  />
+                  <Image
+                    className={style.commentBtn}
+                    onClick={handleCommentSubmitButtonClick}
+                    src="/icon/upload.png"
+                    width={22}
+                    height={22}
+                    alt="send"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className={style.commentListSection}>
-              {commentList &&
-                commentList.length > 0 &&
-                commentList.map((comment) => (
-                  <div
-                    className={style.commentContainer}
-                    key={comment.commentPk}
-                  >
-                    <div className={style.commentUserContainer}>
-                      {comment.user.profileImage !== "NoImage" ? (
-                        <Image
-                          className={style.commentProfile}
-                          src={comment.user.profileImage}
-                          width={30}
-                          height={30}
-                          alt="profile"
-                        />
-                      ) : (
-                        <div className={style.commentProfile}></div>
-                      )}
-                      <div className={style.commentUserInfo}>
-                        <p className={style.commentNickname}>
-                          {comment.user.nickname}
-                        </p>
-                        <p className={style.commentLevelTime}>
-                          Lv. {comment.user.exp}{" "}
-                          {dayjs(comment.createdAt).fromNow()}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className={style.comment}>{comment.content}</p>
-
-                    <div className={style.commentMenuSection}>
-                      <div className={style.commentMenuContainer}>
-                        {comment.recommentCount > 0 && (
-                          <button
-                            onClick={() =>
-                              toggleRecommentsVisibility(comment.commentPk)
-                            }
-                          >
-                            {visibleRecomments === comment.commentPk
-                              ? "답글 숨기기"
-                              : `답글 보기 (${comment.recommentCount}개)`}
-                          </button>
+              <div className={style.commentListSection}>
+                {commentList &&
+                  commentList.length > 0 &&
+                  commentList.map((comment) => (
+                    <div
+                      className={style.commentContainer}
+                      key={comment.commentPk}
+                    >
+                      <div className={style.commentUserContainer}>
+                        {comment.user.profileImage !== "NoImage" ? (
+                          <Image
+                            className={style.commentProfile}
+                            src={comment.user.profileImage}
+                            width={30}
+                            height={30}
+                            alt="profile"
+                          />
+                        ) : (
+                          <div className={style.commentProfile}></div>
                         )}
+                        <div className={style.commentUserInfo}>
+                          <p className={style.commentNickname}>
+                            {comment.user.nickname}
+                          </p>
+                          <p className={style.commentLevelTime}>
+                            Lv. {comment.user.exp}{" "}
+                            {dayjs(comment.createdAt).fromNow()}
+                          </p>
+                        </div>
+                      </div>
 
-                        <button
-                          onClick={() =>
-                            handleRecommentFormToggle(comment.commentPk)
-                          }
-                        >
-                          답글 달기
-                        </button>
-                        {comment.user.userPk === user.userPk &&
-                          !comment.deleteCheck && (
+                      <p className={style.comment}>{comment.content}</p>
+
+                      <div className={style.commentMenuSection}>
+                        <div className={style.commentMenuContainer}>
+                          {comment.recommentCount > 0 && (
                             <button
-                              onClick={() => {
-                                handleCommentDeleteButtonClick(
-                                  comment.commentPk
-                                );
-                              }}
+                              onClick={() =>
+                                toggleRecommentsVisibility(comment.commentPk)
+                              }
                             >
-                              삭제
+                              {visibleRecomments === comment.commentPk
+                                ? "답글 숨기기"
+                                : `답글 보기 (${comment.recommentCount}개)`}
                             </button>
                           )}
+
+                          <button
+                            onClick={() =>
+                              handleRecommentFormToggle(comment.commentPk)
+                            }
+                          >
+                            답글 달기
+                          </button>
+                          {comment.user.userPk === user.userPk &&
+                            !comment.deleteCheck && (
+                              <button
+                                onClick={() => {
+                                  handleCommentDeleteButtonClick(
+                                    comment.commentPk
+                                  );
+                                }}
+                              >
+                                삭제
+                              </button>
+                            )}
+                        </div>
+
+                        {showRecommentForm === comment.commentPk && (
+                          <div className={style.commentInputBox}>
+                            <input
+                              className={style.commentInput}
+                              type="text"
+                              value={recomment}
+                              onChange={(e) => setRecomment(e.target.value)}
+                              placeholder="답글을 입력해주세요."
+                            />
+                            <Image
+                              className={style.commentBtn}
+                              onClick={() =>
+                                handleRecommentSubmitButtonClick(
+                                  comment.commentPk
+                                )
+                              }
+                              src="/icon/upload.png"
+                              width={22}
+                              height={22}
+                              alt="send"
+                            />
+                          </div>
+                        )}
                       </div>
 
-                      {showRecommentForm === comment.commentPk && (
-                        <div className={style.commentInputBox}>
-                          <input
-                            className={style.commentInput}
-                            type="text"
-                            value={recomment}
-                            onChange={(e) => setRecomment(e.target.value)}
-                            placeholder="답글을 입력해주세요."
-                          />
-                          <Image
-                            className={style.commentBtn}
-                            onClick={() =>
-                              handleRecommentSubmitButtonClick(
-                                comment.commentPk
-                              )
-                            }
-                            src="/icon/upload.png"
-                            width={22}
-                            height={22}
-                            alt="send"
-                          />
-                        </div>
-                      )}
-                    </div>
+                      <div className={style.recommentSection}>
+                        {visibleRecomments === comment.commentPk &&
+                          recommentList.map((recomment) => (
+                            <div
+                              className={style.recommentContainer}
+                              key={recomment.recommentPk}
+                            >
+                              <div className={style.commentUserContainer}>
+                                {recomment.user.profileImage !== "NoImage" ? (
+                                  <Image
+                                    className={style.commentProfile}
+                                    src={recomment.user.profileImage}
+                                    width={30}
+                                    height={30}
+                                    alt="profile"
+                                  />
+                                ) : (
+                                  <div className={style.commentProfile}></div>
+                                )}
+                                <div className={style.commentUserInfo}>
+                                  <p className={style.commentNickname}>
+                                    {recomment.user.nickname}
+                                  </p>
+                                  <p className={style.commentLevelTime}>
+                                    Lv. {recomment.user.exp}{" "}
+                                    {dayjs(recomment.createdAt).fromNow()}
+                                  </p>
+                                </div>
+                              </div>
 
-                    <div className={style.recommentSection}>
-                      {visibleRecomments === comment.commentPk &&
-                        recommentList.map((recomment) => (
-                          <div
-                            className={style.recommentContainer}
-                            key={recomment.recommentPk}
-                          >
-                            <div className={style.commentUserContainer}>
-                              {recomment.user.profileImage !== "NoImage" ? (
-                                <Image
-                                  className={style.commentProfile}
-                                  src={recomment.user.profileImage}
-                                  width={30}
-                                  height={30}
-                                  alt="profile"
-                                />
-                              ) : (
-                                <div className={style.commentProfile}></div>
-                              )}
-                              <div className={style.commentUserInfo}>
-                                <p className={style.commentNickname}>
-                                  {recomment.user.nickname}
-                                </p>
-                                <p className={style.commentLevelTime}>
-                                  Lv. {recomment.user.exp}{" "}
-                                  {dayjs(recomment.createdAt).fromNow()}
-                                </p>
+                              <p className={style.comment}>
+                                {recomment.content}
+                              </p>
+
+                              <div className={style.recommentMenuContainer}>
+                                {recomment.user.userPk === user.userPk && (
+                                  <button
+                                    onClick={() => {
+                                      handleRecommentDeleteButtonClick(
+                                        recomment.recommentPk
+                                      );
+                                    }}
+                                  >
+                                    삭제
+                                  </button>
+                                )}
                               </div>
                             </div>
-
-                            <p className={style.comment}>{recomment.content}</p>
-
-                            <div className={style.recommentMenuContainer}>
-                              {recomment.user.userPk === user.userPk && (
-                                <button
-                                  onClick={() => {
-                                    handleRecommentDeleteButtonClick(
-                                      recomment.recommentPk
-                                    );
-                                  }}
-                                >
-                                  삭제
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <p>로그인이 필요한 서비스입니다.</p>
+              <Link href="/auth/login">로그인</Link>
+            </>
+          )}
         </div>
       )}
     </>

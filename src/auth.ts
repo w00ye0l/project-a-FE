@@ -96,7 +96,7 @@ export const {
     }),
   ],
   callbacks: {
-    async jwt({ token, account, user }) {
+    async jwt({ token, account, trigger, user, session }) {
       // console.log("jwt callback", token, account, user);
 
       // 타입 단언 사용
@@ -105,6 +105,12 @@ export const {
       if (account && extendedUser) {
         // token에 유저 정보, JWT 정보 추가
         token = { ...token, ...account, ...extendedUser };
+      }
+
+      // 세션 정보 업데이트 시
+      if (trigger === "update" && session) {
+        token = { ...token, ...session };
+        return token;
       }
 
       // console.log("jwt token", token);

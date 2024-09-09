@@ -1,0 +1,26 @@
+.selectModelContainer {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  letter-spacing: -0.02em;
+}
+
+.subTitle {
+  font-size: 28px;
+  font-weight: 500;
+  color: #666666;
+}
+
+.totalPrice {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+.totalRealPrice {
+  margin: 0px 5px;
+  font-family: "Cafe24 Ohsquare";
+  color: #0733a1;
+}
+

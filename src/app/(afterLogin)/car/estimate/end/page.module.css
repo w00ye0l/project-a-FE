@@ -1,73 +1,98 @@
 .main {
   display: flex;
   flex-direction: column;
-  width: 1250px;
+  font-family: "Pretendard";
 }
 
-.modelInfoSection {
+.titleContainer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.contentSection {
+  margin: auto;
+  margin-top: 70px;
+  width: 1200px;
   margin-bottom: 40px;
   display: flex;
-  justify-content: space-between;
-}
-
-.modelInfoContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.modelName {
-  font-size: 48px;
-}
-
-.modelImg {
-  width: 40%;
-  height: 300px;
-  background-color: #222222;
-}
-
-.modelInfoBox {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.subTitle {
-  color: #c36f51;
-  font-weight: bold;
-}
-
-.totalPrice {
-  font-size: 48px;
-  font-weight: normal;
+  justify-content: center;
+  gap: 50px;
 }
 
 .estimateSection {
-  padding: 40px 0;
+  width: calc(100% - 450px);
+  padding-bottom: 0;
   display: flex;
 }
 
-.estimateContainer {
-  width: 60%;
+.infoContainer {
+  width: 100%;
 }
 
-.optionContainer {
-  margin-top: 20px;
-  padding: 10px 0;
-  border-top: 1px solid #222222;
-}
-
-.defaultOption {
+.infoTitleContainer {
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #ecf6ff;
+  border-radius: 10px;
+}
+
+.infoTitle {
+  font-size: 20px;
+}
+
+.priceContainer {
+  font-size: 20px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.infoPrice {
+  margin-right: 4px;
+  font-family: "Cafe24 Ohsquare";
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.optionContainer {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.optionSection {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.optionBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .optionTitle {
   margin-bottom: 10px;
-  color: #c36f51;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.optionPriceBox {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.optionPrice {
+  font-family: "Cafe24 Ohsquare";
+  font-size: 20px;
+  color: #0733a1;
 }
 
 .price {
@@ -83,8 +108,8 @@
 }
 
 .optionBox {
+  margin-bottom: 14px;
   display: flex;
-  height: 60px;
   align-items: center;
   justify-content: space-between;
 }
@@ -92,14 +117,20 @@
 .colorContainer {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.colorTitle {
+  margin-right: 30px;
 }
 
 .colorBox {
   display: flex;
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
+  width: 22px;
+  height: 22px;
   border: 1px solid #aaaaaa;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .twoColor {
@@ -149,4 +180,36 @@
 
 .subInfoBox:hover .subInfo {
   display: block;
+}
+
+.modelInfoContainer {
+  padding: 40px 30px;
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.modelName {
+  font-size: 26px;
+}
+
+.modelInfoBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.subTitle {
+  /* color: #c36f51; */
+  font-weight: bold;
+}
+
+.totalPrice {
+  font-size: 24px;
+  font-weight: normal;
 }

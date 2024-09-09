@@ -46,20 +46,21 @@ export default function ArticleActionButtonBox({
 
   console.log(scrapsState);
 
-  if (!session) {
-    return <DotSpinner size={30} />;
-  }
+  // if (!session) {
+  //   return <DotSpinner size={30} />;
+  // }
 
-  const reactionImageSrc = reactionsState.find(
-    (reaction) => reaction.user.userPk === user.userPk
-  )
+  const reactionImageSrc = user
     ? reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
-        ?.reactionType === "LIKE"
-      ? "/icon/article/like.png"
-      : reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
-          ?.reactionType === "NEUTRAL"
-      ? "/icon/article/neutral.png"
-      : "/icon/article/dislike.png"
+      ? reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
+          ?.reactionType === "LIKE"
+        ? "/icon/article/like.png"
+        : reactionsState.find(
+            (reaction) => reaction.user.userPk === user.userPk
+          )?.reactionType === "NEUTRAL"
+        ? "/icon/article/neutral.png"
+        : "/icon/article/dislike.png"
+      : "/icon/article/reaction.png"
     : "/icon/article/reaction.png";
 
   // 현재 사용자의 리액션 타입을 업데이트하는 함수
@@ -103,6 +104,11 @@ export default function ArticleActionButtonBox({
 
   // 리액션 버튼 클릭 처리 함수
   const handleReactionButtonClick = async (reactionType: string) => {
+    if (!user) {
+      router.push("/auth/login");
+      return;
+    }
+
     const result = await createReaction({ articlePk, reactionType });
 
     if (result.statusCode === 200 && result.data !== null) {
@@ -124,6 +130,11 @@ export default function ArticleActionButtonBox({
 
   // 스크랩 버튼 클릭 처리 함수
   const handleScrapButtonClick = async () => {
+    if (!user) {
+      router.push("/auth/login");
+      return;
+    }
+
     const result = await createScrap({ articlePk, scrapDisclosure: true });
 
     if (result.statusCode === 200 && result.data !== null) {
@@ -229,8 +240,10 @@ export default function ArticleActionButtonBox({
         <button className={style.actionButton} onClick={handleScrapButtonClick}>
           <Image
             src={
-              scrapsState.find((scrap) => scrap.user.userPk === user.userPk)
-                ? "/icon/article/scrap_active.png"
+              user
+                ? scrapsState.find((scrap) => scrap.user.userPk === user.userPk)
+                  ? "/icon/article/scrap_active.png"
+                  : "/icon/article/scrap.png"
                 : "/icon/article/scrap.png"
             }
             width={24}
