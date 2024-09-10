@@ -6,6 +6,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import style from "./page.module.css";
 import cx from "classnames";
+import Image from "next/image";
 
 export default function CarExteriorPage() {
   const params = useParams();
@@ -95,6 +96,22 @@ export default function CarExteriorPage() {
                 )
               }
             >
+              <Image
+                src={
+                  carPriceStore.selectedExteriorColor.pk ===
+                  colorOption.colorOptionPk
+                    ? "/icon/check_active.png"
+                    : "/icon/check.png"
+                }
+                width={30}
+                height={30}
+                alt="check"
+                className={cx(style.optionCheck, {
+                  [style.optionCheckActive]:
+                    carPriceStore.selectedExteriorColor.pk ===
+                    colorOption.colorOptionPk,
+                })}
+              />
               {colorOption.colorOptionCodeCount === 1 && (
                 <div
                   className={style.colorBox}

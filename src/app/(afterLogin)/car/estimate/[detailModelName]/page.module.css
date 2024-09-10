@@ -76,26 +76,16 @@
   border-radius: 5px;
 }
 
-.trimItem::before {
+.trimItemCheck {
   position: absolute;
-  content: "";
   top: 50%;
   left: 20px;
   transform: translate(0, -50%);
   width: 30px;
   height: 30px;
-  background-image: url("/icon/check.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
-
 .trimItemActive {
   border: 1px solid #147fff;
-}
-
-.trimItemActive::before {
-  background-image: url("/icon/check_active.png");
 }
 
 .name {

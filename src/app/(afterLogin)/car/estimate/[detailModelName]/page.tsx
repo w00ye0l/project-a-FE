@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import cx from "classnames";
 import style from "./page.module.css";
 import { useCarPriceStore } from "@/store/carPrice";
+import Image from "next/image";
 
 export default function EstimatePage() {
   const params = useParams();
@@ -122,6 +123,18 @@ export default function EstimatePage() {
                     })}
                     key={trimName.trimName}
                   >
+                    <Image
+                      src={
+                        selectedTrim ===
+                        trim.carYear + trim.engineInfo + trimName.trimName
+                          ? "/icon/check_active.png"
+                          : "/icon/check.png"
+                      }
+                      width={30}
+                      height={30}
+                      alt="check"
+                      className={style.trimItemCheck}
+                    />
                     <span className={style.name}>{trimName.trimName}</span>
 
                     <div className={style.priceSection}>
