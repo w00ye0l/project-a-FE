@@ -11,7 +11,6 @@ import { CustomUser } from "@/model/CustomUser";
 import { Scrap } from "@/model/Scrap";
 import { createScrap } from "../_lib/postScrap";
 import Image from "next/image";
-import DotSpinner from "@/app/_component/DotSpinner";
 
 interface Props {
   articlePk: number;
@@ -43,12 +42,6 @@ export default function ArticleActionButtonBox({
   // 스크랩 수와 상태 관리
   const [scrapCountState, setScrapCountState] = useState(scrapCount);
   const [scrapsState, setScrapsState] = useState(scraps);
-
-  console.log(scrapsState);
-
-  // if (!session) {
-  //   return <DotSpinner size={30} />;
-  // }
 
   const reactionImageSrc = user
     ? reactionsState.find((reaction) => reaction.user.userPk === user.userPk)
