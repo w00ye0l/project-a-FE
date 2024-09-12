@@ -25,23 +25,23 @@
 .logoMenuSection {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 40px;
 }
 
 .logo {
   display: flex;
-  width: 145px;
-  height: 60px;
   justify-content: center;
   align-items: center;
   text-decoration: none;
 }
 
 .logoName {
+  width: 60px;
   margin-left: 7px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Jalnan2";
-  color: #000;
+  color: #20306c;
+  word-break: keep-all;
 }
 
 .linkSection {
@@ -72,23 +72,24 @@
 }
 
 .btn {
-  padding: 6px 14px;
+  padding: 8px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   font-weight: 600;
-  letter-spacing: -1%;
+  letter-spacing: -0.01em;
   text-decoration: none;
   background-color: #0733a1;
-  border: 1px solid #0733a1;
+  /* border: 1px solid #0733a1; */
   border-radius: 5px;
 }
 
 .outlineBtn {
   color: #0733a1;
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #0733a1;
+  border: 0;
 }
 
 .divider {
