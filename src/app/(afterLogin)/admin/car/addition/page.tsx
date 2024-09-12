@@ -540,7 +540,7 @@ export default function CarAdditionPage() {
         <UploadButtons />
 
         <div className={style.mainContainer}>
-          <CarDefaultOption />
+          {/* <CarDefaultOption /> */}
 
           <div className={style.dataSection}>
             <AGGrid data={gridData} />
