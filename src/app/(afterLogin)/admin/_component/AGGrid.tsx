@@ -276,38 +276,38 @@ export default function AGGrid({ data }: { data: any }) {
     fetchData();
   }, [data.tab]);
 
-  // 제조국이 변경될 때 브랜드 리스트 갱신
-  useEffect(() => {
-    if (data.tab === "brand") {
-      const fetchBrandList = async () => {
-        const result = await getBrandList({ countryName });
-        setRowData(result.data);
-      };
-      fetchBrandList();
-    }
-  }, [countryName]);
+  // // 제조국이 변경될 때 브랜드 리스트 갱신
+  // useEffect(() => {
+  //   if (data.tab === "brand") {
+  //     const fetchBrandList = async () => {
+  //       const result = await getBrandList({ countryName });
+  //       setRowData(result.data);
+  //     };
+  //     fetchBrandList();
+  //   }
+  // }, [countryName]);
 
-  // 브랜드가 변경될 때 모델 리스트 갱신
-  useEffect(() => {
-    if (data.tab === "model") {
-      const fetchModelList = async () => {
-        const result = await getModelList({ brandName });
-        setRowData(result.data);
-      };
-      fetchModelList();
-    }
-  }, [brandName]);
+  // // 브랜드가 변경될 때 모델 리스트 갱신
+  // useEffect(() => {
+  //   if (data.tab === "model") {
+  //     const fetchModelList = async () => {
+  //       const result = await getModelList({ brandName });
+  //       setRowData(result.data);
+  //     };
+  //     fetchModelList();
+  //   }
+  // }, [brandName]);
 
-  // 모델이 변경될 때 디테일 모델 리스트 갱신
-  useEffect(() => {
-    if (data.tab === "detailModel") {
-      const fetchDetailModelList = async () => {
-        const result = await getDetailModelList({ modelName });
-        setRowData(result.data);
-      };
-      fetchDetailModelList();
-    }
-  }, [modelName]);
+  // // 모델이 변경될 때 디테일 모델 리스트 갱신
+  // useEffect(() => {
+  //   if (data.tab === "detailModel") {
+  //     const fetchDetailModelList = async () => {
+  //       const result = await getDetailModelList({ modelName });
+  //       setRowData(result.data);
+  //     };
+  //     fetchDetailModelList();
+  //   }
+  // }, [modelName]);
 
   return (
     <div
@@ -336,6 +336,7 @@ export default function AGGrid({ data }: { data: any }) {
         columnDefs={data.colData}
         defaultColDef={defaultColDef}
         rowSelection={"multiple"}
+        rowHeight={data.tab === "detailModel" ? 90 : 42}
         onGridReady={onGridReady}
         onCellValueChanged={onCellValueChanged}
         pagination={true}

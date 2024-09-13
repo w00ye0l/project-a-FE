@@ -1,5 +1,6 @@
 .main {
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  height: 100%;
   padding: 20px;
   display: flex;
   background-color: #ebf5ff;

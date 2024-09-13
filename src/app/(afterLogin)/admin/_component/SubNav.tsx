@@ -11,13 +11,17 @@ export default function SubNav() {
   const tab = searchParams.get("tab");
 
   const setTab = (tab: string) => {
-    router.push(pathname + "?tab=" + tab);
+    console.log(pathname);
+    const realpath = pathname.includes("image")
+      ? pathname.split("/image")[0]
+      : pathname;
+    router.push(realpath + "?tab=" + tab);
   };
 
   return (
     <nav>
       <ul className={style.subNav}>
-        {pathname === "/admin/car/default" && (
+        {pathname.startsWith("/admin/car/default") && (
           <>
             <li
               onClick={() => setTab("country")}
@@ -46,6 +50,17 @@ export default function SubNav() {
             >
               세부 모델
             </li>
+            {/* <li
+              onClick={() => {
+                router.push("/admin/car/default/image");
+              }}
+              className={cx(
+                style.subLi,
+                pathname.includes("image") ? style.active : ""
+              )}
+            >
+              차량 이미지
+            </li> */}
             <li
               onClick={() => setTab("basicOption")}
               className={cx(
