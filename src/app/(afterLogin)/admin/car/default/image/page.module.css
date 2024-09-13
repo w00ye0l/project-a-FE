@@ -1,0 +1,118 @@
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 30px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.titleSection {
+  display: flex;
+  gap: 100px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.backButton {
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 2px solid #5470ff;
+  color: #3454f1;
+  cursor: pointer;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #5470ff;
+  border: 0;
+  cursor: pointer;
+}
+
+.label {
+  display: block;
+  text-align: center;
+  align-content: center;
+  width: 140px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #555;
+}
+
+.label::before {
+  content: "\002B";
+}
+
+.input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  gap: 20px;
+}
+
+.imageTitleContainer {
+  display: flex;
+  gap: 40px;
+}
+
+.imageContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.imageListContainer {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 10px;
+}
+
+.nowImage {
+  min-width: 320px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  min-height: 180px;
+  border: 1px dashed #ccc;
+  object-fit: contain;
+  flex-wrap: wrap;
+}
+
+.newImage {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 180px;
+  color: #3454f1;
+  border: 2px dashed #5470ff;
+  object-fit: contain;
+  flex-wrap: wrap;
+}
+
+.oneImage {
+  margin: 2px;
+  width: 320px;
+  height: 180px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+}

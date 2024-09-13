@@ -13,8 +13,8 @@ export default async function MainNavBar() {
       <div className={style.contentSection}>
         <div className={style.logoMenuSection}>
           <Link href="/" className={style.logo}>
-            <Image src="/logo_blue.png" width={68} height={34} alt="AZERO" />
-            <h1 className={style.logoName}>으라차차</h1>
+            <Image src="/logo.png" width={800} height={800} alt="MASTER CAR" />
+            <h1 className={style.logoName}>MASTER CAR</h1>
           </Link>
 
           <div className={`${style.linkSection} ${style.left}`}>
