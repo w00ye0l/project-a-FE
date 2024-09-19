@@ -149,7 +149,7 @@ export default function CarExteriorPage() {
           <b>
             +{" "}
             <span className={style.colorPrice}>
-              {carPriceStore.selectedExteriorColor.price}
+              {carPriceStore.selectedExteriorColor.price.toLocaleString()}
             </span>{" "}
             원
           </b>

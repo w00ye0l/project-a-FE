@@ -11,7 +11,6 @@
   overflow-y: auto;
   gap: 10px;
   list-style: none;
-  z-index: -1;
 }
 
 .optionContainer {
@@ -24,7 +23,6 @@
   cursor: pointer;
   border: 1px solid #dddddd;
   border-radius: 10px;
-  overflow: visible;
 }
 
 .optionContainer::before {
@@ -56,6 +54,11 @@
   gap: 10px;
 }
 
+.checkName p {
+  max-width: 300px;
+  word-break: keep-all;
+}
+
 .infoIconWrapper {
   display: flex;
   align-items: center;
@@ -71,14 +74,10 @@
 }
 
 .choiceOptionDescription {
-  position: absolute;
-  top: 0;
-  left: 100%;
   padding: 15px;
   font-size: 14px;
   background-color: #ffffff;
   color: #222222;
-  z-index: 9999;
   width: 340px;
   word-break: keep-all;
   border: 1px solid #dddddd;
@@ -89,14 +88,16 @@
 .descriptionHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
 }
 
 .descriptionHeader h3 {
+  max-width: 270px;
   font-size: 16px;
   font-weight: 600;
   margin: 0;
+  word-break: keep-all;
 }
 
 .closeButton {

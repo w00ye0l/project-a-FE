@@ -108,8 +108,9 @@ export default function ModelImagePage() {
 
     console.log({ result });
 
-    if (result.success) {
+    if (result.statusCode === 200) {
       toast.success("이미지가 저장되었습니다.");
+      router.back();
     } else {
       toast.error("이미지 저장에 실패했습니다.");
     }
