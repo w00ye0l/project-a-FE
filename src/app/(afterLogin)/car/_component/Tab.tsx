@@ -24,9 +24,10 @@ export default function Tab() {
             alt={brandName}
           />
         )}
-        <p>
-          <b>{brandName}</b> {detailModelName}
-        </p>
+        <div>
+          <p className={style.brandName}>{brandName}</p>
+          <p className={style.modelName}>{detailModelName}</p>
+        </div>
       </div>
 
       <ul className={style.navTab}>
