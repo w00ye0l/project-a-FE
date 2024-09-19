@@ -73,7 +73,7 @@ export default function CarInteriorPage() {
 
   return (
     <>
-      <h1 className={style.title}>외장 컬러 선택</h1>
+      <h1 className={style.title}>내장 컬러 선택</h1>
 
       <div className={style.trimSection}>
         <ul className={style.colorOptionContainer}>
@@ -147,7 +147,7 @@ export default function CarInteriorPage() {
           <b>
             +{" "}
             <span className={style.colorPrice}>
-              {carPriceStore.selectedInteriorColor.price}
+              {carPriceStore.selectedInteriorColor.price.toLocaleString()}
             </span>{" "}
             원
           </b>
