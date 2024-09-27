@@ -75,6 +75,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "JalnanGothic";
+  src: url("/fonts/JalnanGothic/JalnanGothic.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 /**
   * SUITE font family
   */
