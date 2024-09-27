@@ -340,8 +340,8 @@ export default function AGGrid({ data }: { data: any }) {
         onGridReady={onGridReady}
         onCellValueChanged={onCellValueChanged}
         pagination={true}
-        paginationPageSize={10}
-        paginationPageSizeSelector={[10, 20, 30, 40, 50]}
+        paginationPageSize={50}
+        paginationPageSizeSelector={[20, 30, 40, 50]}
       />
     </div>
   );
