@@ -1,0 +1,197 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabBox {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #464e5b;
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 44px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #464e5b;
+}
+
+.contentSection {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.contentContainer {
+  display: flex;
+}
+
+.contentBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.contentTitle {
+  margin-bottom: 20px;
+  color: #222222;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100px;
+  padding: 15px 0;
+  border: 1px solid #eeeeee;
+  border-left: none;
+  border-right: none;
+}
+
+.content {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divide {
+  border-right: 1px solid #eeeeee;
+}
+
+.buyTypeBox {
+  margin-right: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buyTypeBox:last-child {
+  margin-right: 0;
+}
+
+.buyTypeLabel {
+  font-size: 18px;
+  color: #888888;
+}
+
+.buyTypeLabel.active {
+  color: #1a70dd;
+  font-weight: 600;
+}
+
+.estimateBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.estimateBox:first-child {
+  margin-right: 70px;
+}
+
+.estimateImage {
+  width: 18px;
+  height: 18px;
+}
+
+.estimateLabel.active {
+  color: #1a70dd;
+  font-weight: 600;
+}
+
+.colorContent {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colorTitle {
+  color: #222222;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.colorSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.color {
+  width: 15px;
+  height: 15px;
+  background-color: #1b2a40;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.optionContent {
+  padding: 0 70px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 6px 84px;
+  overflow-y: auto;
+}
+
+.optionBox {
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optionName {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.firstArea,
+.secondArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.firstArea {
+  margin-right: 80px;
+}
+
+.areaLabel {
+  color: #888888;
+  font-size: 14px;
+}
+
+.areaValue {
+  color: #222222;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.info {
+  padding: 15px 30px;
+  color: #222222;
+  font-size: 16px;
+}
+
+.offerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
