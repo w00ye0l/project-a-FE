@@ -1,0 +1,176 @@
+/* 차량 리스트 */
+.carInfo {
+  margin-bottom: 65px;
+  width: 252px;
+  font-family: "Pretendard";
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.carInfo:hover {
+  .carImage {
+    transform: scale(1.05);
+    z-index: 0;
+  }
+
+  .carName {
+    color: #333333;
+    font-weight: 700;
+  }
+}
+
+.carImage {
+  transition: all 0.2s ease-in-out;
+}
+
+.carImageSection {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.labelSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.labelContainer {
+  display: flex;
+}
+
+.carType {
+  padding: 4px 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0733a1;
+  background-color: #005aff1a;
+}
+
+.day {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #d9d9d9;
+  color: #000000;
+}
+
+.brand {
+  object-fit: cover;
+}
+
+.carImage {
+  object-fit: cover;
+}
+
+.colorSection {
+  padding: 8px 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 2px;
+}
+
+.color {
+  width: 12px;
+  height: 12px;
+  background-color: #737e7a;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.carName {
+  max-width: 100%;
+  font-size: 14px;
+  color: #555555;
+  line-height: 150%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hr {
+  margin: 14px 0px;
+  width: 100%;
+  height: 1px;
+  background-color: #e7e7e7;
+  border: 0;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.discount {
+  font-size: 12px;
+  color: #888888;
+}
+
+.percentage {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0042ff;
+}
+
+.month {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.priceBox {
+  display: flex;
+  width: 120px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buyType {
+  padding: 1px 4px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #147fff;
+  border-radius: 2px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b2a40;
+}
+
+.priceSectionTop {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.priceSectionTop .priceContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.priceTag {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1b2a40;
+}
+
+.priceSectionTop .price {
+  font-size: 13px;
+  font-weight: 400;
+  color: #444444;
+}

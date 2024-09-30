@@ -1,0 +1,98 @@
+.main {
+  margin: 70px 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard";
+  letter-spacing: -0.02em;
+}
+
+.titleContainer {
+  margin-bottom: 40px;
+}
+
+.subTitle {
+  font-size: 18px;
+  color: #1b2a40;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #1b2a40;
+}
+
+.carInfo {
+  margin-bottom: 80px;
+  display: flex;
+  gap: 100px;
+}
+
+.carSection {
+  position: relative;
+}
+
+.brand {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.carImage {
+  width: 700px;
+  height: 430px;
+  object-fit: cover;
+}
+
+.infoSection {
+  margin: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.specContainer {
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.spec {
+  font-size: 14px;
+  color: #888888;
+}
+
+.priceContainer {
+  margin-bottom: 30px;
+  color: #444444;
+  font-size: 18px;
+}
+
+.price {
+  margin-left: 8px;
+  margin-right: 2px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.moreBtn {
+  padding: 13px 28px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 130%;
+  background-color: #434343;
+  border: 0;
+}
+
+.auctionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}

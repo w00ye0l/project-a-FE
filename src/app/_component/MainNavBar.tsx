@@ -24,15 +24,15 @@ export default async function MainNavBar() {
             <Link href="/car" className={style.link}>
               차량정보
             </Link>
-            <Link href="/" className={style.link}>
-              옥션이름
+            <Link href="/auction/dealer" className={style.link}>
+              옥션
             </Link>
             <Link href="/community" className={style.link}>
               커뮤니티
             </Link>
-            <Link href="/" className={style.link}>
+            {/* <Link href="/" className={style.link}>
               고객지원
-            </Link>
+            </Link> */}
 
             {session?.user && (
               <Link href="/admin" className={style.link}>
@@ -54,6 +54,12 @@ export default async function MainNavBar() {
               <Link href="/auth/signup" className={cx(style.btn)}>
                 회원가입
               </Link>
+
+              <div className={style.divider}></div>
+
+              <Link href="/" className={cx(style.btn, style.outlineBtn)}>
+                제휴사 로그인
+              </Link>
             </>
           ) : (
             <>
@@ -61,16 +67,6 @@ export default async function MainNavBar() {
                 마이 페이지
               </Link>
               <LogoutButton me={session} />
-            </>
-          )}
-
-          {!session?.user ?? (
-            <>
-              <div className={style.divider}></div>
-
-              <Link href="/" className={cx(style.btn, style.outlineBtn)}>
-                제휴사 로그인
-              </Link>
             </>
           )}
         </div>

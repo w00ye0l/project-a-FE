@@ -1,0 +1,20 @@
+.main {
+  margin-top: 45px;
+  display: flex;
+  gap: 80px;
+  list-style: none;
+  letter-spacing: -0.02em;
+}
+
+.tab {
+  color: #8794a7;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.active {
+  font-weight: 600;
+  color: #1b2a40;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
