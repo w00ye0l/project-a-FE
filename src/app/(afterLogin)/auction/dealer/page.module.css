@@ -1,0 +1,24 @@
+.titleContainer {
+  vertical-align: text-bottom;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  color: #1b2a40;
+  font-family: "Pretendard";
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.default {
+  margin-left: 4px;
+  color: #888888;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.deadline {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}

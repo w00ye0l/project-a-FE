@@ -1,0 +1,238 @@
+.main {
+  width: 224px;
+  font-family: "Pretendard";
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.carImage {
+  transition: all 0.2s ease-in-out;
+}
+
+.main:hover .carImage {
+  transform: scale(1.05);
+}
+
+.main:hover .name {
+  color: #333333;
+  font-weight: 700;
+}
+
+.imageSection {
+  position: relative;
+  margin-bottom: 8px;
+  background-color: #f8f8f8;
+}
+
+.optionSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.optionPromotion {
+  padding: 4px 7px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #3c73d9;
+}
+
+.optionDeadline {
+  display: flex;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dday {
+  padding: 4px 7px;
+  color: #ac1e1e;
+  background-color: rgba(217, 37, 37, 0.15);
+}
+
+.carType {
+  padding: 4px 7px;
+  color: #1b2a40;
+  background-color: #d9d9d9;
+}
+
+.optionTop {
+  padding: 4px 7px;
+  color: #0733a1;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #005aff1a;
+}
+
+.brand {
+  width: 46px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.colorSection {
+  padding: 8px 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 2px;
+}
+
+.color {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #00000033;
+  border-radius: 50%;
+}
+
+.color1 {
+  background-color: #737e7a;
+}
+
+.color2 {
+  background-color: #e0e0e1;
+}
+
+.name {
+  margin-bottom: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555555;
+  overflow: hidden;
+  line-height: 130%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amount {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #888888;
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buyType {
+  padding: 3px 9px;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 2px;
+}
+
+.rent {
+  background-color: #147fff;
+}
+
+.lease {
+  background-color: #0733a1;
+}
+
+.price {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0042ff;
+}
+
+.month {
+  margin-right: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1b2a40;
+}
+
+/* 오늘마감 */
+.deadlineSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.deadlineSection .name {
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.deadlineSection .priceSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.deadlineSection .priceContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.deadlineSection .price {
+  color: #000000;
+  font-size: 16px;
+}
+
+.deadlineSection .realPrice {
+  color: #aaaaaa;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.deadlineSection .percentage {
+  font-size: 14px;
+  color: #d92525;
+  font-weight: 700;
+}
+
+/* TOP 상위노출 */
+.nameContainer {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.nameContainer .name {
+  max-width: 140px;
+}
+
+.buyTypeContainer {
+  display: flex;
+  gap: 2px;
+}
+
+.buyTypeContainer .buyType {
+  margin: 0;
+  padding: 2px 7px;
+  color: #0733a1;
+  font-size: 13px;
+  background-color: #e0e9f9;
+  border-radius: 0;
+}
+
+.topSection .priceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topSection .priceBox {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #444444;
+}
+
+.topSection .priceTag {
+  font-weight: 600;
+  color: #1b2a40;
+}

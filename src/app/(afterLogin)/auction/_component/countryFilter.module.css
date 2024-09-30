@@ -1,0 +1,49 @@
+.main {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #000000;
+}
+
+.tabs {
+  display: flex;
+  list-style: none;
+}
+
+.tab {
+  width: 256px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1b2a40;
+  font-size: 13px;
+  background-color: #f8f8f8;
+  border: 1px solid #dcdcdc;
+  border-bottom: none;
+  transform: translateY(2px);
+  cursor: pointer;
+  z-index: 0;
+}
+
+.active {
+  height: 44px;
+  font-weight: 600;
+  border: 2px solid #000000;
+  border-bottom: none;
+  background-color: #ffffff;
+  transform: translateY(2px);
+  z-index: 2;
+}
+
+.submit {
+  padding: 12px 22px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  border: 0;
+  transform: translateY(2px);
+  cursor: pointer;
+}
