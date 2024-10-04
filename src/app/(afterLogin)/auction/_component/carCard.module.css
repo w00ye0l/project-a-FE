@@ -14,12 +14,13 @@
   }
 
   .carName {
-    color: #333333;
+    color: #111111;
     font-weight: 700;
   }
 }
 
 .carImage {
+  opacity: 0.2;
   transition: all 0.2s ease-in-out;
 }
 
@@ -91,6 +92,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 0.2s ease-in-out;
 }
 
 .hr {
