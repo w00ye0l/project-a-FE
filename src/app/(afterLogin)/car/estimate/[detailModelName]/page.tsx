@@ -145,7 +145,7 @@ export default function EstimatePage() {
                       className={style.radioButton}
                       type="radio"
                       name="trim"
-                      id={trimName.trimName}
+                      id={trim.carYear + trim.engineInfo + trimName.trimName}
                       defaultChecked={
                         selectedTrim ===
                         trim.carYear + trim.engineInfo + trimName.trimName
@@ -153,7 +153,9 @@ export default function EstimatePage() {
                     />
                     <label
                       className={style.trimLabel}
-                      htmlFor={trimName.trimName}
+                      htmlFor={
+                        trim.carYear + trim.engineInfo + trimName.trimName
+                      }
                     >
                       <span className={style.name}>{trimName.trimName}</span>
 
