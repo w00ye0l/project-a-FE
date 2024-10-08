@@ -38,6 +38,8 @@ export default function BestArticleList() {
     const widthMatch = content.match(/width="(\d+)"/);
     const heightMatch = content.match(/height="(\d+)"/);
 
+    console.log({ srcMatch, widthMatch, heightMatch });
+
     return {
       src: srcMatch ? srcMatch[1] : null,
       width: widthMatch ? parseInt(widthMatch[1], 10) : 100,
@@ -69,13 +71,15 @@ export default function BestArticleList() {
         {articleList.slice(0, 3).map((article: Article) => {
           const { src, width, height } = extractImageUrl(article.originContent);
 
+          console.log({ src, width, height });
+
           return (
             <div
               className={style.topArticleContainer}
               onClick={() => handleArticleBox(article)}
               key={article.articlePk}
             >
-              {src ? (
+              {src && width && height ? (
                 <Image
                   className={style.articleImage}
                   src={src}
@@ -84,7 +88,13 @@ export default function BestArticleList() {
                   alt="image"
                 />
               ) : (
-                <div className={style.articleImage}></div>
+                <Image
+                  className={cx(style.articleImage, style.defaultImage)}
+                  src="/logo.png"
+                  width={100}
+                  height={100}
+                  alt="image"
+                />
               )}
               <div className={style.articleInfo}>
                 <h3 className={style.articleTitle}>{article.title}</h3>
@@ -98,43 +108,69 @@ export default function BestArticleList() {
       </div>
 
       <div className={style.subArticleSection}>
-        {articleList.slice(3, 8).map((article: Article) => (
-          <div
-            className={style.subArticleContainer}
-            onClick={() => handleArticleBox(article)}
-            key={article.articlePk}
-          >
-            <div className={style.articleInfo}>
-              <h3 className={style.articleTitle}>{article.title}</h3>
-              <div className={style.articleBoard}>
-                <p>[{article.boardName}] 게시판</p>
+        {articleList.slice(3, 8).map((article: Article) => {
+          const { src, width, height } = extractImageUrl(article.originContent);
 
-                <div className={style.reactionContainer}>
-                  <div className={style.reactionBox}>
-                    <Image
-                      src="/icon/like.png"
-                      width={14}
-                      height={14}
-                      alt="like"
-                    />
-                    <p>{article.likeCount}</p>
-                  </div>
+          console.log({ src, width, height });
 
-                  <div className={style.reactionBox}>
-                    <Image
-                      src="/icon/comment.png"
-                      width={14}
-                      height={14}
-                      alt="comment"
-                    />
-                    <p>{article.commentCount}</p>
+          return (
+            <div
+              className={style.subArticleContainer}
+              onClick={() => handleArticleBox(article)}
+              key={article.articlePk}
+            >
+              <div className={style.articleInfo}>
+                <h3 className={style.articleTitle}>{article.title}</h3>
+                <div className={style.articleBoard}>
+                  <p>[{article.boardName}] 게시판</p>
+
+                  <div className={style.reactionContainer}>
+                    <div className={style.reactionBox}>
+                      <Image
+                        src="/icon/like.png"
+                        width={14}
+                        height={14}
+                        alt="like"
+                      />
+                      <p>{article.likeCount}</p>
+                    </div>
+
+                    <div className={style.reactionBox}>
+                      <Image
+                        src="/icon/comment.png"
+                        width={14}
+                        height={14}
+                        alt="comment"
+                      />
+                      <p>{article.commentCount}</p>
+                    </div>
                   </div>
                 </div>
               </div>
+              {src && width && height ? (
+                <Image
+                  className={cx(style.articleImage, style.subImage)}
+                  src={src}
+                  width={width}
+                  height={height}
+                  alt="image"
+                />
+              ) : (
+                <Image
+                  className={cx(
+                    style.articleImage,
+                    style.subImage,
+                    style.defaultImage
+                  )}
+                  src="/logo.png"
+                  width={100}
+                  height={100}
+                  alt="image"
+                />
+              )}
             </div>
-            <div className={cx(style.articleImage, style.subImage)}></div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

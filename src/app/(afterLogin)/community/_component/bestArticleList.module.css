@@ -39,8 +39,12 @@
   height: 120px;
   object-fit: contain;
   object-position: center;
-  background-color: #d9d9d9;
+  background-color: #f8f8f8;
   border-radius: 10px;
+}
+
+.defaultImage {
+  opacity: 0.6;
 }
 
 .articleInfo {

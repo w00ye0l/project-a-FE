@@ -45,7 +45,7 @@
 }
 
 .nickname {
-  width: 110px;
+  max-width: 110px;
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
