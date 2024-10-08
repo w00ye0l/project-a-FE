@@ -10,16 +10,14 @@ export default function CarPrice() {
 
   return (
     <>
-      <div className={style.selectModelContainer}>
-        <h1 className={style.subTitle}>
-          {carPriceStore.selectedDetailModel.detailModelName}
-        </h1>
+      <div className={style.main}>
+        <p className={style.subTitle}>총 차량 가격</p>
         <div className={style.totalPrice}>
-          총 차량 가격
+          ₩
           <AnimatedNumber
             className={style.totalRealPrice}
             hasComma={true}
-            size={32}
+            size={24}
             value={
               carPriceStore.defaultPrice +
               carPriceStore.selectedOptions.reduce(
@@ -30,7 +28,6 @@ export default function CarPrice() {
               carPriceStore.selectedInteriorColor.price
             }
           />
-          원
         </div>
       </div>
     </>

@@ -104,7 +104,7 @@ export default function EstimateButtons() {
         onClick={onClickNextButton}
         // disabled={isDisabled()}
       >
-        다음
+        계속
       </button>
     </div>
   );

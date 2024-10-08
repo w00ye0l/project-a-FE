@@ -1,38 +1,51 @@
 .title {
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.subTitle {
+  margin-left: 18px;
+  color: #86868b;
+}
+
+.colorName {
+  margin-bottom: 25px;
+  color: #121212;
+  font-size: 17px;
   font-weight: 600;
 }
 
 .trimSection {
-  padding: 0 5px;
-  height: calc(100% - 170px);
+  height: calc(100% - 90px);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  gap: 5px;
 }
 
 .colorOptionContainer {
-  margin-top: 40px;
+  padding: 0 2px;
   display: flex;
-  list-style: none;
-  gap: 22px;
   flex-wrap: wrap;
+  list-style: none;
+  gap: 9px;
 }
 
 .colorOptionBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
   cursor: pointer;
-}
-
-.colorOptionBox:hover .colorBox {
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 .colorOptionBoxActive {
   position: relative;
-  outline: 5px solid #147fff;
-  border-radius: 10px;
+  outline: 2px solid #147fff;
+  border-radius: 7px;
 }
 
 .colorOptionBoxActive .colorBox {
@@ -55,35 +68,34 @@
 
 .colorBox {
   display: flex;
-  width: 100px;
-  height: 100px;
-  border: 1px solid #aaaaaa;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  box-shadow: inset 0 3px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.twoColorBox {
   overflow: hidden;
 }
 
 .twoColor {
   width: 50%;
-  height: 100%;
+  box-shadow: inset 0 3px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .hr {
-  margin-top: 30px;
-  height: 1px;
+  margin-top: 40px;
+  margin-bottom: 30px;
   border: 0;
-  background-color: #b5b5b5;
-}
-
-.selectColorSection {
-  display: flex;
-  justify-content: space-between;
-}
-
-.colorName {
-  font-size: 20px;
+  border-top: 1px solid #121212;
 }
 
 .colorPrice {
-  font-family: "Cafe24 Ohsquare";
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #121212;
   font-size: 20px;
+  font-weight: 600;
 }

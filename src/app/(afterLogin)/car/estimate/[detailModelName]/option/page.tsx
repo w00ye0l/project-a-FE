@@ -147,7 +147,9 @@ export default function EstimateOptionPage() {
 
   return (
     <>
-      <h1 className={style.title}>옵션 선택</h1>
+      <h1 className={style.title}>
+        옵션.<span className={style.subTitle}>추가 옵션 선택</span>
+      </h1>
 
       <div className={style.optionSection}>
         {choiceOptionList.map((choiceOption) => (
@@ -157,35 +159,52 @@ export default function EstimateOptionPage() {
                 (option) => option.pk === choiceOption.choiceOptionPk
               ),
             })}
-            onClick={() =>
-              selectOption(
-                choiceOption.choiceOptionPk,
-                choiceOption.choiceOptionName,
-                choiceOption.choiceOptionPrice,
-                choiceOption.connectChoiceOption,
-                choiceOption.removeChoiceOption
-              )
-            }
             key={choiceOption.choiceOptionPk}
           >
-            <div className={style.checkName}>
-              <p>{choiceOption.choiceOptionName}</p>
-              <div className={style.infoIconWrapper}>
-                <Image
-                  className={style.infoIcon}
-                  src={"/icon/info_gray.png"}
-                  width={20}
-                  height={20}
-                  alt="info"
+            <input
+              className={style.checkbox}
+              type="checkbox"
+              name="option"
+              id={choiceOption.choiceOptionPk}
+              defaultChecked={carPriceStore.selectedOptions.some(
+                (option) => option.pk === choiceOption.choiceOptionPk
+              )}
+              onChange={(event) => {
+                event.stopPropagation();
+                selectOption(
+                  choiceOption.choiceOptionPk,
+                  choiceOption.choiceOptionName,
+                  choiceOption.choiceOptionPrice,
+                  choiceOption.connectChoiceOption,
+                  choiceOption.removeChoiceOption
+                );
+              }}
+            />
+            <label
+              className={style.label}
+              htmlFor={choiceOption.choiceOptionPk}
+            >
+              <div className={style.checkName}>
+                <p>{choiceOption.choiceOptionName}</p>
+                <div
+                  className={style.infoIconWrapper}
                   onClick={(event) => {
                     event.stopPropagation();
                     handleInfoClick(event, choiceOption.choiceOptionPk);
                   }}
-                />
+                >
+                  <Image
+                    className={style.infoIcon}
+                    src={"/icon/info_gray.png"}
+                    width={20}
+                    height={20}
+                    alt="info"
+                  />
+                </div>
               </div>
-            </div>
 
-            <p>{choiceOption.choiceOptionPrice.toLocaleString()}원</p>
+              <p>{choiceOption.choiceOptionPrice.toLocaleString()}원</p>
+            </label>
           </li>
         ))}
         {/* React Portal을 통해 choiceOptionDescription 렌더링 */}

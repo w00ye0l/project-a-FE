@@ -1,11 +1,13 @@
 .imgSection {
-  margin-top: 100px;
-  width: calc(100% - 700px);
+  width: calc(100% - 500px);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("/estimate/background.png") no-repeat center center / cover;
 }
 
 .modelImg {
-  width: 100%;
+  margin-top: 150px;
+  width: 820px;
   height: auto;
 }

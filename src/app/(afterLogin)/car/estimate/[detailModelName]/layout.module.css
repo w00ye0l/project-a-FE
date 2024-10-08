@@ -3,26 +3,25 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  font-family: "Pretendard";
 }
 
 .contentSection {
-  height: calc(100vh - 135px);
+  height: calc(100vh - 70px);
   display: flex;
   justify-content: space-between;
 }
 
 .optionSection {
-  width: 700px;
+  width: 500px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  outline: 1px solid #dddddd;
   background-color: #fff;
-  font-family: "Pretendard";
 }
 
 .optionContainer {
-  height: calc(100% - 140px);
-  padding: 30px 50px;
+  height: calc(100% - 196px);
+  padding: 60px 45px;
   padding-bottom: 0;
 }

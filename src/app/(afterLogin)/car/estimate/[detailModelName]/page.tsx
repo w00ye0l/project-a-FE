@@ -76,7 +76,9 @@ export default function EstimatePage() {
 
   return (
     <>
-      <h1 className={style.title}>세부 모델 선택</h1>
+      <h1 className={style.title}>
+        세부모델.<span className={style.subTitle}>엔진/트림 선택</span>
+      </h1>
 
       <div className={style.trimSection}>
         {trimList.map((trim) => (
@@ -85,15 +87,31 @@ export default function EstimatePage() {
             onClick={() => toggleVisibility(trim.carYear, trim.engineInfo)}
             key={trim.carYear + trim.engineInfo}
           >
-            <h2
+            <div
               className={cx(
                 style.yearEngineName,
                 visibleSections.includes(trim.carYear + trim.engineInfo) &&
                   style.yearEngineNameActive
               )}
             >
-              {trim.carYear + "년형 " + trim.engineInfo}
-            </h2>
+              <p>{trim.carYear + "년형 " + trim.engineInfo}</p>
+
+              {visibleSections.includes(trim.carYear + trim.engineInfo) ? (
+                <Image
+                  src="/icon/minus_bb.png"
+                  width={18}
+                  height={18}
+                  alt="minus"
+                />
+              ) : (
+                <Image
+                  src="/icon/plus_bb.png"
+                  width={18}
+                  height={18}
+                  alt="minus"
+                />
+              )}
+            </div>
 
             {visibleSections.includes(trim.carYear + trim.engineInfo) && (
               <ul
@@ -123,35 +141,32 @@ export default function EstimatePage() {
                     })}
                     key={trimName.trimName}
                   >
-                    <Image
-                      src={
+                    <input
+                      className={style.radioButton}
+                      type="radio"
+                      name="trim"
+                      id={trimName.trimName}
+                      defaultChecked={
                         selectedTrim ===
                         trim.carYear + trim.engineInfo + trimName.trimName
-                          ? "/icon/check_active.png"
-                          : "/icon/check.png"
                       }
-                      width={30}
-                      height={30}
-                      alt="check"
-                      className={style.trimItemCheck}
                     />
-                    <span className={style.name}>{trimName.trimName}</span>
+                    <label
+                      className={style.trimLabel}
+                      htmlFor={trimName.trimName}
+                    >
+                      <span className={style.name}>{trimName.trimName}</span>
 
-                    <div className={style.priceSection}>
-                      <div className={style.discountContainer}>
-                        <p className={style.discount}>
-                          2<span className={style.percent}>%</span>
-                        </p>
-                      </div>
-                      <p className={style.priceBox}>
-                        <span className={style.price}>
+                      <div className={style.priceSection}>
+                        <p className={style.discount}>2%</p>
+                        <p className={style.price}>
                           {Math.round(
                             trimName.carPrice / 10000
                           ).toLocaleString()}
-                        </span>
-                        만원
-                      </p>
-                    </div>
+                          만원
+                        </p>
+                      </div>
+                    </label>
                   </li>
                 ))}
               </ul>

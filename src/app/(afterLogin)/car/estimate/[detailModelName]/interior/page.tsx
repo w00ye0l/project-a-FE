@@ -73,9 +73,15 @@ export default function CarInteriorPage() {
 
   return (
     <>
-      <h1 className={style.title}>내장 컬러 선택</h1>
+      <h1 className={style.title}>
+        인테리어.<span className={style.subTitle}>내장 색상 선택</span>
+      </h1>
 
       <div className={style.trimSection}>
+        <p className={style.colorName}>
+          색상 - {carPriceStore.selectedInteriorColor.name}
+        </p>
+
         <ul className={style.colorOptionContainer}>
           {colorOptionList.map((colorOption) => (
             <li
@@ -94,22 +100,6 @@ export default function CarInteriorPage() {
                 )
               }
             >
-              <Image
-                src={
-                  carPriceStore.selectedInteriorColor.pk ===
-                  colorOption.colorOptionPk
-                    ? "/icon/check_active.png"
-                    : "/icon/check.png"
-                }
-                width={30}
-                height={30}
-                alt="check"
-                className={cx(style.optionCheck, {
-                  [style.optionCheckActive]:
-                    carPriceStore.selectedInteriorColor.pk ===
-                    colorOption.colorOptionPk,
-                })}
-              />
               {colorOption.colorOptionCodeCount === 1 && (
                 <div
                   className={style.colorBox}
@@ -140,17 +130,8 @@ export default function CarInteriorPage() {
 
         <hr className={style.hr} />
 
-        <div className={style.selectColorSection}>
-          <p className={style.colorName}>
-            {carPriceStore.selectedInteriorColor.name}
-          </p>
-          <b>
-            +{" "}
-            <span className={style.colorPrice}>
-              {carPriceStore.selectedInteriorColor.price.toLocaleString()}
-            </span>{" "}
-            원
-          </b>
+        <div className={style.colorPrice}>
+          + {carPriceStore.selectedInteriorColor.price.toLocaleString()}원
         </div>
       </div>
     </>
