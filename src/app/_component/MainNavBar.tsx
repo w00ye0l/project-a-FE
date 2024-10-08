@@ -12,7 +12,10 @@ export default function MainNavBar() {
   const { data: session } = useSession();
   const pathname = usePathname();
 
-  if (pathname.startsWith("/car/estimate")) {
+  if (
+    !pathname.startsWith("/car/estimate/end") &&
+    pathname.startsWith("/car/estimate")
+  ) {
     return;
   }
 
