@@ -6,7 +6,6 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import style from "./page.module.css";
 import cx from "classnames";
-import Image from "next/image";
 
 export default function CarExteriorPage() {
   const params = useParams();
@@ -29,7 +28,7 @@ export default function CarExteriorPage() {
       );
 
       const result = await response.json();
-      // console.log(result.data);
+      console.log(result.data);
 
       const exteriorColorList = result.data.colorOption.filter(
         (option: ColorOption) => option.colorOptionType === "외장색상"
@@ -37,8 +36,8 @@ export default function CarExteriorPage() {
       console.log({ exteriorColorList });
 
       setColorOptionList(exteriorColorList || []);
-      carPriceStore.setSelectedCarSpec(result.data.carSpec);
-      carPriceStore.setSelectedCarBasicOption(result.data.basicOption);
+      carPriceStore.setSelectedCarSpec(result.data.carSpec[0]);
+      carPriceStore.setSelectedCarBasicOption(result.data.basicOption[0]);
     } catch (error) {
       console.error("Failed to fetch option list:", error);
     }
@@ -75,9 +74,15 @@ export default function CarExteriorPage() {
 
   return (
     <>
-      <h1 className={style.title}>외장 컬러 선택</h1>
+      <h1 className={style.title}>
+        익스테리어.<span className={style.subTitle}>외장 색상 선택</span>
+      </h1>
 
       <div className={style.trimSection}>
+        <p className={style.colorName}>
+          색상 - {carPriceStore.selectedExteriorColor.name}
+        </p>
+
         <ul className={style.colorOptionContainer}>
           {colorOptionList.map((colorOption) => (
             <li
@@ -96,22 +101,6 @@ export default function CarExteriorPage() {
                 )
               }
             >
-              <Image
-                src={
-                  carPriceStore.selectedExteriorColor.pk ===
-                  colorOption.colorOptionPk
-                    ? "/icon/check_active.png"
-                    : "/icon/check.png"
-                }
-                width={30}
-                height={30}
-                alt="check"
-                className={cx(style.optionCheck, {
-                  [style.optionCheckActive]:
-                    carPriceStore.selectedExteriorColor.pk ===
-                    colorOption.colorOptionPk,
-                })}
-              />
               {colorOption.colorOptionCodeCount === 1 && (
                 <div
                   className={style.colorBox}
@@ -142,17 +131,8 @@ export default function CarExteriorPage() {
 
         <hr className={style.hr} />
 
-        <div className={style.selectColorSection}>
-          <p className={style.colorName}>
-            {carPriceStore.selectedExteriorColor.name}
-          </p>
-          <b>
-            +{" "}
-            <span className={style.colorPrice}>
-              {carPriceStore.selectedExteriorColor.price.toLocaleString()}
-            </span>{" "}
-            원
-          </b>
+        <div className={style.colorPrice}>
+          + {carPriceStore.selectedExteriorColor.price.toLocaleString()}원
         </div>
       </div>
     </>

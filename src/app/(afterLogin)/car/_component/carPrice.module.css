@@ -1,26 +1,25 @@
-.selectModelContainer {
-  margin-bottom: 30px;
+.main {
+  padding: 0 45px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 5px;
   letter-spacing: -0.02em;
 }
 
 .subTitle {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   color: #666666;
 }
 
 .totalPrice {
   margin-left: auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  font-size: 24px;
 }
 
 .totalRealPrice {
-  margin: 0px 5px;
-  font-family: "Cafe24 Ohsquare";
-  color: #0733a1;
+  margin-left: 5px;
 }
-

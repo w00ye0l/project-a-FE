@@ -1,31 +1,51 @@
-.main {
+.section {
   height: 70px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
+  font-family: "Pretendard";
 }
 
-.title {
-  padding: 0 20px;
-  width: 370px;
+.main {
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.title {
+  padding: 0 45px;
+  width: 390px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-right: 1px solid #ddd;
-  gap: 10px;
+  gap: 4px;
+}
+
+.brandBox {
+  display: flex;
+  gap: 4px;
+}
+
+.brandImage {
+  width: 28px;
+  height: auto;
+  transform: scale(1.2);
 }
 
 .brandName {
-  font-weight: 300;
+  font-size: 16px;
+  color: #555555;
 }
 
 .modelName {
-  font-size: 20px;
-  color: #1b1b1b;
+  font-size: 18px;
+  color: #555555;
 }
 
 .navTab {
-  width: calc(100% - 370px);
   display: flex;
   list-style: none;
   align-items: center;
@@ -33,20 +53,27 @@
 }
 
 .tab {
+  padding: 0 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
+  gap: 54px;
+}
+
+.tab:first-child {
+  padding-left: 60px;
 }
 
 .tabName {
-  color: #0e0e0e;
+  color: #888888;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
 }
 
 .tabActive {
-  font-weight: bold;
+  font-weight: 600;
   color: #0733a1;
 }
 
@@ -54,4 +81,11 @@
   height: 100%;
   color: #808080;
   vertical-align: middle;
+}
+
+.close {
+  margin-right: 40px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
 }

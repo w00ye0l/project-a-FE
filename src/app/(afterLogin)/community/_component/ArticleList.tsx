@@ -105,7 +105,7 @@ export default function ArticleList({ boardName }: { boardName: string | "" }) {
         <p>게시글이 없습니다.</p>
       )}
 
-      {pageInfo && (
+      {articleList && articleList.length > 0 && pageInfo && (
         <div className={style.paginationSection}>
           <CPagination handlePageMove={handlePageMove} pageInfo={pageInfo} />
         </div>

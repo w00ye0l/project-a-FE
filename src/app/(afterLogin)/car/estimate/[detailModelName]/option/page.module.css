@@ -1,50 +1,74 @@
 .title {
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-bottom: 40px;
+  font-size: 24px;
   font-weight: 600;
 }
 
+.subTitle {
+  margin-left: 18px;
+  color: #86868b;
+}
+
 .optionSection {
-  height: calc(100% - 170px);
+  height: calc(100% - 90px);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  gap: 10px;
   list-style: none;
 }
 
 .optionContainer {
   position: relative;
-  padding: 20px;
-  padding-left: 50px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
+  border-bottom: 1px solid #dddddd;
 }
 
-.optionContainer::before {
+.checkbox {
+  position: relative;
+  margin-right: 6px;
+  width: 22px;
+  height: 22px;
+  appearance: none;
+  border: 1px solid #aaaaaa;
+  cursor: pointer;
+}
+
+.checkbox:after {
   position: absolute;
   content: "";
-  top: 50%;
-  left: 20px;
-  transform: translate(0, -50%);
-  width: 20px;
-  height: 20px;
-  background-image: url("/icon/check.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  display: none;
 }
 
-.optionActive {
-  border: 1px solid #147fff;
+.checkbox:checked {
+  background-color: #444444;
+  border: none;
 }
 
-.optionActive::before {
-  background-image: url("/icon/check_active.png");
+.checkbox:checked:after {
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  content: "";
+  display: block;
+  width: 4px;
+  height: 10px;
+  border: 2px solid #ffffff;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+
+.label {
+  width: calc(100% - 28px);
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
 .checkName {
@@ -52,6 +76,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.optionActive .label {
+  color: #121212;
+  font-weight: 600;
+}
+
+.optionActive .checkName {
+  color: #444444;
 }
 
 .checkName p {

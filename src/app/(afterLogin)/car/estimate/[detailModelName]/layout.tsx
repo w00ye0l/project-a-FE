@@ -19,11 +19,9 @@ export default function CarLayoutPage({
           <CarImage />
 
           <div className={style.optionSection}>
-            <div className={style.optionContainer}>
-              <CarPrice />
+            <div className={style.optionContainer}>{children}</div>
 
-              {children}
-            </div>
+            <CarPrice />
 
             <EstimateButtons />
           </div>

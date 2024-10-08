@@ -1,12 +1,16 @@
 .title {
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-bottom: 40px;
+  font-size: 24px;
   font-weight: 600;
 }
 
+.subTitle {
+  margin-left: 18px;
+  color: #86868b;
+}
+
 .trimSection {
-  padding: 0 5px;
-  height: calc(100% - 170px);
+  height: calc(100% - 90px);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -14,53 +18,26 @@
 }
 
 .yearEngineName {
+  display: flex;
+  justify-content: space-between;
   position: relative;
-  padding: 18px 20px;
-  font-size: 20px;
+  padding: 28px 0px;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
-  border-bottom: 1px solid #dddddd;
-}
-
-.yearEngineName::after {
-  position: absolute;
-  top: 45%;
-  right: 20px;
-  width: 12px;
-  height: 12px;
-  transform: translate(-50%, -50%) rotate(135deg);
-  content: "";
-  border-top: 2px solid #000000;
-  border-right: 2px solid #000000;
+  border-bottom: 1px solid #121212;
 }
 
 .yearEngineName:hover {
-  background-color: #f3f9ff;
-}
-
-.yearEngineNameActive {
-  background-color: #d4eaff;
-  border: 0;
-  border-radius: 5px;
-}
-
-.yearEngineNameActive:hover {
-  background-color: #d4eaff;
-}
-
-.yearEngineNameActive.yearEngineName::after {
-  transform: rotate(-45deg);
-  right: 27px;
+  background-color: #f2f2f2;
 }
 
 .trimBox {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-start;
   list-style: none;
-  gap: 10px;
 }
 
 .trimItem {
@@ -68,66 +45,79 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  padding-left: 60px;
   width: 100%;
-  cursor: pointer;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
+  border-bottom: 1px solid #f3f3f3;
 }
 
-.trimItemCheck {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  transform: translate(0, -50%);
-  width: 30px;
-  height: 30px;
+.radioButton {
+  position: relative;
+  margin-right: 6px;
+  width: 22px;
+  height: 22px;
+  appearance: none;
+  border: 1px solid #aaaaaa;
+  cursor: pointer;
 }
-.trimItemActive {
-  border: 1px solid #147fff;
+
+.radioButton:after {
+  position: absolute;
+  content: "";
+  display: none;
+}
+
+.radioButton:checked {
+  background-color: #444444;
+  border: none;
+}
+
+.radioButton:checked:after {
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  content: "";
+  display: block;
+  width: 4px;
+  height: 10px;
+  border: 2px solid #ffffff;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+
+.trimLabel {
+  padding: 20px 0px;
+  width: calc(100% - 28px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
 .name {
-  font-size: 18px;
+  color: #666666;
+  font-size: 16px;
 }
 
 .trimItemActive .name {
+  color: #444444;
   font-weight: 600;
 }
 
 .priceSection {
-  width: 160px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
-.discountContainer {
-  width: 50px;
-  height: 50px;
+.trimItemActive .priceSection {
+  font-weight: 600;
+}
+
+.discount {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #4994ff;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 50%;
-}
-
-.percent {
+  color: #d92525;
   font-size: 16px;
-}
-
-.priceBox {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-}
-
-.price {
-  font-family: "Cafe24 Ohsquare";
-  font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
 }

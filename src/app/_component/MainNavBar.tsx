@@ -1,12 +1,23 @@
+"use client";
+
 import style from "@/app/_component/mainNavBar.module.css";
 import cx from "classnames";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { auth } from "@/auth";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
-export default async function MainNavBar() {
-  const session = await auth();
+export default function MainNavBar() {
+  const { data: session } = useSession();
+  const pathname = usePathname();
+
+  if (
+    !pathname.startsWith("/car/estimate/end") &&
+    pathname.startsWith("/car/estimate")
+  ) {
+    return;
+  }
 
   return (
     <div className={style.main}>

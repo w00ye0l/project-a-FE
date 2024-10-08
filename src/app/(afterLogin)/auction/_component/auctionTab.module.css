@@ -12,9 +12,21 @@
   font-weight: 400;
 }
 
+.tab::after {
+  margin-top: 4px;
+  content: "";
+  display: block;
+  width: 0;
+  height: 1px;
+  transition: all 0.3s;
+  background-color: #000000;
+}
+
 .active {
   font-weight: 600;
   color: #1b2a40;
-  text-decoration: underline;
-  text-underline-offset: 8px;
+}
+
+.active.tab::after {
+  width: 100%;
 }

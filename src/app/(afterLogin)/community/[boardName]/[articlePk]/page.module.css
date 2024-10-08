@@ -3,12 +3,73 @@
   font-family: "Pretendard";
 }
 
+.writerContainer {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.writerProfileImage {
+  width: 40px;
+  height: 40px;
+  background-color: #eeeeee;
+  border-radius: 50%;
+  border: 1.2px solid #52667c;
+  object-fit: cover;
+}
+
+.defaultImage {
+  opacity: 0.6;
+}
+
+.writerInfo {
+  font-size: 14px;
+}
+
+.titleContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
 .title {
   font-weight: 600;
   font-size: 30px;
   letter-spacing: -0.02em;
   line-height: 140%;
   color: #1b2a40;
+}
+
+.optionImage {
+  cursor: pointer;
+}
+
+.optionContainer {
+  padding: 4px;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 9px;
+}
+
+.btn {
+  padding: 5px 16px;
+  font-size: 14px;
+  color: #888888;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: #005aff;
+  background-color: rgba(0, 90, 255, 0.05);
 }
 
 .content {
@@ -84,6 +145,21 @@
   background-color: transparent;
   border: 0;
   cursor: pointer;
+}
+
+.notLoginSection {
+  margin: 20px 0;
+  display: flex;
+  padding: 20px;
+  background-color: #012b940d;
+  border-radius: 10px;
+  color: #888888;
+}
+
+.notLoginSection a {
+  margin-left: 20px;
+  color: #0733a1;
+  font-weight: 500;
 }
 
 .commentListSection {

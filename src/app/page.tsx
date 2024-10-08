@@ -106,7 +106,7 @@ export default function Home() {
       <div className={style.previewSection}>
         <div className={cx(style.previewContainer, style.left)}>
           <div className={style.titleBox}>
-            <h1 className={style.title}>으라차차 !</h1>
+            <h1 className={style.title}>마스터카 !</h1>
             <p className={style.subtitle}>
               시작부터 끝까지 고객님께
               <span className={cx(style.point, style.rotate)}>꼭</span>
@@ -191,7 +191,7 @@ export default function Home() {
             <div className={style.rankBox}>
               <p className={style.rank}>3</p>
               <Image
-                src="/main/car/cona.png"
+                src="/main/car/sportage.png"
                 width={120}
                 height={70}
                 alt="cona"
@@ -214,18 +214,16 @@ export default function Home() {
         <div className={style.featureContainer}>
           <div className={style.featureBox}>
             <div className={style.featureInfo}>
-              <p className={style.caption}>멘트 고갈 당했다 뭐라고 쓰지</p>
+              <p className={style.caption}>맞춤형 신차 견적</p>
               <h1 className={style.featureTitle}>
-                멘트 고갈 당했다 뭐라고 쓰지
+                내게 맞는 차량,
                 <br />
-                멘트 고갈 당했다 뭐라고 쓰지
+                합리적인 가격으로
               </h1>
 
-              <p>멘트 고갈 당했다 뭐라고 쓰지</p>
-              <p>멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지</p>
+              <p>원하는 옵션과 예산에 맞는 신차를 손쉽게 견적 내세요.</p>
               <p>
-                멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지멘트
-                고갈 당했다
+                다양한 브랜드와 모델을 비교하고 나만의 완벽한 차량을 찾으세요.
               </p>
             </div>
 
@@ -238,52 +236,41 @@ export default function Home() {
           </div>
 
           <div className={cx(style.featureBox, style.rightFeature)}>
-            <Image
-              src="/main/info.png"
-              width={460}
-              height={360}
-              alt="estimate"
-            />
+            <Image src="/main/info.png" width={460} height={360} alt="info" />
 
             <div className={style.featureInfo}>
-              <p className={style.caption}>멘트 고갈 당했다 뭐라고 쓰지</p>
+              <p className={style.caption}>최신 차량 정보</p>
               <h1 className={style.featureTitle}>
-                멘트 고갈 당했다 뭐라고 쓰지
+                밑을 수 있는 차량 정보,
                 <br />
-                멘트 고갈 당했다 뭐라고 쓰지
+                한눈에
               </h1>
 
-              <p>멘트 고갈 당했다 뭐라고 쓰지</p>
-              <p>멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지</p>
-              <p>
-                멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지멘트
-                고갈 당했다
-              </p>
+              <p>국내외 인기 차량들의 상세한 스펙과 리뷰를 확인하세요.</p>
+              <p>성능, 연비, 가격 비교를 통해 최고의 선택을 할 수 있습니다.</p>
             </div>
           </div>
 
           <div className={style.featureBox}>
             <div className={style.featureInfo}>
-              <p className={style.caption}>멘트 고갈 당했다 뭐라고 쓰지</p>
+              <p className={style.caption}>차에 대한 이야기</p>
               <h1 className={style.featureTitle}>
-                멘트 고갈 당했다 뭐라고 쓰지
-                <br />
-                멘트 고갈 당했다 뭐라고 쓰지
+                차를 사랑하는 사람들과의 소통
               </h1>
 
-              <p>멘트 고갈 당했다 뭐라고 쓰지</p>
-              <p>멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지</p>
               <p>
-                멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지멘트
-                고갈 당했다
+                자동차에 대한 다양한 경험과 정보를 공유하는 커뮤니티에
+                참여하세요.
               </p>
+              <p>서로의 노하우와 팁을 나누며 차에 대한 애정을 키워보세요.</p>
             </div>
 
             <Image
+              className={style.featureImage}
               src="/main/community.png"
               width={460}
               height={360}
-              alt="estimate"
+              alt="community"
             />
           </div>
 
@@ -292,23 +279,21 @@ export default function Home() {
               src="/main/auction.png"
               width={460}
               height={360}
-              alt="estimate"
+              alt="auction"
             />
 
             <div className={style.featureInfo}>
-              <p className={style.caption}>멘트 고갈 당했다 뭐라고 쓰지</p>
+              <p className={style.caption}>차량 경매</p>
               <h1 className={style.featureTitle}>
-                멘트 고갈 당했다 뭐라고 쓰지
+                원하는 차량,
                 <br />
-                멘트 고갈 당했다 뭐라고 쓰지
+                최고의 가격으로
               </h1>
 
-              <p>멘트 고갈 당했다 뭐라고 쓰지</p>
-              <p>멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지</p>
               <p>
-                멘트 고갈 당했다 뭐라고 쓰지멘트 고갈 당했다 뭐라고 쓰지멘트
-                고갈 당했다
+                옥션을 통해 신뢰할 수 있는 딜러, 캐피탈과의 거래를 경험하세요.
               </p>
+              <p>차량을 경매로 보다 저렴하고 안전하게 구매할 수 있습니다.</p>
             </div>
           </div>
         </div>
