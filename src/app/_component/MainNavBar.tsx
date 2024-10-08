@@ -24,7 +24,13 @@ export default function MainNavBar() {
       <div className={style.contentSection}>
         <div className={style.logoMenuSection}>
           <Link href="/" className={style.logo}>
-            <Image src="/logo.png" width={800} height={800} alt="MASTER CAR" />
+            <Image
+              className={style.logoImage}
+              src="/logo_simple.png"
+              width={600}
+              height={190}
+              alt="MASTER CAR"
+            />
             <h1 className={style.logoName}>MASTER CAR</h1>
           </Link>
 

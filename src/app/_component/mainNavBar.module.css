@@ -35,18 +35,17 @@
   text-decoration: none;
 }
 
-.logo img {
-  width: 60px;
-  height: 60px;
+.logoImage {
+  width: 80px;
+  object-fit: contain;
 }
 
 .logoName {
-  width: 60px;
+  /* width: 100px; */
   margin-left: 7px;
-  font-size: 14px;
-  font-family: "Jalnan2";
-  color: #20306c;
-  word-break: keep-all;
+  font-size: 22px;
+  font-family: "Montserrat";
+  color: #222222;
 }
 
 .linkSection {
@@ -54,8 +53,8 @@
 }
 
 .left {
-  justify-content: flex-start;
-  gap: 50px;
+  justify-self: center;
+  gap: 30px;
 }
 
 .right {
@@ -90,6 +89,7 @@
 }
 
 .outlineBtn {
+  padding: 8px 10px;
   color: #0733a1;
   background-color: transparent;
   border: 1px solid #0733a1;
@@ -97,7 +97,7 @@
 }
 
 .divider {
-  margin: 0 14px;
+  margin: 0 8px;
   height: 30px;
   border-right: 1px solid #dddddd;
 }
