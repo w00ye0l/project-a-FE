@@ -2,8 +2,8 @@
 
 import style from "./page.module.css";
 import cx from "classnames";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { createArticle } from "../_lib/createArticle";
@@ -12,6 +12,12 @@ import {
   DropzoneRootProps,
   useDropzone,
 } from "react-dropzone";
+import DotSpinner from "@/app/_component/DotSpinner";
+
+interface IBoard {
+  boardPk: number;
+  boardName: string;
+}
 
 interface VideoFile extends File {
   preview: string;
@@ -19,17 +25,31 @@ interface VideoFile extends File {
 
 const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => <DotSpinner size={20} />,
 });
 
 export default function CommunityWritePage() {
   const router = useRouter();
-  const pathname = usePathname();
-  const boardName = pathname.split("/")[2];
+  const [boardList, setBoardList] = useState<IBoard[]>([]);
+  const [boardName, setBoardName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [originContent, setOriginContent] = useState("");
   const [videos, setVideos] = useState<VideoFile[]>([]);
+
+  // 게시판 목록 조회
+  const getBoardList = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/community/boardlist`,
+      {
+        method: "GET",
+      }
+    );
+
+    const result = await response.json();
+
+    setBoardList(result.data);
+  };
 
   // 파일 드랍 이벤트
   const onDrop = (acceptedFiles: File[]) => {
@@ -87,70 +107,84 @@ export default function CommunityWritePage() {
     router.back();
   };
 
+  useEffect(() => {
+    getBoardList();
+  }, []);
+
   return (
-    <>
-      <div className={style.buttonContainer}>
-        <button onClick={handleBackButtonClick}>뒤로 가기</button>
-        <button onClick={onSubmit}>작성하기</button>
+    <div className={style.main}>
+      <div className={style.titleContainer}>
+        <h2 className={style.title}>게시글 작성</h2>
+
+        <select
+          className={cx(style.container, style.boardContainer)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            setBoardName(e.target.value)
+          }
+        >
+          <option value="">게시판을 선택하세요.</option>
+          {boardList.map((board) => (
+            <option key={board.boardPk} value={board.boardName}>
+              {board.boardName}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div>
-        <div className={style.editorContainer}>
-          <h2>글쓰기</h2>
+      <input
+        className={cx(style.container, style.titleInput)}
+        type="text"
+        value={title}
+        placeholder="제목을 입력하세요."
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-          <label htmlFor="title">제목</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+      <div className={style.editor}>
+        <QuillEditor
+          value={originContent}
+          onOriginChange={setOriginContent}
+          onChange={setContent}
+        />
+      </div>
 
-          <div className={style.editor}>
-            <QuillEditor
-              value={originContent}
-              onOriginChange={setOriginContent}
-              onChange={setContent}
-            />
+      <div className={style.videoUploadContainer}>
+        <h2 className={style.subTitle}>파일 첨부</h2>
+
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          <div className={style.videoSection}>
+            비디오를 업로드하려면 클릭하거나 파일을 끌어오세요.
           </div>
+        </div>
+      </div>
 
-          <div className={style.videoUploadContainer}>
-            <h2>비디오 업로드</h2>
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div className={cx("box")} style={{ height: "100px" }}>
-                비디오를 업로드하려면 클릭하거나 파일을 끌어오세요.
+      <div className={style.previewContainer}>
+        {videos && videos.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {videos.map((video, index) => (
+              <div key={index} style={{ display: "inline-block" }}>
+                <p>
+                  {video.name}
+                  <button onClick={() => removeVideo(index)}>제거</button>
+                </p>
+                <video src={video.preview} controls width="300px" />
               </div>
-            </div>
+            ))}
           </div>
-        </div>
-
-        <div className={style.previewContainer}>
-          {/* <h2>미리보기</h2>
-          <p>제목: {title}</p>
-          <div
-            className={cx(style.preview, "ql-content")}
-            dangerouslySetInnerHTML={{
-              // __html: DOMPurify.sanitize(originContent),
-              __html: originContent,
-            }}
-          /> */}
-
-          {videos && videos.length > 0 && (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              {videos.map((video, index) => (
-                <div key={index} style={{ display: "inline-block" }}>
-                  <p>
-                    {video.name}
-                    <button onClick={() => removeVideo(index)}>제거</button>
-                  </p>
-                  <video src={video.preview} controls width="300px" />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </>
+
+      <div className={style.buttonContainer}>
+        <button
+          className={cx(style.btn, style.outlineBtn)}
+          onClick={handleBackButtonClick}
+        >
+          뒤로 가기
+        </button>
+        <button className={style.btn} onClick={onSubmit}>
+          작성하기
+        </button>
+      </div>
+    </div>
   );
 }
