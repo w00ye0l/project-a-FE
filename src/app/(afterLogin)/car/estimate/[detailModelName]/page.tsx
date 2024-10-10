@@ -53,7 +53,6 @@ export default function EstimatePage() {
     trimName: string,
     carPrice: number
   ) => {
-    carPriceStore.reset();
     carPriceStore.setSelectedCarInfo({
       carYear,
       engineInfo,
