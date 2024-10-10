@@ -354,10 +354,35 @@
 
 .featureTitle {
   margin-bottom: 40px;
+  color: #1b2a40;
   font-size: 30px;
   font-weight: bold;
   line-height: 140%;
 }
+
+.featureDescription {
+  color: #1b2a40;
+  font-size: 20px;
+  line-height: 150%;
+}
+
+/* .featureImage {
+  animation: fade-in linear;
+  animation-timeline: view();
+  animation-range-start: cover;
+  animation-range-end: 400px;
+}
+
+@keyframes fade-in {
+  from {
+    scale: 0.5;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+} */
 
 /* 푸터 */
 .footerSection {

@@ -54,7 +54,7 @@ export default function CarCard({ type }: { type: string }) {
 
         <Image
           className={style.carImage}
-          src="/logo.png"
+          src="/logo_text.png"
           width={252}
           height={230}
           alt="car"

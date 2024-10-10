@@ -47,7 +47,7 @@ export default function TopCarCard({ type }: { type: string }) {
 
         <Image
           className={style.carImage}
-          src="/logo.png"
+          src="/logo_text.png"
           width={224}
           height={224}
           alt="car"
