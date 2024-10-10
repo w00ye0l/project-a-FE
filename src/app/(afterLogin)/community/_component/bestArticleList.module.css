@@ -37,7 +37,6 @@
 .articleImage {
   width: 204px;
   height: 120px;
-  object-fit: contain;
   object-position: center;
   background-color: #f8f8f8;
   border-radius: 10px;

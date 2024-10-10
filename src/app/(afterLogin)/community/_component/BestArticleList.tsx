@@ -38,8 +38,6 @@ export default function BestArticleList() {
     const widthMatch = content.match(/width="(\d+)"/);
     const heightMatch = content.match(/height="(\d+)"/);
 
-    console.log({ srcMatch, widthMatch, heightMatch });
-
     return {
       src: srcMatch ? srcMatch[1] : null,
       width: widthMatch ? parseInt(widthMatch[1], 10) : 100,
@@ -71,8 +69,6 @@ export default function BestArticleList() {
         {articleList.slice(0, 3).map((article: Article) => {
           const { src, width, height } = extractImageUrl(article.originContent);
 
-          console.log({ src, width, height });
-
           return (
             <div
               className={style.topArticleContainer}
@@ -82,6 +78,7 @@ export default function BestArticleList() {
               {src && width && height ? (
                 <Image
                   className={style.articleImage}
+                  style={{ objectFit: "cover" }}
                   src={src}
                   width={width}
                   height={height}
@@ -90,6 +87,7 @@ export default function BestArticleList() {
               ) : (
                 <Image
                   className={cx(style.articleImage, style.defaultImage)}
+                  style={{ objectFit: "contain" }}
                   src="/logo.png"
                   width={100}
                   height={100}
@@ -110,8 +108,6 @@ export default function BestArticleList() {
       <div className={style.subArticleSection}>
         {articleList.slice(3, 8).map((article: Article) => {
           const { src, width, height } = extractImageUrl(article.originContent);
-
-          console.log({ src, width, height });
 
           return (
             <div
@@ -150,6 +146,7 @@ export default function BestArticleList() {
               {src && width && height ? (
                 <Image
                   className={cx(style.articleImage, style.subImage)}
+                  style={{ objectFit: "cover" }}
                   src={src}
                   width={width}
                   height={height}
@@ -162,6 +159,7 @@ export default function BestArticleList() {
                     style.subImage,
                     style.defaultImage
                   )}
+                  style={{ objectFit: "contain" }}
                   src="/logo.png"
                   width={100}
                   height={100}
