@@ -16,13 +16,16 @@ export default function EstimateEndPage() {
   const exteriorColor = carPriceStore.selectedExteriorColor;
   const interiorColor = carPriceStore.selectedInteriorColor;
   const [buyType, setBuyType] = useState<string>("rent");
-  const [month, setMonth] = useState<string>("fourEight");
-  const [distance, setDistance] = useState<string>("");
+  const [month, setMonth] = useState<number>(48);
+  const [distance, setDistance] = useState<number>(20000);
   const [prePrice, setPrePrice] = useState<string>("threePre");
   const [depositPrice, setDepositPrice] = useState<string>("");
   const [buyerType, setBuyerType] = useState<string>("person");
   const [area, setArea] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [carTax, setCarTax] = useState<number>(0);
+  const [getTax, setGetTax] = useState<number>(0);
+  const [monthlyPrice, setMonthlyPrice] = useState<any[]>([]);
 
   const carPk = carPriceStore.selectedCarSpec.carPk;
   const totalPrice =
@@ -45,11 +48,11 @@ export default function EstimateEndPage() {
   };
 
   const handleMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonth(e.target.value);
+    setMonth(Number(e.target.value));
   };
 
   const handleDistance = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDistance(e.target.value);
+    setDistance(Number(e.target.value));
   };
 
   const handlePrePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +70,21 @@ export default function EstimateEndPage() {
   const getPriceData = async () => {
     setLoading(true);
 
+    let calBuyType = "";
     let calPrePrice = 0;
     let calDepositPrice = 0;
+    let calBuyerType = "";
+    let calAreaType = "";
+
+    if (buyType === "rent") {
+      calBuyType = "렌트";
+    } else if (buyType === "lease") {
+      calBuyType = "리스";
+    } else if (buyType === "cash") {
+      calBuyType = "현금";
+    } else if (buyType === "month") {
+      calBuyType = "할부";
+    }
 
     if (prePrice === "onePre") {
       calPrePrice = totalPrice * 0.1;
@@ -100,7 +116,23 @@ export default function EstimateEndPage() {
       calDepositPrice = Number(depositPrice) * 10000;
     }
 
-    console.log(carPk, totalPrice, calPrePrice, calDepositPrice);
+    if (buyerType === "person") {
+      calBuyerType = "개인";
+    } else if (buyerType === "business") {
+      calBuyerType = "개인사업자";
+    } else if (buyerType === "corporate") {
+      calBuyerType = "법인사업자";
+    }
+
+    if (area === "seoul") {
+      calAreaType = "서울";
+    } else if (area === "gyeonggi") {
+      calAreaType = "경기";
+    } else if (area === "incheon") {
+      calAreaType = "인천";
+    }
+
+    console.log(month, carPk, totalPrice, calPrePrice, calDepositPrice);
 
     try {
       const result = await getMonthlyPrice({
@@ -108,9 +140,17 @@ export default function EstimateEndPage() {
         totalPrice,
         prePrice: calPrePrice,
         depositPrice: calDepositPrice,
+        buyType: calBuyType,
+        month,
+        km: distance,
+        buyerType: calBuyerType,
+        areaType: calAreaType,
       });
 
       console.log({ result });
+      setCarTax(result.data.carTax);
+      setGetTax(result.data.getTax);
+      setMonthlyPrice(result.data.monthlyPrices);
     } catch (error) {
       console.error("Failed to fetch model details:", error);
     }
@@ -121,7 +161,17 @@ export default function EstimateEndPage() {
     if (carPk && totalPrice) {
       getPriceData();
     }
-  }, [buyType, distance, month, prePrice, depositPrice, carPk, totalPrice]);
+  }, [
+    buyType,
+    month,
+    distance,
+    prePrice,
+    depositPrice,
+    buyerType,
+    area,
+    carPk,
+    totalPrice,
+  ]);
 
   return (
     <div className={style.main}>
@@ -378,12 +428,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="month"
                       id="threeSix"
-                      value="threeSix"
-                      checked={month === "threeSix"}
+                      value={36}
+                      checked={month === 36}
                       onChange={handleMonth}
                     />
                     <label
-                      className={cx({ [style.active]: month === "threeSix" })}
+                      className={cx({ [style.active]: month === 36 })}
                       htmlFor="threeSix"
                     >
                       36개월
@@ -395,12 +445,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="month"
                       id="fourEight"
-                      value="fourEight"
-                      checked={month === "fourEight"}
+                      value={48}
+                      checked={month === 48}
                       onChange={handleMonth}
                     />
                     <label
-                      className={cx({ [style.active]: month === "fourEight" })}
+                      className={cx({ [style.active]: month === 48 })}
                       htmlFor="fourEight"
                     >
                       48개월
@@ -412,12 +462,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="month"
                       id="sixZero"
-                      value="sixZero"
-                      checked={month === "sixZero"}
+                      value={60}
+                      checked={month === 60}
                       onChange={handleMonth}
                     />
                     <label
-                      className={cx({ [style.active]: month === "sixZero" })}
+                      className={cx({ [style.active]: month === 60 })}
                       htmlFor="sixZero"
                     >
                       60개월
@@ -435,13 +485,13 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="oneHalfKm"
-                      value="oneHalfKm"
-                      checked={distance === "oneHalfKm"}
+                      value={15000}
+                      checked={distance === 15000}
                       onChange={handleDistance}
                     />
                     <label
                       className={cx({
-                        [style.active]: distance === "oneHalfKm",
+                        [style.active]: distance === 15000,
                       })}
                       htmlFor="oneHalfKm"
                     >
@@ -454,12 +504,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="twoKm"
-                      value="twoKm"
-                      checked={distance === "twoKm"}
+                      value={20000}
+                      checked={distance === 20000}
                       onChange={handleDistance}
                     />
                     <label
-                      className={cx({ [style.active]: distance === "twoKm" })}
+                      className={cx({ [style.active]: distance === 20000 })}
                       htmlFor="twoKm"
                     >
                       2만km
@@ -471,13 +521,13 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="twoHalfKm"
-                      value="twoHalfKm"
-                      checked={distance === "twoHalfKm"}
+                      value={25000}
+                      checked={distance === 25000}
                       onChange={handleDistance}
                     />
                     <label
                       className={cx({
-                        [style.active]: distance === "twoHalfKm",
+                        [style.active]: distance === 25000,
                       })}
                       htmlFor="twoHalfKm"
                     >
@@ -490,12 +540,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="threeKm"
-                      value="threeKm"
-                      checked={distance === "threeKm"}
+                      value={30000}
+                      checked={distance === 30000}
                       onChange={handleDistance}
                     />
                     <label
-                      className={cx({ [style.active]: distance === "threeKm" })}
+                      className={cx({ [style.active]: distance === 30000 })}
                       htmlFor="threeKm"
                     >
                       3만km
@@ -507,13 +557,13 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="threeHalfKm"
-                      value="threeHalfKm"
-                      checked={distance === "threeHalfKm"}
+                      value={35000}
+                      checked={distance === 35000}
                       onChange={handleDistance}
                     />
                     <label
                       className={cx({
-                        [style.active]: distance === "threeHalfKm",
+                        [style.active]: distance === 35000,
                       })}
                       htmlFor="threeHalfKm"
                     >
@@ -526,12 +576,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="fourKm"
-                      value="fourKm"
-                      checked={distance === "fourKm"}
+                      value={40000}
+                      checked={distance === 40000}
                       onChange={handleDistance}
                     />
                     <label
-                      className={cx({ [style.active]: distance === "fourKm" })}
+                      className={cx({ [style.active]: distance === 40000 })}
                       htmlFor="fourKm"
                     >
                       4만km
@@ -543,12 +593,12 @@ export default function EstimateEndPage() {
                       type="radio"
                       name="distance"
                       id="infKm"
-                      value="infKm"
-                      checked={distance === "infKm"}
+                      value={0}
+                      checked={distance === 0}
                       onChange={handleDistance}
                     />
                     <label
-                      className={cx({ [style.active]: distance === "infKm" })}
+                      className={cx({ [style.active]: distance === 0 })}
                       htmlFor="infKm"
                     >
                       무제한
@@ -868,9 +918,23 @@ export default function EstimateEndPage() {
                     <option value="" defaultValue="" hidden>
                       지역
                     </option>
-                    <option value="seoul">서울</option>
-                    <option value="gyeonggi">경기</option>
-                    <option value="incheon">인천</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기</option>
+                    <option value="인천">인천</option>
+                    <option value="강원">강원</option>
+                    <option value="대전">대전</option>
+                    <option value="세종">세종</option>
+                    <option value="충북">충북</option>
+                    <option value="충남">충남</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                    <option value="울산">울산</option>
+                    <option value="경북">경북</option>
+                    <option value="경남">경남</option>
+                    <option value="광주">광주</option>
+                    <option value="전북">전북</option>
+                    <option value="전남">전남</option>
+                    <option value="제주">제주</option>
                   </select>
                 </div>
               </div>
@@ -889,7 +953,46 @@ export default function EstimateEndPage() {
                 </p>
               </div>
 
-              <div className={style.monthPriceContainer}></div>
+              <div className={style.monthPriceContainer}>
+                {monthlyPrice && monthlyPrice.length > 0 ? (
+                  monthlyPrice.map(
+                    (price: { capitalName: string; monthPrice: number }) => (
+                      <div
+                        className={style.priceContainer}
+                        key={price.capitalName}
+                      >
+                        <div className={style.capitalNameBox}>
+                          <input
+                            className={style.capitalRadio}
+                            type="radio"
+                            name="capital"
+                            id={price.capitalName}
+                          />
+                          <label
+                            className={style.capitalName}
+                            htmlFor={price.capitalName}
+                          >
+                            {price.capitalName}
+                          </label>
+                        </div>
+                        <p className={style.monthPrice}>
+                          월{" "}
+                          <span className={style.realMonthPrice}>
+                            {price.monthPrice.toLocaleString()}
+                          </span>
+                          원
+                        </p>
+                      </div>
+                    )
+                  )
+                ) : (
+                  <p className={style.none}>
+                    금융사 정보가 없습니다.
+                    <br />
+                    다른 조건을 선택해주세요.
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className={style.bigo}>
@@ -897,46 +1000,111 @@ export default function EstimateEndPage() {
                 <p className={style.monthLabel}>비고</p>
               </div>
 
-              <div className={style.bigoContentContainer}></div>
+              <div className={style.bigoContentContainer}>
+                <div className={style.bigoBox}>
+                  <div className={style.bigoContent}>
+                    <p>취등록세</p>
+                    <p>{getTax.toLocaleString()}</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>자동차세</p>
+                    <p>{carTax.toLocaleString()}</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>탁송료</p>
+                    <p>-</p>
+                  </div>
+                </div>
+                <div className={style.bigoBox}>
+                  <div className={style.bigoContent}>
+                    <p>할인</p>
+                    <p>-</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>기본할인</p>
+                    <p>-</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>금융사할인</p>
+                    <p>-</p>
+                  </div>
+                </div>
+                <div className={style.bigoBox}>
+                  <div className={style.bigoContent}>
+                    <p>보조금 혜택</p>
+                    <p>-</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>국고 보조금</p>
+                    <p>-</p>
+                  </div>
+                  <div className={style.bigoContent}>
+                    <p>지자체 보조금</p>
+                    <p>-</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <button className={style.saveBtn}>저장하기</button>
         </div>
 
-        {/* 차량 정보 */}
-        <div className={style.modelInfoContainer}>
-          <h1 className={style.modelName}>
-            {carPriceStore.selectedBrand} {detailModel.detailModelName}
-          </h1>
-
-          <div className={style.modelInfoBox}>
-            <p>
-              {carInfo.carYear}년형 {carInfo.engineInfo} {carInfo.trimName}
-            </p>
-
-            {imageUrl && (
-              <Image
-                src={imageUrl}
-                width={340}
-                height={190}
-                alt={detailModel.detailModelName}
-              />
-            )}
-
-            <div>
-              <p className={style.subTitle}>차량 가격</p>
-              <h1 className={style.totalPrice}>
-                {(
-                  carPriceStore.defaultPrice +
-                  options.reduce((acc, cur) => acc + cur.price, 0) +
-                  exteriorColor.price +
-                  interiorColor.price
-                ).toLocaleString()}
-                원
-              </h1>
-            </div>
+        {/* 견적 관련 */}
+        <div className={style.featSection}>
+          <div className={style.buttonSection}>
+            <button className={cx(style.btn)}>견적 문의하기</button>
+            <button className={cx(style.btn, style.outlineBtn)}>
+              견적 다운로드
+            </button>
           </div>
+
+          <ul className={style.warningSection}>
+            <li>
+              상기 견적 금액은 개별 소비세 5.0% 적용 견적입니다.(단, 차종 및
+              면세구분에 따라 세제 혜택이 적용됩니다.)
+            </li>
+            <br />
+            <li>
+              상기 이미지는 실제 차량과 사양 및 컬러가 다를 수 있으므로 전시장
+              방문 및 실차 확인을 권장합니다.
+            </li>
+            <br />
+
+            <li>
+              일부 이미지는 대표 등급 기준으로 연출되었으며 추후 사전예고 없이
+              변경이나 업데이트가 될 수 있습니다.
+            </li>
+            <br />
+
+            <li>
+              본 견적서는 고객님의 차량 구입(청약) 의사결정에 도움을 드리고자
+              작성된 것으로, 법적인 효력이 없으며, 자세한 문의는 지점·대리점을
+              통해 확인바랍니다.
+            </li>
+            <br />
+
+            <li>
+              실계약 진행 시 차량 매매 관련 대금(계약금 포함)은 반드시 ‘고객전용
+              입금계좌’ 혹은 ‘현대자동차(주) 명의 계좌’로 입금하여 주시기
+              바라며, 이외의 계좌로 송금하는 것은 자동차 매매 대금을 지급한
+              것으로 인정되지 않으니 유의하시기 바랍니다.
+            </li>
+            <br />
+
+            <li>
+              주문생산방식으로 계약된 차량의 경우 최소 45일 납기를 예상합니다.
+            </li>
+
+            <br />
+            <li>
+              선택 품목을 포함한 최종 가격은 세제 혜택 등에 따라 다를 수
+              있습니다. 최종 판매가는 반드시 지점·대리점에 문의 바랍니다.
+            </li>
+
+            <br />
+            <li>지점·대리점 견적서 내의 옵션·컬러 명칭과 다를 수 있습니다.</li>
+          </ul>
         </div>
       </div>
     </div>

@@ -309,6 +309,7 @@
   color: #888888;
   font-size: 14px;
   border: 1px solid #dddddd;
+  cursor: pointer;
 }
 
 .detailValue .active {
@@ -393,12 +394,63 @@
 .priceLabel {
   margin-right: 40px;
   width: 105px;
+  text-align: center;
 }
 
 .monthPriceContainer {
   height: 360px;
   overflow-y: auto;
   border-bottom: 1px solid #dddddd;
+}
+
+.priceContainer {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.capitalNameBox {
+  margin-left: 40px;
+  display: flex;
+  align-content: center;
+}
+
+.capitalRadio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border-right: 1px solid #dddddd;
+}
+
+.capitalName {
+  padding-left: 50px;
+  color: #555555;
+  cursor: pointer;
+}
+
+.monthPrice {
+  margin-right: 40px;
+  font-size: 14px;
+  color: #555555;
+}
+
+.realMonthPrice {
+  margin-left: 10px;
+  margin-right: 2px;
+  color: #444444;
+  font-size: 18px;
+}
+
+.none {
+  margin: 20px;
+  text-align: center;
+  color: #777777;
+  line-height: 160%;
 }
 
 .bigo {
@@ -409,6 +461,26 @@
   height: 360px;
   border: 1px solid #dddddd;
   border-top: none;
+}
+
+.bigoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 24px;
+  height: calc(100% / 3);
+  border-bottom: 1px dashed #eeeeee;
+}
+
+.bigoBox:last-child {
+  border-bottom: none;
+}
+
+.bigoContent {
+  display: flex;
+  justify-content: space-between;
+  color: #555555;
+  font-size: 15px;
 }
 
 .saveBtn {
@@ -423,7 +495,47 @@
   cursor: pointer;
 }
 
-/* dddd */
-.modelInfoContainer {
+.featSection {
   width: 292px;
+  letter-spacing: -0.02em;
+}
+
+.buttonSection {
+  margin-top: 44px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  height: 50px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #434343;
+  line-height: 120%;
+  border: none;
+  cursor: pointer;
+}
+
+.outlineBtn {
+  color: #434343;
+  background-color: #ffffff;
+  border: 2px solid #434343;
+}
+
+.warningSection {
+  color: #888888;
+  font-size: 13px;
+  line-height: 170%;
+}
+
+.warningSection li::marker {
+  line-height: calc(13 / 8);
+  font-size: 8px;
+}
+
+.warningSection li {
+  margin-left: 20px;
 }
