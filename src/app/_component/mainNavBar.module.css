@@ -25,7 +25,7 @@
 .logoMenuSection {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 60px;
 }
 
 .logo {
@@ -36,7 +36,8 @@
 }
 
 .logoImage {
-  width: 80px;
+  width: 60px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -54,7 +55,7 @@
 
 .left {
   justify-self: center;
-  gap: 30px;
+  gap: 40px;
 }
 
 .right {
