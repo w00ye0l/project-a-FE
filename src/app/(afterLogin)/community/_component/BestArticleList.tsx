@@ -88,7 +88,7 @@ export default function BestArticleList() {
                 <Image
                   className={cx(style.articleImage, style.defaultImage)}
                   style={{ objectFit: "contain" }}
-                  src="/logo.png"
+                  src="/logo_text.png"
                   width={100}
                   height={100}
                   alt="image"
@@ -159,10 +159,10 @@ export default function BestArticleList() {
                     style.subImage,
                     style.defaultImage
                   )}
-                  style={{ objectFit: "contain" }}
-                  src="/logo.png"
-                  width={100}
-                  height={100}
+                  style={{ objectFit: "cover" }}
+                  src="/logo_text.png"
+                  width={50}
+                  height={50}
                   alt="image"
                 />
               )}
