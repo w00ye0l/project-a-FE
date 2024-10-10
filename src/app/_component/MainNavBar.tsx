@@ -52,7 +52,10 @@ export default function MainNavBar() {
             </Link> */}
 
             {session?.user && (
-              <Link href="/admin" className={style.link}>
+              <Link
+                href="/admin/car/default?tab=country"
+                className={style.link}
+              >
                 ADMIN
               </Link>
             )}
