@@ -60,7 +60,9 @@ export default function ModelList() {
     detailModelNormalImages: string[],
     detailModelColorImages: string[]
   ) => {
-    const { setSelectedBrand, setSelectedDetailModel } = carPriceStore;
+    const { reset, setSelectedBrand, setSelectedDetailModel } = carPriceStore;
+
+    reset();
 
     // 브랜드 등록
     setSelectedBrand(modelName);

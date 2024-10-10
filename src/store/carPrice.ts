@@ -124,6 +124,17 @@ export const useCarPriceStore = create(
           defaultPrice: 0,
           selectedExteriorColor: { pk: "", name: "", codes: [], price: 0 },
           selectedInteriorColor: { pk: "", name: "", codes: [], price: 0 },
+          selectedCarInfo: {
+            carYear: "",
+            engineInfo: "",
+            trimName: "",
+          },
+          selectedDetailModel: {
+            detailModelName: "",
+            detailModelMainImage: "",
+            detailModelNormalImages: [],
+            detailModelColorImages: [],
+          },
           selectedOptions: [],
           selectedCarSpec: {} as CarSpec,
           selectedCarBasicOption: {} as BasicOption,
