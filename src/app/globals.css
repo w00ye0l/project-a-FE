@@ -239,64 +239,55 @@
 @font-face {
   font-family: "Montserrat";
   font-weight: 900;
-  src: local("Montserrat Black"),
-    url("/fonts/Montserrat/static/Montserrat-Black.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Black.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 800;
-  src: local("Montserrat ExtraBold"),
-    url("/fonts/Montserrat/static/Montserrat-ExtraBold.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-ExtraBold.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 700;
-  src: local("Montserrat Bold"),
-    url("/fonts/Montserrat/static/Montserrat-Bold.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Bold.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 600;
-  src: local("Montserrat SemiBold"),
-    url("/fonts/Montserrat/static/Montserrat-SemiBold.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-SemiBold.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 500;
-  src: local("Montserrat Medium"),
-    url("/fonts/Montserrat/static/Montserrat-Medium.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Medium.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 400;
-  src: local("Montserrat Regular"),
-    url("/fonts/Montserrat/static/Montserrat-Regular.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Regular.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 300;
-  src: local("Montserrat Light"),
-    url("/fonts/Montserrat/static/Montserrat-Light.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Light.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 200;
-  src: local("Montserrat ExtraLight"),
-    url("/fonts/Montserrat/static/Montserrat-ExtraLight.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-ExtraLight.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Montserrat";
   font-weight: 100;
-  src: local("Montserrat Thin"),
-    url("/fonts/Montserrat/static/Montserrat-Thin.ttf") format("ttf");
+  src: url("/fonts/Montserrat/static/Montserrat-Thin.ttf") format("ttf");
 }
 
 @media (prefers-color-scheme: dark) {
