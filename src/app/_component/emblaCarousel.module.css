@@ -55,7 +55,7 @@
   bottom: 0;
   right: 0;
   left: 50%;
-  margin-left: 400px;
+  margin-left: 420px;
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-start;
@@ -67,7 +67,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0.1rem;
   align-items: center;
-  border-radius: 20px;
   overflow: hidden;
 }
 .embla__button {
@@ -92,6 +91,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.embla__button:first-child {
+  border-radius: 50% 0 0 50%;
+}
+.embla__button:last-child {
+  border-radius: 0 50% 50% 0;
 }
 .embla__button:disabled {
   color: rgb(192, 192, 192);
@@ -124,7 +129,7 @@
   justify-self: flex-end;
   color: #ffffff;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
   padding: 10px 20px;
   min-width: 40px;
 }
