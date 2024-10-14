@@ -3,6 +3,7 @@ import style from "./page.module.css";
 import cx from "classnames";
 import EmblaCarousel from "./_component/EmblaCarousel";
 import Link from "next/link";
+import Footer from "./_component/Footer";
 
 export default function Home() {
   return (
@@ -305,11 +306,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className={style.footerSection}>
-        <div className={style.footerContainer}>
-          <h2>회사 소개</h2>
-        </div>
-      </footer>
+      <Footer />
 
       <div className={style.counselBtn}>
         <Image
