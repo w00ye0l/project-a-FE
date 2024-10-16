@@ -5,14 +5,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import style from "./modelList.module.css";
 import cx from "classnames";
-import Image from "next/image";
-import { useCarPriceStore } from "@/store/carPrice";
 import DotSpinner from "@/app/_component/DotSpinner";
 import CPagination from "../../community/_component/Pagination";
 import { PageInfo } from "@/model/PageInfo";
 import { getCarList } from "../_lib/getCarList";
+import CarBox from "@/app/(afterLogin)/car/_component/CarBox";
 
-export default function ModelList() {
+export default function ModelList({ type }: { type?: string }) {
   const [pageInfo, setPageInfo] = useState<PageInfo>();
   const [modelInfoList, setModelInfoList] = useState<ModelInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,7 +19,6 @@ export default function ModelList() {
   const searchParams = useSearchParams();
   const brandName = searchParams.get("b");
   const pathname = usePathname();
-  const carPriceStore = useCarPriceStore();
 
   // 모델 리스트 가져오기
   const getData = async ({ brandName }: { brandName: string | null }) => {
@@ -33,6 +31,8 @@ export default function ModelList() {
 
     try {
       const result = await getCarList({ brandName, pageNumber: page });
+
+      console.log({ result });
 
       if (result.data.content !== null) {
         setModelInfoList(result.data.content);
@@ -50,31 +50,6 @@ export default function ModelList() {
     } finally {
       setLoading(false);
     }
-  };
-
-  // 견적내기 버튼 클릭 시 견적 페이지로 이동
-  const onClickEstimateBtn = (
-    modelName: string,
-    detailModelName: string,
-    detailModelMainImage: string,
-    detailModelNormalImages: string[],
-    detailModelColorImages: string[]
-  ) => {
-    const { reset, setSelectedBrand, setSelectedDetailModel } = carPriceStore;
-
-    reset();
-
-    // 브랜드 등록
-    setSelectedBrand(modelName);
-    // detailmodel 등록
-    setSelectedDetailModel({
-      detailModelName: detailModelName,
-      detailModelMainImage: detailModelMainImage,
-      detailModelNormalImages: detailModelNormalImages,
-      detailModelColorImages: detailModelColorImages,
-    });
-
-    router.push(`/car/estimate/${detailModelName}`);
   };
 
   // 브랜드 이름 변경 시 모델 리스트 갱신
@@ -118,12 +93,33 @@ export default function ModelList() {
 
   return (
     <div className={style.main}>
+      <div className={style.menuSection}>
+        <div className={style.tabBox}>
+          <div className={cx(style.tab, style.tabActive)}>전체</div>
+          <div className={style.tab}>렌트</div>
+          <div className={style.tab}>리스</div>
+        </div>
+
+        <fieldset className={style.searchField}>
+          <input
+            type="text"
+            className={style.search}
+            placeholder="차량을 검색해 보세요."
+          />
+          <span className={style.searchIcon}></span>
+        </fieldset>
+      </div>
+
       <div className={style.sortContainer}>
         <p className={cx(style.sort, style.sortActive)}>인기순</p>
         <div className={style.divider}></div>
         <p className={cx(style.sort)}>가격순</p>
         <div className={style.divider}></div>
-        <p className={cx(style.sort)}>최근출시순</p>
+        <p className={cx(style.sort)}>연비순</p>
+        {/* <div className={style.divider}></div>
+        <p className={cx(style.sort)}>이용료 낮은순(렌트)</p>
+        <div className={style.divider}></div>
+        <p className={cx(style.sort)}>이용료 낮은순(리스)</p> */}
       </div>
 
       <div className={style.modelPart}>
@@ -131,77 +127,11 @@ export default function ModelList() {
           <DotSpinner size={40} />
         ) : (
           modelInfoList.map((modelInfo) => (
-            <div className={style.modelSection} key={modelInfo.detailModelName}>
-              <div className={style.modelContainer}>
-                <div className={style.modelInfoSection}>
-                  <div className={style.modelInfoContainer}>
-                    {modelInfo.detailModelMainImage ? (
-                      <Image
-                        className={style.modelImage}
-                        src={modelInfo.detailModelMainImage}
-                        width={940}
-                        height={515}
-                        alt={modelInfo.detailModelName}
-                      />
-                    ) : (
-                      <div className={style.modelImage}></div>
-                    )}
-
-                    <div className={style.modelInfoBox}>
-                      <div className={style.brandBox}>
-                        <Image
-                          className={style.brandImg}
-                          src={`/brand/${modelInfo.brandName}.jpg`}
-                          alt=""
-                          width={90}
-                          height={60}
-                        />
-                        <p>{modelInfo.brandName}</p>
-                      </div>
-
-                      <button
-                        onClick={() =>
-                          onClickEstimateBtn(
-                            modelInfo.brandName,
-                            modelInfo.detailModelName,
-                            modelInfo.detailModelMainImage,
-                            modelInfo.detailModelNormalImages,
-                            modelInfo.detailModelColorImages
-                          )
-                        }
-                        className={style.infoBtn}
-                      >
-                        정보 보기
-                      </button>
-                    </div>
-                  </div>
-
-                  <h2 className={style.carName}>{modelInfo.detailModelName}</h2>
-
-                  <p className={style.carPrice}>
-                    {Math.round(
-                      modelInfo.detailModelSpec.minCarPrice / 10000
-                    ).toLocaleString()}
-                    <span className={style.priceUnit}> 만원 ~</span>
-                  </p>
-                </div>
-
-                <button
-                  onClick={() =>
-                    onClickEstimateBtn(
-                      modelInfo.brandName,
-                      modelInfo.detailModelName,
-                      modelInfo.detailModelMainImage,
-                      modelInfo.detailModelNormalImages,
-                      modelInfo.detailModelColorImages
-                    )
-                  }
-                  className={style.estimateBtn}
-                >
-                  견적 내기
-                </button>
-              </div>
-            </div>
+            <CarBox
+              type={type}
+              modelInfo={modelInfo}
+              key={modelInfo.detailModelName}
+            />
           ))
         )}
       </div>
