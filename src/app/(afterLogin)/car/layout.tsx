@@ -1,7 +1,5 @@
 import { Suspense } from "react";
 import style from "./layout.module.css";
-import cx from "classnames";
-import Tab from "./_component/Tab";
 
 export default function CarLayoutPage({
   children,
