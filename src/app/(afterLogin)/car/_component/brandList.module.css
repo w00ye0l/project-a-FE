@@ -5,62 +5,65 @@
 }
 
 .visibleBtn {
-  padding: 15px 0;
+  padding: 14px 0;
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #0b2369;
-  font-family: "SUITE";
-  font-size: 24px;
-  font-weight: 600;
+  color: #434343;
+  font-family: "ONE Mobile Title";
+  font-size: 20px;
   background-color: #fff;
-  border: 1px solid #0b2369;
-  border-radius: 5px;
+  border: 1px solid #434343;
   cursor: pointer;
 }
 
 .activeBrandSection {
   color: #fff;
-  background-color: #0b2369;
+  background-color: #434343;
 }
 
 .brandSection {
   width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid #000000;
+  border-top: none;
 }
 
 .brandContainer {
-  padding: 12px;
+  padding: 20px 34px;
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 20px;
 }
 
 .brandBox {
-  padding: 6px 15px;
+  padding: 0 8px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 130px;
-  gap: 7px;
-  border: 1px solid #ececec;
-  border-radius: 5px;
+  width: 95px;
+  height: 95px;
+  gap: 8px;
+  border: 1px solid #eeeeee;
   cursor: pointer;
 }
 
 .activeBrandBox {
-  font-weight: 600;
-  background-color: #f3f8ff;
-  border: 2px solid #0733a1;
+  color: #0740e4;
+  border: 1px solid #0740e4;
+}
+
+.brandImage {
+  width: 60px;
+  height: auto;
 }
 
 .brandName {
-  font-family: "SUITE";
-  font-size: 20px;
+  font-family: "Pretendard";
+  font-size: 16px;
   word-break: keep-all;
   text-align: center;
 }
