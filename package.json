@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-quill": "^2.0.0",
+    "react-text-transition": "^3.1.0",
     "sonner": "^1.4.41",
     "zustand": "^4.5.4"
   },
