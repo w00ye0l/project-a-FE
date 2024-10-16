@@ -10,20 +10,31 @@ interface Props {
 
 export default function CPagination({ pageInfo, handlePageMove }: Props) {
   console.log(pageInfo);
+  const main = {
+    "& .Mui-selected": {
+      bgcolor: "#121212 !Important",
+      color: "#fff !Important",
+    },
+    "& .MuiPaginationItem-root": {
+      borderRadius: "0px",
+    },
+  };
 
   return (
     <Stack spacing={2}>
       <Pagination
         page={pageInfo.number + 1}
         count={pageInfo.totalPages}
-        color="primary"
+        // variant="outlined"
+        shape="rounded"
         renderItem={(item) => (
           <PaginationItem
-            slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+            // slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
             {...item}
           />
         )}
         onChange={(_, page) => handlePageMove(page)}
+        sx={main}
       />
     </Stack>
   );
