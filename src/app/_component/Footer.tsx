@@ -1,8 +1,11 @@
 import style from "./footer.module.css";
+import Notice from "./Notice";
 
 export default function Footer() {
   return (
     <footer className={style.section}>
+      <Notice />
+
       <div className={style.top}>
         <div className={style.container}>
           <p>개인정보처리방침</p>
