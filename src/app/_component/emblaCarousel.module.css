@@ -55,7 +55,7 @@
   bottom: 0;
   right: 0;
   left: 50%;
-  margin-left: 400px;
+  margin-left: 420px;
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-start;
@@ -65,8 +65,9 @@
 .embla__buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
+  gap: 0.1rem;
   align-items: center;
+  overflow: hidden;
 }
 .embla__button {
   -webkit-tap-highlight-color: rgba(49, 49, 49, 0.5);
@@ -80,18 +81,28 @@
   border: 0;
   padding: 0;
   margin: 0;
-  box-shadow: inset 0 0 0 2px rgb(234, 234, 234);
+  /* box-shadow: inset 0 0 0 2px rgb(234, 234, 234); */
+  background-color: #00000020;
   width: 40px;
   height: 40px;
   z-index: 1;
-  border-radius: 50%;
-  color: rgb(54, 49, 61);
+  /* border-radius: 50%; */
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.embla__button:first-child {
+  border-radius: 50% 0 0 50%;
+}
+.embla__button:last-child {
+  border-radius: 0 50% 50% 0;
+}
 .embla__button:disabled {
   color: rgb(192, 192, 192);
+}
+.embla__button:hover {
+  background-color: #00000030;
 }
 .embla__button__svg {
   width: 35%;
@@ -109,15 +120,19 @@
   border: 0;
   padding: 0;
   margin: 0;
-  box-shadow: inset 0 0 0 2px rgb(234, 234, 234);
+  /* box-shadow: inset 0 0 0 2px rgb(234, 234, 234); */
+  background-color: #00000020;
   border-radius: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   justify-self: flex-end;
-  color: rgb(54, 49, 61);
-  font-weight: 700;
-  font-size: 18px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
   padding: 10px 20px;
   min-width: 40px;
+}
+.embla__play:hover {
+  background-color: #00000030;
 }

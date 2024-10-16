@@ -1,0 +1,178 @@
+.modelSection {
+  width: 320px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modelSection:hover .carName {
+  text-underline-position: under;
+  text-decoration: underline;
+}
+
+.infoSection {
+  width: 320px;
+  border-radius: 5px;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 180px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+}
+
+.brandBox {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.brandImg {
+  width: 26px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.brandName {
+  color: #777777;
+  font-size: 14px;
+}
+
+.modelImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.buttonSection {
+  display: flex;
+  bottom: 0;
+  right: 20px;
+  transform: translateY(50%);
+  position: absolute;
+  gap: 6px;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  color: #434343;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid #434343;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fillBtn {
+  color: #ffffff;
+  background-color: #434343;
+}
+
+.modelInfoBox {
+  margin-top: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carName {
+  color: #121212;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.infoBtn {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  background-color: #fff;
+  border: 0;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.infoBtn::after {
+  content: "";
+  background: url("/icon/info_deepgrey.png") no-repeat center;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background-size: contain;
+}
+
+.fuel {
+  margin-bottom: 14px;
+  color: #808388;
+  font-size: 14px;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceContainer {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.originPrice {
+  margin-bottom: 1px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.price {
+  color: #0e59ff;
+  font-size: 16px;
+}
+
+.carPrice {
+  margin-right: 2px;
+  font-size: 22px;
+  font-family: "ONE Mobile Title";
+}
+
+.sale {
+  color: #ff3737;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.discount {
+  color: #555555;
+  font-size: 14px;
+}
+
+.discountPrice {
+  font-weight: 600;
+}
+
+.estimateBtn {
+  width: 100%;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0733a1;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: inset 2px -3px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: inset -2px 3px 8px rgba(255, 255, 255, 0.6);
+}

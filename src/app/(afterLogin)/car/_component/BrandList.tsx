@@ -23,7 +23,7 @@ export default function BrandList({
   const [visibleDomestic, setVisibleDomestic] = useState<Boolean>(true);
   const [domesticBrands, setDomesticBrands] = useState<Brand[]>([]);
   const [importedBrands, setImportedBrands] = useState<Brand[]>([]);
-  const [visibleBrandCount, setVisibleBrandCount] = useState<number>(18);
+  const [visibleBrandCount, setVisibleBrandCount] = useState<number>(20);
   const carPriceStore = useCarPriceStore();
 
   // 제조국에 대한 브랜드 리스트 갱신
@@ -68,8 +68,8 @@ export default function BrandList({
 
   // 전체 브랜드 표시하기
   const showMoreBrands = () => {
-    if (visibleBrandCount > 18) {
-      setVisibleBrandCount(18);
+    if (visibleBrandCount > 20) {
+      setVisibleBrandCount(20);
     } else {
       if (visibleDomestic) {
         setVisibleBrandCount(domesticBrands.length);
@@ -93,10 +93,10 @@ export default function BrandList({
           onClick={() => {
             setVisibleDomestic(!visibleDomestic);
             // 섹션 변경시 브랜드 수 초기화
-            setVisibleBrandCount(18);
+            setVisibleBrandCount(20);
           }}
         >
-          국산
+          국산 브랜드
         </li>
         <li
           className={cx(style.visibleBtn, {
@@ -105,10 +105,10 @@ export default function BrandList({
           onClick={() => {
             setVisibleDomestic(!visibleDomestic);
             // 섹션 변경시 브랜드 수 초기화
-            setVisibleBrandCount(18);
+            setVisibleBrandCount(20);
           }}
         >
-          수입
+          수입 브랜드
         </li>
       </ul>
 
@@ -166,7 +166,7 @@ export default function BrandList({
           <div className={cx(style.moreBrand)} onClick={showMoreBrands}>
             <Image
               className={cx({
-                [style.activeBrand]: visibleBrandCount > 18,
+                [style.activeBrand]: visibleBrandCount > 20,
               })}
               src="/icon/more_brand.png"
               width={20}

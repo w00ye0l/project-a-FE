@@ -22,6 +22,14 @@
   background-color: #000000;
 }
 
+.tab:hover {
+  color: #1b2a40;
+}
+
+.tab:hover::after {
+  width: 100%;
+}
+
 .active {
   font-weight: 600;
   color: #1b2a40;
