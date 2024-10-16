@@ -119,9 +119,9 @@ export default function EstimateEndPage() {
     if (buyerType === "person") {
       calBuyerType = "개인";
     } else if (buyerType === "business") {
-      calBuyerType = "개인사업자";
+      calBuyerType = "사업자";
     } else if (buyerType === "corporate") {
-      calBuyerType = "법인사업자";
+      calBuyerType = "법인";
     }
 
     if (area === "seoul") {
