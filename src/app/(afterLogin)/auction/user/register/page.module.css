@@ -125,14 +125,17 @@
   color: #000000;
   font-size: 18px;
   font-weight: 500;
-  background-color: #ffffff;
+  background: linear-gradient(to right, #000000 50%, #ffffff 50%);
+  background-size: 200% 100%;
+  background-position: right;
   border: 2px solid #000000;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .submitBtn:hover {
-  background-color: #000000;
+  /* background-color: #000000; */
+  background-position: left;
   color: #ffffff;
 }
 

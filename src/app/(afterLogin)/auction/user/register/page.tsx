@@ -5,7 +5,7 @@ export default function AuctionUserRegisterPage() {
   return (
     <div className={style.main}>
       <div>
-        <p>옥션 등록하기</p>
+        <p>견적 등록하기</p>
         <h1>MASTERCAR</h1>
       </div>
 
