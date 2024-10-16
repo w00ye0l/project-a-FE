@@ -4,22 +4,12 @@ import cx from "classnames";
 import EmblaCarousel from "./_component/EmblaCarousel";
 import Link from "next/link";
 import Footer from "./_component/Footer";
+import MenuButtons from "./_component/MeunButtons";
 
 export default function Home() {
   return (
     <main className={style.main}>
       {/* 배너 */}
-      {/* <div className={style.bannerSection}>
-        <div className={style.bannerContainer}>
-          <Image
-            className={style.ad}
-            src="/main/test_ads.png"
-            width={100}
-            height={100}
-            alt="ads"
-          />
-        </div>
-      </div> */}
       <EmblaCarousel />
 
       {/* 메인 컨텐츠 */}
@@ -308,15 +298,7 @@ export default function Home() {
 
       <Footer />
 
-      <div className={style.counselBtn}>
-        <Image
-          className={style.icon}
-          src="/icon/counsel.png"
-          alt=""
-          width={36}
-          height={54.27}
-        />
-      </div>
+      <MenuButtons />
     </main>
   );
 }
