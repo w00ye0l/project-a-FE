@@ -38,7 +38,7 @@ export default function MainNavBar() {
             <Link href="/car" className={cx(style.link, style.activeLink)}>
               내 차 할래?
             </Link>
-            <Link href="/car" className={style.link}>
+            <Link href="/info" className={style.link}>
               차량정보
             </Link>
             <Link href="/auction/dealer" className={style.link}>
