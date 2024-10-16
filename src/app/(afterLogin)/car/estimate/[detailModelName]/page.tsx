@@ -10,7 +10,6 @@ import Image from "next/image";
 
 export default function EstimatePage() {
   const params = useParams();
-  // 문자 한글로 인코딩
   const detailModelName = params.detailModelName;
   const [trimList, setTrimList] = useState<TrimList[]>([]);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
