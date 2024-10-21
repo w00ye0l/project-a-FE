@@ -1,6 +1,6 @@
 export interface BasicOptionDefine {
-  basicOptionDataPk: string;
+  basicOptionDefinePk: string;
   category: string;
-  optionName: string;
-  optionDescription: string;
+  basicOptionName: string;
+  basicOptionDescription: string;
 }

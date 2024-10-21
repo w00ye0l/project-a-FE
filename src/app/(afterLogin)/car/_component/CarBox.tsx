@@ -4,6 +4,7 @@ import cx from "classnames";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCarPriceStore } from "@/store/carPrice";
+import { useCarInfoStore } from "@/store/carInfo";
 
 export default function CarBox({
   type,
@@ -14,10 +15,12 @@ export default function CarBox({
 }) {
   const router = useRouter();
   const carPriceStore = useCarPriceStore();
+  const carInfoStore = useCarInfoStore();
 
   // 견적내기 버튼 클릭 시 견적 페이지로 이동
   const onClickEstimateBtn = (
     brandName: string,
+    detailModelPk: string,
     detailModelName: string,
     detailModelMainImage: string,
     detailModelNormalImages: string[],
@@ -31,6 +34,7 @@ export default function CarBox({
     setSelectedBrand(brandName);
     // detailmodel 등록
     setSelectedDetailModel({
+      detailModelPk: detailModelPk,
       detailModelName: detailModelName,
       detailModelMainImage: detailModelMainImage,
       detailModelNormalImages: detailModelNormalImages,
@@ -41,6 +45,28 @@ export default function CarBox({
   };
 
   const onClickInfoBtn = () => {
+    const { setModelInfo, setModelSpec } = carInfoStore;
+
+    setModelInfo({
+      detailModelName: modelInfo.detailModelName,
+      detailModelMainImage: modelInfo.detailModelMainImage,
+      detailModelNormalImages: modelInfo.detailModelNormalImages,
+      detailModelColorImages: modelInfo.detailModelColorImages,
+    });
+
+    setModelSpec({
+      carClass: modelInfo.detailModelSpec.carClass,
+      fuelTypes: modelInfo.detailModelSpec.fuelTypes,
+      maxDiscountPercent: modelInfo.detailModelSpec.maxDiscountPercent,
+      minCarPrice: modelInfo.detailModelSpec.minCarPrice,
+      maxCarPrice: modelInfo.detailModelSpec.maxCarPrice,
+      minEngineDisplacement: modelInfo.detailModelSpec.minEngineDisplacement,
+      maxEngineDisplacement: modelInfo.detailModelSpec.maxEngineDisplacement,
+      minFuelEfficiency: modelInfo.detailModelSpec.minFuelEfficiency,
+      maxFuelEfficiency: modelInfo.detailModelSpec.maxFuelEfficiency,
+      priority: modelInfo.detailModelSpec.priority,
+    });
+
     router.push(`/info/${modelInfo.detailModelName}`);
   };
 
@@ -54,6 +80,7 @@ export default function CarBox({
         if (type !== "info") {
           onClickEstimateBtn(
             modelInfo.brandName,
+            modelInfo.detailModelPk,
             modelInfo.detailModelName,
             modelInfo.detailModelMainImage,
             modelInfo.detailModelNormalImages,
@@ -93,6 +120,7 @@ export default function CarBox({
               onClick={() => {
                 onClickEstimateBtn(
                   modelInfo.brandName,
+                  modelInfo.detailModelPk,
                   modelInfo.detailModelName,
                   modelInfo.detailModelMainImage,
                   modelInfo.detailModelNormalImages,

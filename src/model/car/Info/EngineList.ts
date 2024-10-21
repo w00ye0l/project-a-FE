@@ -1,4 +1,4 @@
-export interface TrimList {
+export interface EngineList {
   carYear: string;
   engineInfo: string;
   trimNameList: [

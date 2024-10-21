@@ -94,11 +94,13 @@ export default function ModelList({ type }: { type?: string }) {
   return (
     <div className={style.main}>
       <div className={style.menuSection}>
-        <div className={style.tabBox}>
-          <div className={cx(style.tab, style.tabActive)}>전체</div>
-          <div className={style.tab}>렌트</div>
-          <div className={style.tab}>리스</div>
-        </div>
+        {type !== "info" && (
+          <div className={style.tabBox}>
+            <div className={cx(style.tab, style.tabActive)}>전체</div>
+            <div className={style.tab}>렌트</div>
+            <div className={style.tab}>리스</div>
+          </div>
+        )}
 
         <fieldset className={style.searchField}>
           <input
