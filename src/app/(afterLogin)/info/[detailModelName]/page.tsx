@@ -311,8 +311,14 @@ export default function CarInfoDetailPage() {
             <p>{modelSpec.carClass}</p>
             <p>{modelSpec.fuelTypes.join("/")}</p>
             <p>
-              {modelSpec.minEngineDisplacement.toLocaleString()}~
-              {modelSpec.maxEngineDisplacement.toLocaleString()}cc
+              {modelSpec.minEngineDisplacement
+                ? modelSpec.minEngineDisplacement.toLocaleString()
+                : "0"}
+              ~
+              {modelSpec.maxEngineDisplacement
+                ? modelSpec.maxEngineDisplacement.toLocaleString()
+                : "0"}
+              cc
             </p>
             <p>
               복합연비 {modelSpec.minFuelEfficiency}~
