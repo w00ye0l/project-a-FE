@@ -7,6 +7,7 @@ interface CarPriceState {
   defaultPrice: number;
   selectedBrand: string;
   selectedDetailModel: {
+    detailModelPk: string;
     detailModelName: string;
     detailModelMainImage: string;
     detailModelNormalImages: string[];
@@ -35,6 +36,7 @@ interface CarPriceState {
   setDefaultPrice: (price: number) => void;
   setSelectedBrand: (brand: string) => void;
   setSelectedDetailModel: (model: {
+    detailModelPk: string;
     detailModelName: string;
     detailModelMainImage: string;
     detailModelNormalImages: string[];
@@ -71,6 +73,7 @@ export const useCarPriceStore = create(
       defaultPrice: 0,
       selectedBrand: "",
       selectedDetailModel: {
+        detailModelPk: "",
         detailModelName: "",
         detailModelMainImage: "",
         detailModelNormalImages: [],
@@ -90,6 +93,7 @@ export const useCarPriceStore = create(
       setDefaultPrice: (price: number) => set({ defaultPrice: price }),
       setSelectedBrand: (brand: string) => set({ selectedBrand: brand }),
       setSelectedDetailModel: (model: {
+        detailModelPk: string;
         detailModelName: string;
         detailModelMainImage: string;
         detailModelNormalImages: string[];
@@ -130,6 +134,7 @@ export const useCarPriceStore = create(
             trimName: "",
           },
           selectedDetailModel: {
+            detailModelPk: "",
             detailModelName: "",
             detailModelMainImage: "",
             detailModelNormalImages: [],
