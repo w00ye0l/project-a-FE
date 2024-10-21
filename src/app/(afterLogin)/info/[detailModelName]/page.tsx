@@ -9,7 +9,7 @@ import cx from "classnames";
 import { EngineList } from "@/model/car/Info/EngineList";
 import { CarSpec } from "@/model/car/Info/CarSpec";
 import { BasicOptionDefine } from "@/model/car/BasicOptionDefine";
-import Footer from "@/app/_component/Footer";
+import { ColorOptionSimple } from "@/model/car/Info/ColorOptionSimple";
 
 const BasicOptionCategory = [
   "외장/내장",
@@ -29,6 +29,19 @@ export default function CarInfoDetailPage() {
   const detailModelNameDecoded = decodeURIComponent(detailModelName as string);
 
   const [carSpec, setCarSpec] = useState<CarSpec>();
+
+  // 외장색상
+  const [exteriorColorList, setExteriorColorList] = useState<
+    ColorOptionSimple[]
+  >([]);
+  const [selectedExteriorColor, setSelectedExteriorColor] =
+    useState<string>("");
+  // 내장색상
+  const [interiorColorList, setInteriorColorList] = useState<
+    ColorOptionSimple[]
+  >([]);
+  const [selectedInteriorColor, setSelectedInteriorColor] =
+    useState<string>("");
 
   const [engineList, setEngineList] = useState<EngineList[]>([]);
   const [carYearList, setCarYearList] = useState<string[]>([]);
@@ -122,6 +135,40 @@ export default function CarInfoDetailPage() {
     }
   };
 
+  // 모든 색상 데이터 가져오기
+  const getColorData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user-page/color-info?detailModelName=${detailModelNameDecoded}`,
+        {
+          method: "GET",
+        }
+      );
+
+      const result = await response.json();
+
+      console.log(result.data);
+
+      // result.data를 순회하며 외장색상과 내장색상을 분리합니다.
+      const exteriorColors: ColorOptionSimple[] = [];
+      const interiorColors: ColorOptionSimple[] = [];
+
+      result.data.forEach((color: ColorOptionSimple) => {
+        if (color.colorOptionType === "외장색상") {
+          exteriorColors.push(color);
+        } else if (color.colorOptionType === "내장색상") {
+          interiorColors.push(color);
+        }
+      });
+
+      // 분리된 색상 리스트를 각각 설정합니다.
+      setExteriorColorList(exteriorColors);
+      setInteriorColorList(interiorColors);
+    } catch (error) {
+      console.error("Failed to fetch color data:", error);
+    }
+  };
+
   // 기본 옵션 가져오기
   const getBasicOptionDefineList = async () => {
     try {
@@ -175,6 +222,7 @@ export default function CarInfoDetailPage() {
 
   useEffect(() => {
     if (!isReady) {
+      getColorData();
       getBasicOptionDefineList();
       getTrimList();
     } else if (isReady && carYear && engineInfo && trimName) {
@@ -274,34 +322,95 @@ export default function CarInfoDetailPage() {
 
           <div className={style.colorSection}>
             <p className={style.colorTitle}>
-              외장색상 <span className={style.colorName}>내추럴 티타늄</span>
+              외장색상{" "}
+              <span className={style.colorName}>{selectedExteriorColor}</span>
             </p>
             <div className={style.colorContainer}>
-              <div className={cx(style.colorOptionBox, style.active)}>
+              {exteriorColorList.map((color) => (
+                <div
+                  className={cx(style.colorOptionBox, {
+                    [style.active]:
+                      color.colorOptionName === selectedExteriorColor,
+                  })}
+                  key={color.colorOptionName}
+                  onClick={() =>
+                    setSelectedExteriorColor(color.colorOptionName)
+                  }
+                >
+                  {color.colorOptionCodeCount === 1 && (
+                    <div
+                      className={style.colorBox}
+                      style={{
+                        backgroundColor: `#${color.colorOptionCodes[0]}`,
+                      }}
+                    ></div>
+                  )}
+                  {color.colorOptionCodeCount === 2 && (
+                    <div className={cx(style.colorBox, style.twoColorBox)}>
+                      <div
+                        className={style.twoColor}
+                        style={{
+                          backgroundColor: `#${color.colorOptionCodes[0]}`,
+                        }}
+                      ></div>
+                      <div
+                        className={style.twoColor}
+                        style={{
+                          backgroundColor: `#${color.colorOptionCodes[1]}`,
+                        }}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+              ))}
+              {/* <div className={cx(style.colorOptionBox, style.active)}>
                 <div className={style.colorBox}></div>
-              </div>
-              <div className={style.colorOptionBox}>
-                <div className={style.colorBox}></div>
-              </div>
-              <div className={style.colorOptionBox}>
-                <div className={style.colorBox}></div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={style.colorSection}>
             <p className={style.colorTitle}>
-              내장색상 <span className={style.colorName}>내추럴 티타늄</span>
+              내장색상{" "}
+              <span className={style.colorName}>{selectedInteriorColor}</span>
             </p>
             <div className={style.colorContainer}>
-              <div className={cx(style.colorOptionBox, style.active)}>
-                <div className={style.colorBox}></div>
-              </div>
-              <div className={style.colorOptionBox}>
-                <div className={style.colorBox}></div>
-              </div>
-              <div className={style.colorOptionBox}>
-                <div className={style.colorBox}></div>
-              </div>
+              {interiorColorList.map((color) => (
+                <div
+                  className={cx(style.colorOptionBox, {
+                    [style.active]:
+                      color.colorOptionName === selectedInteriorColor,
+                  })}
+                  key={color.colorOptionName}
+                  onClick={() =>
+                    setSelectedInteriorColor(color.colorOptionName)
+                  }
+                >
+                  {color.colorOptionCodeCount === 1 && (
+                    <div
+                      className={style.colorBox}
+                      style={{
+                        backgroundColor: `#${color.colorOptionCodes[0]}`,
+                      }}
+                    ></div>
+                  )}
+                  {color.colorOptionCodeCount === 2 && (
+                    <div className={cx(style.colorBox, style.twoColorBox)}>
+                      <div
+                        className={style.twoColor}
+                        style={{
+                          backgroundColor: `#${color.colorOptionCodes[0]}`,
+                        }}
+                      ></div>
+                      <div
+                        className={style.twoColor}
+                        style={{
+                          backgroundColor: `#${color.colorOptionCodes[1]}`,
+                        }}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
