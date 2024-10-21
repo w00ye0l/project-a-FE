@@ -152,19 +152,10 @@ export default function CarBox({
             <h2 className={style.carName}>{modelInfo.detailModelName}</h2>
 
             <div
-              onClick={
-                (e) => {
-                  e.stopPropagation();
-                  console.log("info");
-                }
-                // onClickEstimateBtn(
-                //   modelInfo.brandName,
-                //   modelInfo.detailModelName,
-                //   modelInfo.detailModelMainImage,
-                //   modelInfo.detailModelNormalImages,
-                //   modelInfo.detailModelColorImages
-                // )
-              }
+              onClick={(e) => {
+                e.stopPropagation();
+                onClickInfoBtn();
+              }}
               className={style.infoBtn}
             >
               정보 보기
