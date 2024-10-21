@@ -1,22 +1,22 @@
 "use client";
 
-import { TrimList } from "@/model/car/Info/TrimList";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import cx from "classnames";
 import style from "./page.module.css";
 import { useCarPriceStore } from "@/store/carPrice";
 import Image from "next/image";
+import { EngineList } from "@/model/car/Info/EngineList";
 
 export default function EstimatePage() {
   const params = useParams();
   const detailModelName = params.detailModelName;
-  const [trimList, setTrimList] = useState<TrimList[]>([]);
+  const [engineList, setEngineList] = useState<EngineList[]>([]);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
   const [selectedTrim, setSelectedTrim] = useState<string>("");
   const carPriceStore = useCarPriceStore();
 
-  const getTrimList = async () => {
+  const getEngineList = async () => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/user-page/trim-names?detailModelName=${detailModelName}`,
@@ -28,7 +28,7 @@ export default function EstimatePage() {
       const result = await response.json();
       console.log(result.data);
 
-      setTrimList(result.data);
+      setEngineList(result.data);
       setVisibleSections([result.data[0].carYear + result.data[0].engineInfo]);
     } catch (error) {
       console.error("Failed to fetch trim list:", error);
@@ -61,7 +61,7 @@ export default function EstimatePage() {
   };
 
   useEffect(() => {
-    getTrimList();
+    getEngineList();
   }, []);
 
   useEffect(() => {
@@ -79,22 +79,22 @@ export default function EstimatePage() {
       </h1>
 
       <div className={style.trimSection}>
-        {trimList.map((trim) => (
+        {engineList.map((engine) => (
           <div
             className={cx(style.trimContainer)}
-            onClick={() => toggleVisibility(trim.carYear, trim.engineInfo)}
-            key={trim.carYear + trim.engineInfo}
+            onClick={() => toggleVisibility(engine.carYear, engine.engineInfo)}
+            key={engine.carYear + engine.engineInfo}
           >
             <div
               className={cx(
                 style.yearEngineName,
-                visibleSections.includes(trim.carYear + trim.engineInfo) &&
+                visibleSections.includes(engine.carYear + engine.engineInfo) &&
                   style.yearEngineNameActive
               )}
             >
-              <p>{trim.carYear + "년형 " + trim.engineInfo}</p>
+              <p>{engine.carYear + "년형 " + engine.engineInfo}</p>
 
-              {visibleSections.includes(trim.carYear + trim.engineInfo) ? (
+              {visibleSections.includes(engine.carYear + engine.engineInfo) ? (
                 <Image
                   src="/icon/minus_bb.png"
                   width={18}
@@ -111,31 +111,31 @@ export default function EstimatePage() {
               )}
             </div>
 
-            {visibleSections.includes(trim.carYear + trim.engineInfo) && (
+            {visibleSections.includes(engine.carYear + engine.engineInfo) && (
               <ul
                 className={style.trimBox}
                 onClick={(event) => {
                   event.stopPropagation(); // 부모로 이벤트 전파를 막음
                 }}
               >
-                {trim.trimNameList.map((trimName) => (
+                {engine.trimNameList.map((trimName) => (
                   <li
                     onClick={(event) => {
                       event.stopPropagation();
                       onClickTrimName(
-                        trim.carYear,
-                        trim.engineInfo,
+                        engine.carYear,
+                        engine.engineInfo,
                         trimName.trimName,
                         trimName.carPrice
                       );
                       setSelectedTrim(
-                        trim.carYear + trim.engineInfo + trimName.trimName
+                        engine.carYear + engine.engineInfo + trimName.trimName
                       );
                     }}
                     className={cx(style.trimItem, {
                       [style.trimItemActive]:
                         selectedTrim ===
-                        trim.carYear + trim.engineInfo + trimName.trimName,
+                        engine.carYear + engine.engineInfo + trimName.trimName,
                     })}
                     key={trimName.trimName}
                   >
@@ -143,16 +143,18 @@ export default function EstimatePage() {
                       className={style.radioButton}
                       type="radio"
                       name="trim"
-                      id={trim.carYear + trim.engineInfo + trimName.trimName}
+                      id={
+                        engine.carYear + engine.engineInfo + trimName.trimName
+                      }
                       defaultChecked={
                         selectedTrim ===
-                        trim.carYear + trim.engineInfo + trimName.trimName
+                        engine.carYear + engine.engineInfo + trimName.trimName
                       }
                     />
                     <label
                       className={style.trimLabel}
                       htmlFor={
-                        trim.carYear + trim.engineInfo + trimName.trimName
+                        engine.carYear + engine.engineInfo + trimName.trimName
                       }
                     >
                       <span className={style.name}>{trimName.trimName}</span>
