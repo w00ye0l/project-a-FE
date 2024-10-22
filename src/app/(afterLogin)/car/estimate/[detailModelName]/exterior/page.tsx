@@ -37,7 +37,7 @@ export default function CarExteriorPage() {
 
       setColorOptionList(exteriorColorList || []);
       carPriceStore.setSelectedCarSpec(result.data.carSpec[0]);
-      carPriceStore.setSelectedCarBasicOption(result.data.basicOption[0]);
+      // carPriceStore.setSelectedCarBasicOption(result.data.basicOption[0]);
     } catch (error) {
       console.error("Failed to fetch option list:", error);
     }

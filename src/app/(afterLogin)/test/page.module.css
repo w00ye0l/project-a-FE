@@ -1,0 +1,276 @@
+.container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: calc(100dvh - 64px);
+  font-family: "Pretendard";
+  letter-spacing: -0.02em;
+  scroll-behavior: smooth;
+  transition: transform 0.5s ease-out;
+}
+
+.container section {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #ffffff;
+}
+
+.container section:first-child {
+  flex-direction: column;
+}
+
+.container section:nth-child(2n) {
+  background-color: #eef5ff;
+}
+
+.searchSection {
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.searchContainer {
+  padding: 9px 0;
+  width: 550px;
+  display: flex;
+  gap: 20px;
+  border-bottom: 2px solid #434343;
+}
+
+.searchLabel {
+  display: flex;
+  align-items: center;
+  color: #434343;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 10px;
+}
+
+.searchLabel::before {
+  display: inline-block;
+  content: "";
+  background: url("/icon/search.svg") no-repeat center;
+  width: 18px;
+  height: 18px;
+}
+
+.searchInput {
+  font-family: "Pretendard";
+  font-size: 18px;
+  border: none;
+  flex-grow: 1;
+  letter-spacing: -0.02em;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #aaaaaa;
+}
+
+.searchButton {
+  padding: 9px 17px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #434343;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.featureSection {
+  min-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 30px;
+  font-family: "Paperlogy", "Pretendard";
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.featureContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.featureBox {
+  width: 264px;
+  height: 150px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+.feature {
+  margin: auto;
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container section:nth-child(2n + 1) .featureInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: end;
+}
+
+.caption {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: "Paperlogy";
+  color: #0d36c0;
+  font-weight: 500;
+}
+
+.featureTitle {
+  margin-bottom: 40px;
+  font-family: "Paperlogy";
+  color: #1b2a40;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: normal;
+}
+
+.featureDescription {
+  margin-bottom: 30px;
+  color: #1b2a40;
+  font-size: 20px;
+  line-height: 140%;
+}
+
+.featureButton {
+  padding: 15px 80px;
+  font-family: "Paperlogy";
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #0d36c0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.IconSection {
+  position: relative;
+  width: 558px;
+  height: 530px;
+}
+
+.coinOne {
+  position: absolute;
+  top: 17px;
+  left: 30px;
+  animation: floating 3s infinite;
+}
+
+.coinTwo {
+  position: absolute;
+  left: 3px;
+  bottom: 62px;
+  animation: floating 3s infinite 1s;
+}
+
+.coinThree {
+  position: absolute;
+  right: -7px;
+  bottom: 53px;
+  animation: floating 3s infinite 0.5s;
+}
+
+.IconSection .car {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+}
+
+.IconSection .lens {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  transform-origin: bottom left;
+  animation: rotate 3s infinite;
+}
+
+.IconSection .community {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+}
+
+.IconSection .heart {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  animation: floating 3s infinite;
+}
+
+.IconSection .ground {
+  position: absolute;
+  bottom: 0px;
+  left: 85px;
+}
+
+.IconSection .hammer {
+  position: absolute;
+  top: 8px;
+  left: 0px;
+  transform-origin: bottom left;
+  animation: rotate 3s infinite;
+}
+
+.IconSection .coin {
+  position: absolute;
+  top: 180px;
+  right: 50px;
+  animation: pop 3s infinite 1.5s;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -40px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

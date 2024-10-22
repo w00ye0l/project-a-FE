@@ -110,6 +110,7 @@
   background-color: #c2bcb2;
   box-shadow: inset 0 3px 3px 0 #0000001f;
   border-radius: 50%;
+  transform: rotate(45deg);
 }
 
 .twoColorBox {
@@ -149,8 +150,6 @@
 
 /* 탭 */
 .tabBox {
-  position: sticky;
-  top: 66px;
   width: 100%;
   height: 46px;
   display: flex;
@@ -269,7 +268,7 @@
 }
 
 .trimBox {
-  padding: 16px 0px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -284,6 +283,8 @@
 
 .trimName {
   font-weight: 600;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .trimOriginPrice {
@@ -514,7 +515,7 @@
 .carryingBox p {
   text-align: center;
   color: #666666;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 130%;
 }
