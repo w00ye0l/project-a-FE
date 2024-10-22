@@ -6,6 +6,7 @@ import cx from "classnames";
 import { useCallback, useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { EmblaOptionsType } from "embla-carousel";
+import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import {
   NextButton,
   PrevButton,
@@ -14,13 +15,16 @@ import {
 import Image from "next/image";
 
 export default function EmblaCarousel() {
-  const SLIDE_COUNT = 4;
+  const SLIDE_COUNT = 5;
   const options: EmblaOptionsType = { loop: true };
   const slides = Array.from(Array(SLIDE_COUNT).keys());
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({ delay: 5000 }),
   ]);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
 
   const {
     prevBtnDisabled,
@@ -80,8 +84,8 @@ export default function EmblaCarousel() {
                 <Image
                   className={style.embla__slide__image}
                   src={`/main/banner/banner_${index + 1}.png`}
-                  width={1200}
-                  height={530}
+                  width={2400}
+                  height={800}
                   alt={`banner_${index + 1}`}
                 />
               </div>
@@ -90,25 +94,37 @@ export default function EmblaCarousel() {
         </div>
       </div>
 
+      <div className={style.embla__buttons}>
+        <PrevButton
+          onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+          disabled={prevBtnDisabled}
+        />
+        <NextButton
+          onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+          disabled={nextBtnDisabled}
+        />
+      </div>
+
       <div className={style.embla__controls}>
-        <div className={style.embla__buttons}>
-          <PrevButton
-            onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
-            disabled={prevBtnDisabled}
-          />
-          <NextButton
-            onClick={() => onButtonAutoplayClick(onNextButtonClick)}
-            disabled={nextBtnDisabled}
-          />
+        <div className={style.embla__dots}>
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={cx(style.embla__dot, {
+                [style.embla__dot__selected]: index === selectedIndex,
+              })}
+            />
+          ))}
         </div>
 
-        <button
+        {/* <button
           className={style.embla__play}
           onClick={toggleAutoplay}
           type="button"
         >
           {isPlaying ? "Stop" : "Start"}
-        </button>
+        </button> */}
       </div>
     </div>
   );
