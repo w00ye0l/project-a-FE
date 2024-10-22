@@ -149,8 +149,6 @@
 
 /* 탭 */
 .tabBox {
-  position: sticky;
-  top: 66px;
   width: 100%;
   height: 46px;
   display: flex;
