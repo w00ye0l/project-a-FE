@@ -146,10 +146,11 @@ export default function EstimatePage() {
                       id={
                         engine.carYear + engine.engineInfo + trimName.trimName
                       }
-                      defaultChecked={
+                      checked={
                         selectedTrim ===
                         engine.carYear + engine.engineInfo + trimName.trimName
                       }
+                      readOnly
                     />
                     <label
                       className={style.trimLabel}
