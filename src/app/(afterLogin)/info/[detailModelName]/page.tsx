@@ -835,7 +835,9 @@ export default function CarInfoDetailPage() {
                   <span className={style.highlight}>
                     {carSpec?.trunkStroller?.split(" ").slice(0, -1).join(", ")}
                   </span>{" "}
-                  유모차까지 적재 가능
+                  유모차까지
+                  <br />
+                  적재 가능
                 </p>
               </div>
               <div className={style.carryingBox}>
