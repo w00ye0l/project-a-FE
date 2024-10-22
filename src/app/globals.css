@@ -340,6 +340,7 @@ body {
 }
 
 button {
+  letter-spacing: -0.02em;
   font-family: "Pretendard", sans-serif;
 }
 
