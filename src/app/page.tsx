@@ -74,7 +74,7 @@ export default function Home() {
             </div>
           </Link>
 
-          <Link href="/auction">
+          <Link href="/auction/dealer">
             <div className={style.contentBox}>
               <div className={style.contentImageBox}>
                 <Image
