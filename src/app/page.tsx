@@ -40,7 +40,7 @@ export default function Home() {
             </div>
           </Link>
 
-          <Link href="/car">
+          <Link href="/car/info">
             <div className={style.contentBox}>
               <div className={style.contentImageBox}>
                 <Image
