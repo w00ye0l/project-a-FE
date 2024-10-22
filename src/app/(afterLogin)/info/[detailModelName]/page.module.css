@@ -269,7 +269,7 @@
 }
 
 .trimBox {
-  padding: 16px 0px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -284,6 +284,8 @@
 
 .trimName {
   font-weight: 600;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .trimOriginPrice {
