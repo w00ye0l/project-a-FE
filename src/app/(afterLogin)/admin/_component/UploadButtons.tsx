@@ -55,7 +55,7 @@ export default function UploadButtons() {
         } else if (tab === "detailModel") {
           url = "/detail-model/excel-upload";
         } else if (tab === "basicOption") {
-          url = "/basic-option/excel-upload";
+          url = "/basic-option-define/excel-upload";
         } else if (tab === "carInfo") {
           url = "/excel-upload";
         } else if (tab === "carSpec") {

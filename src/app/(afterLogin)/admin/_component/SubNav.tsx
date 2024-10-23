@@ -68,7 +68,7 @@ export default function SubNav() {
                 tab === "basicOption" ? style.active : ""
               )}
             >
-              기본 옵션
+              기본 옵션 정의
             </li>
           </>
         )}
