@@ -1,6 +1,6 @@
 .main {
   position: fixed;
-  bottom: 50px;
+  bottom: 100px;
   right: 50px;
   display: flex;
   flex-direction: column;

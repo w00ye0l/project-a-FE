@@ -4,12 +4,63 @@ import { useState } from "react";
 import style from "./counselButton.module.css";
 import cx from "classnames";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function CounselButton() {
   const [openModal, setOpenModal] = useState(false);
+  const [carName, setCarName] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [callTime, setCallTime] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleOpenModal = () => {
     setOpenModal(!openModal); // 토글 기능 추가
+  };
+
+  const handleCounselButton = async () => {
+    console.log({ carName, customerName, callTime, phoneNumber });
+
+    if (
+      carName === "" ||
+      customerName === "" ||
+      callTime === "" ||
+      phoneNumber === ""
+    ) {
+      toast.error("모든 항목을 입력해주세요.");
+      return;
+    }
+
+    if (phoneNumber.startsWith("010") === false || phoneNumber.length !== 11) {
+      toast.error("휴대폰 번호를 확인해주세요.");
+      return;
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/car/ask`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ carName, customerName, callTime, phoneNumber }),
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if (result.statusCode === 200) {
+      toast.success("상담 신청이 완료되었습니다.");
+
+      setOpenModal(false);
+      setCarName("");
+      setCustomerName("");
+      setCallTime("");
+      setPhoneNumber("");
+    } else {
+      toast.error("다시 시도해주세요.");
+    }
   };
 
   return (
@@ -34,38 +85,59 @@ export default function CounselButton() {
             <div className={style.top}>
               <div className={style.box}>
                 <label htmlFor="car">차량</label>
-                <input type="text" id="car" />
+                <input
+                  type="text"
+                  id="car"
+                  value={carName}
+                  onChange={(e) => setCarName(e.target.value)}
+                />
               </div>
             </div>
             <div className={style.top}>
               <div className={style.box}>
                 <label htmlFor="name">이름</label>
-                <input type="text" id="name" />
+                <input
+                  type="text"
+                  id="name"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                />
               </div>
               <div className={style.box}>
                 <label htmlFor="time">상담 가능 시간</label>
-                <select name="time" id="time">
+                <select
+                  name="time"
+                  id="time"
+                  value={callTime}
+                  onChange={(e) => setCallTime(e.target.value)}
+                >
                   <option value="" disabled>
                     시간설정
                   </option>
-                  <option value="09">09시~10시</option>
-                  <option value="10">10시~11시</option>
-                  <option value="12">11시~12시</option>
-                  <option value="13">13시~14시</option>
-                  <option value="14">14시~15시</option>
-                  <option value="15">15시~16시</option>
-                  <option value="16">16시~17시</option>
-                  <option value="17">17시~18시</option>
-                  <option value="18">18시~19시</option>
-                  <option value="19">19시~20시</option>
-                  <option value="20">20시~21시</option>
-                  <option value="21">21시~22시</option>
+                  <option value="09시~10시">09시~10시</option>
+                  <option value="10시~11시">10시~11시</option>
+                  <option value="11시~12시">11시~12시</option>
+                  <option value="13시~14시">13시~14시</option>
+                  <option value="14시~15시">14시~15시</option>
+                  <option value="15시~16시">15시~16시</option>
+                  <option value="16시~17시">16시~17시</option>
+                  <option value="17시~18시">17시~18시</option>
+                  <option value="18시~19시">18시~19시</option>
+                  <option value="19시~20시">19시~20시</option>
+                  <option value="20시~21시">20시~21시</option>
+                  <option value="21시~22시">21시~22시</option>
                 </select>
               </div>
             </div>
             <div className={style.box}>
               <label htmlFor="phone">휴대폰번호</label>
-              <input type="tel" id="phone" placeholder="'-'없이 숫자만 입력" />
+              <input
+                type="tel"
+                id="phone"
+                placeholder="'-'없이 숫자만 입력"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
             </div>
 
             <div className={style.btnSection}>
@@ -75,7 +147,9 @@ export default function CounselButton() {
               >
                 취소
               </button>
-              <button className={style.btn}>상담하기</button>
+              <button className={style.btn} onClick={handleCounselButton}>
+                상담하기
+              </button>
             </div>
           </div>
         </div>
