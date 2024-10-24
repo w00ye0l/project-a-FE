@@ -25,6 +25,12 @@
   background-color: #eef5ff;
 }
 
+.container section:last-child {
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(40, 125, 255, 0.8);
+}
+
 .searchSection {
   margin-bottom: 60px;
   display: flex;
@@ -237,6 +243,51 @@
   top: 180px;
   right: 50px;
   animation: pop 3s infinite 1.5s;
+}
+
+.appSection {
+  width: min(1200px, 100%);
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appImageContainer {
+  padding-left: 150px;
+  display: flex;
+  gap: 30px;
+}
+
+.appImage {
+  width: 199px;
+  height: 404px;
+}
+
+.appInfoSection {
+  font-family: "Paperlogy";
+  color: #ffffff;
+}
+
+.appTitle {
+  margin-bottom: 10px;
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.appDescription {
+  margin-bottom: 30px;
+  font-size: 20px;
+  line-height: 140%;
+}
+
+.appLink {
+  padding: 12px 54px;
+  color: #ffffff;
+  font-size: 18px;
+  background-color: #000000;
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes floating {

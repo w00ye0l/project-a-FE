@@ -222,9 +222,39 @@ export default function TestPage() {
             </div>
           </div>
         </section>
-      </div>
 
-      {/* <Footer /> */}
+        <section className={cx(style.section, style.six)}>
+          <div className={style.appSection}>
+            <div className={style.appImageContainer}>
+              <Image
+                className={style.appImage}
+                src="/main/app_1.png"
+                width={398}
+                height={808}
+                alt="app"
+              />
+              <Image
+                className={style.appImage}
+                src="/main/app_2.png"
+                width={398}
+                height={808}
+                alt="app"
+              />
+            </div>
+
+            <div className={style.appInfoSection}>
+              <h1 className={style.appTitle}>마스터카, 어플 출시!</h1>
+              <p className={style.appDescription}>
+                마스터카 모바일로 더 쉽고 빠르게 내 차를 만나보세요.
+              </p>
+
+              <button className={style.appLink}>앱 다운로드</button>
+            </div>
+          </div>
+
+          <Footer />
+        </section>
+      </div>
     </>
   );
 }
