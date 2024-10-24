@@ -14,7 +14,7 @@
 .titleContainer {
   margin: auto;
   padding-top: 160px;
-  width: 1200px;
+  width: min(1200px, 100%);
   height: 100%;
   display: flex;
   color: #ffffff;
@@ -95,7 +95,7 @@
 /* ex */
 .contentSection {
   margin: 100px auto;
-  width: 1200px;
+  width: min(1200px, 100%);
   display: flex;
   justify-content: center;
   gap: 88px;
