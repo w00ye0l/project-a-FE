@@ -24,6 +24,21 @@ interface VideoFile extends File {
   preview: string;
 }
 
+const BoardName: { [key: string]: string } = {
+  best: "인기글",
+  carinfo: "차량 정보",
+  free: "자유",
+  mycar: "출고",
+  humor: "유머",
+  enter: "연예",
+  idol: "아이돌",
+  sports: "스포츠",
+  event: "이벤트",
+  notice: "공지사항",
+  qna: "건의사항",
+  adult: "성인",
+};
+
 const QuillEditor = dynamic(() => import("./_component/QuillEditor"), {
   ssr: false,
   loading: () => <DotSpinner size={20} />,
@@ -137,7 +152,7 @@ export default function CommunityWritePage() {
           <option value="">게시판을 선택하세요.</option>
           {boardList.map((board) => (
             <option key={board.boardPk} value={board.boardName}>
-              {board.boardName}
+              {BoardName[board.boardName]}
             </option>
           ))}
         </select>
