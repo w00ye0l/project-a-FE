@@ -25,7 +25,7 @@ export default function SocialRedirectPage() {
           }
         })
         .then(() => {
-          router.replace("/mypage");
+          router.replace("/");
           router.refresh();
           toast.info("로그인 성공!");
         })
