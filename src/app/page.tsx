@@ -7,6 +7,7 @@ import Image from "next/image";
 import Footer from "@/app/_component/Footer";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import MenuButtons from "./_component/MeunButtons";
 
 export default function TestPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -324,6 +325,8 @@ export default function TestPage() {
         </div>
 
         <Footer />
+
+        <MenuButtons />
       </section>
     </div>
   );
