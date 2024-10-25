@@ -51,6 +51,7 @@
   border-radius: 50%;
   background-color: #eeeeee;
   border: 1.2px solid #52667c;
+  object-fit: cover;
 }
 
 .level {

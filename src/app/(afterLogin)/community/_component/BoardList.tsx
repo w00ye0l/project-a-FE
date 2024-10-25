@@ -83,16 +83,67 @@ export default function BoardList() {
 
         <hr className={style.hr} />
 
-        {boardList.map((board: IBoard) => (
-          <li key={board.boardPk}>
-            <Link
-              className={style.subMenu}
-              href={`/community/${board.boardName}`}
-            >
-              {board.boardName} 게시판
-            </Link>
-          </li>
-        ))}
+        {/* {boardList.map((board: IBoard) => ( */}
+        <li>
+          <Link className={style.subMenu} href="/community/carinfo">
+            차량 정보 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/free">
+            자유 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/mycar">
+            출고 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/humor">
+            유머 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/enter">
+            연예 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/idol">
+            아이돌 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/sports">
+            스포츠 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/event">
+            이벤트 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/notice">
+            공지사항 게시판
+          </Link>
+        </li>
+        <li>
+          <Link className={style.subMenu} href="/community/qna">
+            건의사항 게시판
+          </Link>
+        </li>
+        {/* <li>
+          <Link className={style.subMenu} href="/community/free">
+            제휴요청 게시판
+          </Link>
+        </li> */}
+        <li>
+          <Link className={style.subMenu} href="/community/adult">
+            성인 게시판
+          </Link>
+        </li>
       </ul>
     </div>
   );
