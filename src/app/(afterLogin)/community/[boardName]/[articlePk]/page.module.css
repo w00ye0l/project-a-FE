@@ -81,6 +81,10 @@
   color: #1b2a40;
 }
 
+.content * {
+  word-wrap: break-word;
+}
+
 .hr {
   margin: 20px 0px;
   width: 100%;
