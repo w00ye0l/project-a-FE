@@ -144,6 +144,5 @@
 
 .more:hover {
   font-weight: 600;
-  background-color: rgba(211, 211, 211, 0.2);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
