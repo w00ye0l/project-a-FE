@@ -11,9 +11,8 @@
 }
 
 .writerProfileImage {
-  width: 40px;
-  height: 40px;
-  background-color: #eeeeee;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 1.2px solid #52667c;
   object-fit: cover;
@@ -24,7 +23,43 @@
 }
 
 .writerInfo {
+  display: flex;
+  flex-direction: column;
   font-size: 14px;
+  gap: 8px;
+}
+
+.writerProfile {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 6px;
+  color: #0733a1;
+  font-size: 14px;
+  border: 1px solid #0733a1;
+  border-radius: 20px;
+}
+
+.levelTag {
+  color: #0733a1;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.writerName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.date {
+  font-size: 12px;
+  color: #888888;
 }
 
 .titleContainer {
@@ -118,7 +153,6 @@
 .commentProfile {
   width: 30px;
   height: 30px;
-  background-color: #eeeeee;
   border: 1.2px solid #52667c;
   border-radius: 50%;
   object-fit: cover;
