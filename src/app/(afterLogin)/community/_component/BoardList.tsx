@@ -90,13 +90,13 @@ export default function BoardList() {
           </Link>
         </li>
         <li>
-          <Link className={style.subMenu} href="/community/free">
-            자유 게시판
+          <Link className={style.subMenu} href="/community/mycar">
+            출고 게시판
           </Link>
         </li>
         <li>
-          <Link className={style.subMenu} href="/community/mycar">
-            출고 게시판
+          <Link className={style.subMenu} href="/community/free">
+            자유 게시판
           </Link>
         </li>
         <li>
