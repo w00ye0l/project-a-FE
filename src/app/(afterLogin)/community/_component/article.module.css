@@ -49,8 +49,8 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #eeeeee;
   border: 1.2px solid #52667c;
+  object-fit: cover;
 }
 
 .level {
@@ -144,6 +144,5 @@
 
 .more:hover {
   font-weight: 600;
-  background-color: rgba(211, 211, 211, 0.2);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }

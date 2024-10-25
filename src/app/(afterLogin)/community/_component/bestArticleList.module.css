@@ -20,22 +20,25 @@
 }
 
 .topArticleSection {
+  width: 100%;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   font-family: "Pretendard";
   letter-spacing: -0.01em;
   cursor: pointer;
+  gap: 13px;
 }
 
 .topArticleContainer {
+  width: calc(100% / 3 - 26px);
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 .articleImage {
-  width: 204px;
+  width: 100%;
   height: 120px;
   object-position: center;
   background-color: #f8f8f8;
@@ -54,8 +57,12 @@
 }
 
 .articleTitle {
+  width: 100%;
   font-weight: 500;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .articleBoard {

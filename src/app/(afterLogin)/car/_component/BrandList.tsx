@@ -12,9 +12,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCarPriceStore } from "@/store/carPrice";
 
 export default function BrandList({
+  type,
   brandName,
   setBrandName,
 }: {
+  type?: string;
   brandName: string;
   setBrandName: (brandName: string) => void;
 }) {
@@ -58,11 +60,19 @@ export default function BrandList({
     if (carPriceStore.selectedBrand === brandItem.brandName) {
       carPriceStore.setSelectedBrand("");
       setBrandName("");
-      router.push("/car");
+      if (type === "info") {
+        router.push("/info");
+      } else {
+        router.push("/car");
+      }
     } else {
       carPriceStore.setSelectedBrand(brandItem.brandName);
       setBrandName(brandItem.brandName);
-      router.push(`/car?b=${brandItem.brandName}`);
+      if (type === "info") {
+        router.push(`/info?b=${brandItem.brandName}`);
+      } else {
+        router.push(`/car?b=${brandItem.brandName}`);
+      }
     }
   };
 

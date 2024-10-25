@@ -19,7 +19,11 @@ export default function CarInfoPage() {
         alt="ads"
       />
 
-      <BrandList brandName={brandName} setBrandName={setBrandName} />
+      <BrandList
+        type="info"
+        brandName={brandName}
+        setBrandName={setBrandName}
+      />
 
       <ModelList type="info" />
     </main>

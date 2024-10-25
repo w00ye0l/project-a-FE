@@ -16,7 +16,7 @@
 
 .contentSection {
   display: flex;
-  width: 1200px;
+  width: min(1200px, 100%);
   height: 64px;
   justify-content: space-between;
   align-items: center;

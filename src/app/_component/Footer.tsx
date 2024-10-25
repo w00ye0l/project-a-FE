@@ -1,10 +1,15 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import style from "./footer.module.css";
 import Notice from "./Notice";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className={style.section}>
-      <Notice />
+      {pathname !== "/" && pathname !== "/test" && <Notice />}
 
       <div className={style.top}>
         <div className={style.container}>

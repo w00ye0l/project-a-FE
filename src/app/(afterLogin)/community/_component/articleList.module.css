@@ -20,6 +20,12 @@
   border-radius: 10px;
   box-shadow: -2px 4px 10px #52667c38;
   z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.articleContainer:hover {
+  box-shadow: -2px 4px 10px rgba(82, 102, 124, 0.4);
+  transform: translateY(-10px);
 }
 
 /* .articleContainer::before {

@@ -34,8 +34,16 @@ export default function EstimateEndPage() {
     exteriorColor.price +
     interiorColor.price;
 
-  const prePriceList = ["onePre", "twoPre", "threePre", "fourPre", "fivePre"];
+  const prePriceList = [
+    "zeroPre",
+    "onePre",
+    "twoPre",
+    "threePre",
+    "fourPre",
+    "fivePre",
+  ];
   const depositPriceList = [
+    "zeroDep",
     "oneDep",
     "twoDep",
     "threeDep",
@@ -86,7 +94,9 @@ export default function EstimateEndPage() {
       calBuyType = "할부";
     }
 
-    if (prePrice === "onePre") {
+    if (prePrice === "" || prePrice === "zeroPre") {
+      calPrePrice = 0;
+    } else if (prePrice === "onePre") {
       calPrePrice = totalPrice * 0.1;
     } else if (prePrice === "twoPre") {
       calPrePrice = totalPrice * 0.2;
@@ -97,10 +107,10 @@ export default function EstimateEndPage() {
     } else if (prePrice === "fivePre") {
       calPrePrice = totalPrice * 0.5;
     } else {
-      calPrePrice = Number(prePrice) * 10000;
+      calPrePrice = Number(prePrice);
     }
 
-    if (depositPrice === "") {
+    if (depositPrice === "" || depositPrice === "zeroDep") {
       calDepositPrice = 0;
     } else if (depositPrice === "oneDep") {
       calDepositPrice = totalPrice * 0.1;
@@ -113,7 +123,7 @@ export default function EstimateEndPage() {
     } else if (depositPrice === "fiveDep") {
       calDepositPrice = totalPrice * 0.5;
     } else {
-      calDepositPrice = Number(depositPrice) * 10000;
+      calDepositPrice = Number(depositPrice);
     }
 
     if (buyerType === "person") {
@@ -204,12 +214,23 @@ export default function EstimateEndPage() {
           </div>
 
           <div className={style.carModel}>
-            <Image
-              src={imageUrl}
-              width={640}
-              height={360}
-              alt={detailModel.detailModelName}
-            />
+            {imageUrl ? (
+              <Image
+                className={style.carImage}
+                src={imageUrl ?? ""}
+                width={640}
+                height={360}
+                alt={detailModel.detailModelName}
+              />
+            ) : (
+              <Image
+                className={style.carImage}
+                src="/logo_simple.png"
+                width={384}
+                height={122}
+                alt={detailModel.detailModelName}
+              />
+            )}
             <p className={style.modelNameTwo}>{detailModel.detailModelName}</p>
             <p className={style.subModelName}>
               {carInfo.carYear}년형 {carInfo.engineInfo} {carInfo.trimName}
@@ -618,6 +639,25 @@ export default function EstimateEndPage() {
                     <input
                       type="radio"
                       name="prePrice"
+                      id="zeroPre"
+                      value="zeroPre"
+                      checked={prePrice === "zeroPre"}
+                      onChange={handlePrePrice}
+                    />
+                    <label
+                      className={cx({
+                        [style.active]: prePrice === "zeroPre",
+                      })}
+                      htmlFor="zeroPre"
+                    >
+                      0%
+                    </label>
+                  </div>
+
+                  <div className={style.detailValue}>
+                    <input
+                      type="radio"
+                      name="prePrice"
                       id="onePre"
                       value="onePre"
                       checked={prePrice === "onePre"}
@@ -716,7 +756,7 @@ export default function EstimateEndPage() {
                     type="text"
                     value={prePriceList.includes(prePrice) ? "" : prePrice}
                     onChange={handlePrePrice}
-                    placeholder="직접입력(만원)"
+                    placeholder="직접입력"
                   />
                 </div>
               </div>
@@ -725,6 +765,25 @@ export default function EstimateEndPage() {
                 <p className={style.detailTitle}>보증금</p>
 
                 <div className={style.detailBox}>
+                  <div className={style.detailValue}>
+                    <input
+                      type="radio"
+                      name="depositPrice"
+                      id="zeroDep"
+                      value="zeroDep"
+                      checked={depositPrice === "zeroDep"}
+                      onChange={handleDepPrice}
+                    />
+                    <label
+                      className={cx({
+                        [style.active]: depositPrice === "zeroDep",
+                      })}
+                      htmlFor="zeroDep"
+                    >
+                      0%
+                    </label>
+                  </div>
+
                   <div className={style.detailValue}>
                     <input
                       type="radio"
@@ -833,7 +892,7 @@ export default function EstimateEndPage() {
                         : depositPrice
                     }
                     onChange={handleDepPrice}
-                    placeholder="직접입력(만원)"
+                    placeholder="직접입력"
                   />
                 </div>
               </div>
