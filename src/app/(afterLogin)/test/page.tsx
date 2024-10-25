@@ -1,50 +1,209 @@
-import EmblaCarousel from "@/app/_component/EmblaCarousel";
+import Image from "next/image";
 import style from "./page.module.css";
 import cx from "classnames";
-import Image from "next/image";
-import Footer from "@/app/_component/Footer";
 import Link from "next/link";
+import EmblaCarousel from "@/app/_component/EmblaCarousel";
+import Footer from "@/app/_component/Footer";
+import MenuButtons from "@/app/_component/MeunButtons";
 
-export default function TestPage() {
+export default function Home() {
   return (
-    <>
-      <div className={style.container}>
-        <section className={style.one}>
-          {/* 배너 */}
-          <EmblaCarousel />
+    <main className={style.main}>
+      {/* 배너 */}
+      <EmblaCarousel />
 
-          {/* 검색 */}
-          <div className={style.searchSection}>
-            <div className={style.searchContainer}>
-              <label className={style.searchLabel} htmlFor="car">
-                차량 검색
-              </label>
-              <input
-                className={style.searchInput}
-                type="text"
-                id="car"
-                placeholder="모델명을 입력하세요. 예) G80"
+      {/* 메인 컨텐츠 */}
+      <div className={style.contentSection}>
+        <Image
+          className={style.ads}
+          src="/main/test_ads_top.png"
+          width={1200}
+          height={100}
+          alt="ads"
+        />
+
+        <div className={style.contentContainer}>
+          <Link href="/car">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/estimate.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+              </div>
+              <div className={style.contentNameBox}>
+                <p className={style.contentName}>신차견적</p>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/info">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/info.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>차량정보</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/community">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/community.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>커뮤니티</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/auction/dealer">
+            <div className={style.contentBox}>
+              <div className={style.contentImageBox}>
+                <Image
+                  className={style.contentImg}
+                  src="/main/icon/auction.png"
+                  alt=""
+                  width={200}
+                  height={160}
+                />
+                <div className={style.contentNameBox}>
+                  <p className={style.contentName}>딜러옥션</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* 프리뷰 */}
+      <div className={style.previewSection}>
+        <div className={cx(style.previewContainer, style.left)}>
+          <div className={style.titleBox}>
+            <h1 className={style.title}>마스터카 !</h1>
+            <p className={style.subtitle}>
+              시작부터 끝까지 고객님께
+              <span className={cx(style.point, style.rotate)}>꼭</span>
+              <span className={style.point}>맞</span>
+              <span className={style.point}>는</span>
+              <br />
+              최적의 차량으로 안내드립니다.
+            </p>
+          </div>
+
+          <Image
+            className={style.captain}
+            src="/main/captain.png"
+            width={450}
+            height={450}
+            alt="captain"
+          />
+        </div>
+
+        <div className={cx(style.previewContainer, style.right)}>
+          <h2 className={style.previewTitle}>
+            렌터카 즉시출고 <span className={style.hot}>핫</span> 딜!
+          </h2>
+          <div className={style.hotDealPreview}>
+            <div className={style.hotDealContainer}>
+              <Image
+                src="/main/car/grandeur.png"
+                width={180}
+                height={120}
+                alt="grandeur"
               />
+
+              <div className={style.hotDealInfo}>
+                <p className={style.hotDealBrand}>현대</p>
+                <p className={style.hotDealCar}>디 올 뉴 그랜저 (GN7)</p>
+              </div>
             </div>
 
-            <button className={style.searchButton}>검색</button>
-          </div>
-
-          {/* 기능 소개 */}
-          <div className={style.featureSection}>
-            <h2 className={style.title}>마스터카만의 기능</h2>
-
-            <div className={style.featureContainer}>
-              <div className={style.featureBox}></div>
-              <div className={style.featureBox}></div>
-              <div className={style.featureBox}></div>
-              <div className={style.featureBox}></div>
+            <div className={style.hotDealDotButton}>
+              <div className={style.hotDealDot}></div>
+              <div className={style.hotDealDot}></div>
+              <div className={cx(style.hotDealDot, style.activeDot)}></div>
+              <div className={style.hotDealDot}></div>
+              <div className={style.hotDealDot}></div>
             </div>
           </div>
-        </section>
 
-        <section className={style.two}>
-          <div className={style.feature}>
+          <h2 className={style.previewTitle}>국산차 인기 순위</h2>
+          <div className={style.rankPreview}>
+            <div className={style.rankBox}>
+              <p className={style.rank}>1</p>
+              <Image
+                src="/main/car/cona.png"
+                width={120}
+                height={70}
+                alt="cona"
+              />
+              <div className={style.rankInfo}>
+                <div className={style.rankCar}>
+                  <p className={style.rankName}>코나</p>
+                  <p className={style.rankBrand}>현대</p>
+                </div>
+                <p className={style.rankTrim}>2024년 가솔린 터보 1.6</p>
+              </div>
+            </div>
+            <div className={style.rankBox}>
+              <p className={style.rank}>2</p>
+              <Image
+                src="/main/car/carnival.png"
+                width={120}
+                height={70}
+                alt="cona"
+              />
+              <div className={style.rankInfo}>
+                <div className={style.rankCar}>
+                  <p className={style.rankName}>카니발</p>
+                  <p className={style.rankBrand}>기아</p>
+                </div>
+                <p className={style.rankTrim}>2024년 가솔린 터보 3.5 (7인승)</p>
+              </div>
+            </div>
+            <div className={style.rankBox}>
+              <p className={style.rank}>3</p>
+              <Image
+                src="/main/car/sportage.png"
+                width={120}
+                height={70}
+                alt="cona"
+              />
+              <div className={style.rankInfo}>
+                <div className={style.rankCar}>
+                  <p className={style.rankName}>스포티지</p>
+                  <p className={style.rankBrand}>기아</p>
+                </div>
+                <p className={style.rankTrim}>
+                  2024년 가솔린 터보 1.6 하이브리드 2WD
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={style.featureSection}>
+        <div className={style.featureContainer}>
+          <div className={style.featureBox}>
             <div className={style.featureInfo}>
               <p className={style.caption}>맞춤형 신차 견적</p>
               <h1 className={style.featureTitle}>
@@ -58,68 +217,25 @@ export default function TestPage() {
                 <br />
                 다양한 브랜드와 모델을 비교하고 나만의 완벽한 차량을 찾으세요.
               </p>
-
-              <Link href="/car">
-                <button className={style.featureButton}>견적 내러 가기</button>
-              </Link>
             </div>
 
-            <div className={style.IconSection}>
-              <Image
-                src="/main/test/estimate.png"
-                width={522}
-                height={532}
-                alt="차량 견적 내기"
-              />
-              <Image
-                className={style.coinOne}
-                src="/main/test/coin_1.svg"
-                width={84}
-                height={81}
-                alt="coin"
-              />
-              <Image
-                className={style.coinTwo}
-                src="/main/test/coin_2.svg"
-                width={140}
-                height={87}
-                alt="coin"
-              />
-              <Image
-                className={style.coinThree}
-                src="/main/test/coin_3.svg"
-                width={103}
-                height={109}
-                alt="coin"
-              />
-            </div>
+            <Image
+              src="/main/estimate.png"
+              width={460}
+              height={360}
+              alt="estimate"
+            />
           </div>
-        </section>
 
-        <section className={style.three}>
-          <div className={style.feature}>
-            <div className={style.IconSection}>
-              <Image
-                className={style.car}
-                src="/main/test/car.png"
-                width={452}
-                height={273}
-                alt="자량 정보 확인"
-              />
-              <Image
-                className={style.lens}
-                src="/main/test/lens.png"
-                width={458}
-                height={468}
-                alt="돋보기"
-              />
-            </div>
+          <div className={cx(style.featureBox, style.rightFeature)}>
+            <Image src="/main/info.png" width={460} height={360} alt="info" />
 
             <div className={style.featureInfo}>
               <p className={style.caption}>최신 차량 정보</p>
               <h1 className={style.featureTitle}>
                 믿을 수 있는 차량 정보,
-                <br />한 눈에 보기 쉽게
+                <br />
+                한눈에
               </h1>
 
               <p className={style.featureDescription}>
@@ -127,22 +243,14 @@ export default function TestPage() {
                 <br />
                 성능, 연비, 가격 비교를 통해 최고의 선택을 할 수 있습니다.
               </p>
-
-              <Link href="/car/info">
-                <button className={style.featureButton}>정보 확인 하기</button>
-              </Link>
             </div>
           </div>
-        </section>
 
-        <section className={style.four}>
-          <div className={style.feature}>
+          <div className={style.featureBox}>
             <div className={style.featureInfo}>
               <p className={style.caption}>차에 대한 이야기</p>
               <h1 className={style.featureTitle}>
-                차를 좋아하고 아끼는
-                <br />
-                사람들과의 소통 창구
+                차를 사랑하는 사람들과의 소통
               </h1>
 
               <p className={style.featureDescription}>
@@ -151,63 +259,31 @@ export default function TestPage() {
                 <br />
                 서로의 노하우와 팁을 나누며 차에 대한 애정을 키워보세요.
               </p>
-
-              <Link href="/community">
-                <button className={style.featureButton}>이야기하러 가기</button>
-              </Link>
             </div>
 
-            <div className={style.IconSection}>
-              <Image
-                className={style.community}
-                src="/main/test/community.png"
-                width={438}
-                height={408}
-                alt="커뮤니티"
-              />
-              <Image
-                className={style.heart}
-                src="/main/test/heart.png"
-                width={100}
-                height={105}
-                alt="coin"
-              />
-            </div>
+            <Image
+              className={style.featureImage}
+              src="/main/community.png"
+              width={460}
+              height={360}
+              alt="community"
+            />
           </div>
-        </section>
 
-        <section className={style.five}>
-          <div className={style.feature}>
-            <div className={style.IconSection}>
-              <Image
-                className={style.ground}
-                src="/main/test/ground.png"
-                width={414}
-                height={212}
-                alt="판"
-              />
-              <Image
-                className={style.hammer}
-                src="/main/test/hammer.png"
-                width={356}
-                height={298}
-                alt="망치"
-              />
-              <Image
-                className={style.coin}
-                src="/main/test/coin_4.png"
-                width={149}
-                height={158}
-                alt="동전"
-              />
-            </div>
+          <div className={cx(style.featureBox, style.rightFeature)}>
+            <Image
+              src="/main/auction.png"
+              width={460}
+              height={360}
+              alt="auction"
+            />
 
             <div className={style.featureInfo}>
-              <p className={style.caption}>차량 경매 가능</p>
+              <p className={style.caption}>차량 경매</p>
               <h1 className={style.featureTitle}>
                 원하는 차량,
                 <br />
-                최고의 가격으로 입찰
+                최고의 가격으로
               </h1>
 
               <p className={style.featureDescription}>
@@ -215,46 +291,14 @@ export default function TestPage() {
                 <br />
                 차량을 경매로 보다 저렴하고 안전하게 구매할 수 있습니다.
               </p>
-
-              <Link href="/auction/dealer">
-                <button className={style.featureButton}>입찰하러 가기</button>
-              </Link>
             </div>
           </div>
-        </section>
-
-        <section className={cx(style.section, style.six)}>
-          <div className={style.appSection}>
-            <div className={style.appImageContainer}>
-              <Image
-                className={style.appImage}
-                src="/main/app_1.png"
-                width={398}
-                height={808}
-                alt="app"
-              />
-              <Image
-                className={style.appImage}
-                src="/main/app_2.png"
-                width={398}
-                height={808}
-                alt="app"
-              />
-            </div>
-
-            <div className={style.appInfoSection}>
-              <h1 className={style.appTitle}>마스터카, 어플 출시!</h1>
-              <p className={style.appDescription}>
-                마스터카 모바일로 더 쉽고 빠르게 내 차를 만나보세요.
-              </p>
-
-              <button className={style.appLink}>앱 다운로드</button>
-            </div>
-          </div>
-
-          <Footer />
-        </section>
+        </div>
       </div>
-    </>
+
+      <Footer />
+
+      <MenuButtons />
+    </main>
   );
 }
