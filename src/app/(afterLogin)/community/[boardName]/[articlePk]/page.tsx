@@ -110,7 +110,7 @@ export default function ArticleDetailPage() {
   const handleDeleteButtonClick = () => {
     if (confirm("정말 삭제하시겠습니까?")) {
       // 삭제 API 호출
-      console.log("삭제");
+      toast.success("게시글이 삭제되었습니다.");
       deleteArticle({ articlePk });
       router.push(`/community/${article?.boardName}`);
       router.refresh();
@@ -121,7 +121,7 @@ export default function ArticleDetailPage() {
   const handleCommentDeleteButtonClick = (commentPk: string) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       // 댓글 삭제 API 호출
-      console.log("댓글삭제");
+      toast.success("댓글이 삭제되었습니다.");
       deleteComment({ commentPk });
       setVisibleRecomments(null);
       getCommentListData();
@@ -132,7 +132,7 @@ export default function ArticleDetailPage() {
   const handleRecommentDeleteButtonClick = (recommentPk: string) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       // 대댓글 삭제 API 호출
-      console.log("대댓글삭제, recommentPk:", recommentPk);
+      toast.success("댓글이 삭제되었습니다.");
       deleteRecomment({ recommentPk });
       setVisibleRecomments(null);
       getCommentListData();
@@ -146,7 +146,7 @@ export default function ArticleDetailPage() {
 
       return;
     }
-    console.log("댓글작성");
+    toast.success("댓글이 작성되었습니다.");
     createComment({ articlePk, content: comment });
 
     setComment("");
@@ -155,8 +155,10 @@ export default function ArticleDetailPage() {
 
   // 대댓글 작성 버튼 클릭
   const handleRecommentSubmitButtonClick = (commentPk: number) => {
-    console.log("대댓글작성");
-    console.log({ articlePk, commentPk, recomment });
+    if (recomment.length === 0) {
+      return;
+    }
+    toast.success("답글이 작성되었습니다.");
 
     createRecomment({ articlePk, commentPk, recomment });
 
@@ -245,8 +247,15 @@ export default function ArticleDetailPage() {
               ></div>
             )}
             <div className={style.writerInfo}>
-              <p>{article.user.nickname}</p>
-              <p>Lv. {article.user.exp}</p>
+              <div className={style.writerProfile}>
+                <div className={style.level}>
+                  <span className={style.levelTag}>Lv.</span>
+                  {article.user.exp}
+                </div>
+                <p className={style.writerName}>{article.user.nickname}</p>
+              </div>
+
+              <p className={style.date}>{dayjs(article.createdAt).fromNow()}</p>
             </div>
           </div>
 

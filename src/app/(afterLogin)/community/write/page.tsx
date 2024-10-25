@@ -13,6 +13,7 @@ import {
   useDropzone,
 } from "react-dropzone";
 import DotSpinner from "@/app/_component/DotSpinner";
+import { toast } from "sonner";
 
 interface IBoard {
   boardPk: number;
@@ -91,6 +92,14 @@ export default function CommunityWritePage() {
       formData.append("videos", video);
     });
 
+    if (!boardName) {
+      toast.error("게시판을 선택하세요.");
+    } else if (!title) {
+      toast.error("제목을 입력하세요.");
+    } else if (!content) {
+      toast.error("내용을 입력하세요.");
+    }
+
     // 게시글 작성 API 호출
     const result = await createArticle({
       boardName,
@@ -99,7 +108,10 @@ export default function CommunityWritePage() {
 
     console.log({ result });
 
-    router.push(`/community/${boardName}`);
+    if (result.statusCode === 200) {
+      toast.success("게시글이 작성되었습니다.");
+      router.push(`/community/${boardName}`);
+    }
   };
 
   // 뒤로가기 버튼 클릭
