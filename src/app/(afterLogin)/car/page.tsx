@@ -6,7 +6,7 @@ import ModelList from "./_component/ModelList";
 import style from "./car.module.css";
 import Image from "next/image";
 import Footer from "@/app/_component/Footer";
-import MenuButtons from "@/app/_component/MeunButtons";
+import MenuButtons from "@/app/_component/MenuButtons";
 
 export default function CarPage() {
   const [brandName, setBrandName] = useState<string>("");

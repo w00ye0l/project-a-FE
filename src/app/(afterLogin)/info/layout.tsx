@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import style from "./layout.module.css";
 import Footer from "@/app/_component/Footer";
-import MenuButtons from "@/app/_component/MeunButtons";
+import MenuButtons from "@/app/_component/MenuButtons";
 
 export default function CarInfoLayoutPage({
   children,

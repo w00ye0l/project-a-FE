@@ -4,7 +4,7 @@ import cx from "classnames";
 import Link from "next/link";
 import EmblaCarousel from "@/app/_component/EmblaCarousel";
 import Footer from "@/app/_component/Footer";
-import MenuButtons from "@/app/_component/MeunButtons";
+import MenuButtons from "@/app/_component/MenuButtons";
 
 export default function Home() {
   return (
