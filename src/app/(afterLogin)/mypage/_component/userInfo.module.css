@@ -1,0 +1,114 @@
+.main {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard";
+  background-color: #007aff;
+}
+
+.titleSection {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  margin-right: 4px;
+  width: 28px;
+  height: 28px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.title {
+  font-family: "Paperlogy";
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.titleNickname {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.highlight {
+  margin: 0px 2px;
+  font-size: 24px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.userInfo {
+  display: flex;
+  gap: 14px;
+}
+
+.pointSection {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pointBox {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 200px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+}
+
+.pointBox:last-child {
+  border-right: none;
+}
+
+.pointTitle {
+  margin-bottom: 6px;
+  color: #434343;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.point {
+  margin-bottom: 20px;
+  font-family: "Paperlogy";
+  color: #0d36c0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pointUnit {
+  margin-left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pointLink {
+  color: #888888;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.pointLink::after {
+  margin-left: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: url("/icon/arrow_right_gray.svg") no-repeat center;
+}
+
+.unknownBox {
+  width: 194px;
+  height: 116px;
+  background: linear-gradient(121deg, #00c400 0%, #1b7c1b 100%);
+  border-radius: 10px;
+}
