@@ -7,6 +7,7 @@ import Image from "next/image";
 import Footer from "@/app/_component/Footer";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import MenuButtons from "./_component/MeunButtons";
 
 export default function TestPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -107,10 +108,88 @@ export default function TestPage() {
           <h2 className={style.title}>마스터카만의 기능</h2>
 
           <div className={style.featureContainer}>
-            <div className={style.featureBox}></div>
-            <div className={style.featureBox}></div>
-            <div className={style.featureBox}></div>
-            <div className={style.featureBox}></div>
+            <div className={style.featureBox}>
+              <div className={style.featureSummary}>
+                <h3 className={style.summaryTitle}>신차견적</h3>
+                <p className={style.summaryDescription}>
+                  다양한 브랜드와 모델을 비교하여 나만의 차량을 찾으세요.
+                </p>
+              </div>
+              <div className={style.summaryContent}>
+                <Image
+                  className={style.summaryImage}
+                  src="/main/icon/car.png"
+                  width={132}
+                  height={132}
+                  alt="신차견적"
+                />
+                <Link href="/car" className={style.summaryLink}>
+                  바로가기
+                </Link>
+              </div>
+            </div>
+            <div className={style.featureBox}>
+              <div className={style.featureSummary}>
+                <h3 className={style.summaryTitle}>차량정보</h3>
+                <p className={style.summaryDescription}>
+                  국내외 인기 차량들의 상세한 스펙과 리뷰를 확인하세요.
+                </p>
+              </div>
+              <div className={style.summaryContent}>
+                <Image
+                  className={style.summaryImage}
+                  src="/main/icon/search.png"
+                  width={132}
+                  height={132}
+                  alt="차량정보"
+                />
+                <Link href="/info" className={style.summaryLink}>
+                  바로가기
+                </Link>
+              </div>
+            </div>
+            <div className={style.featureBox}>
+              <div className={style.featureSummary}>
+                <h3 className={style.summaryTitle}>옥션</h3>
+                <p className={style.summaryDescription}>
+                  차량을 경매로
+                  <br />
+                  보다 안전하고 저렴하게 구매하세요.
+                </p>
+              </div>
+              <div className={style.summaryContent}>
+                <Image
+                  className={style.summaryImage}
+                  src="/main/icon/auction.png"
+                  width={132}
+                  height={132}
+                  alt="옥션"
+                />
+                <Link href="/auction/dealer" className={style.summaryLink}>
+                  바로가기
+                </Link>
+              </div>
+            </div>
+            <div className={style.featureBox}>
+              <div className={style.featureSummary}>
+                <h3 className={style.summaryTitle}>커뮤니티</h3>
+                <p className={style.summaryDescription}>
+                  국내외 인기 차량들의 상세한 스펙과 리뷰를 확인하세요.
+                </p>
+              </div>
+              <div className={style.summaryContent}>
+                <Image
+                  className={style.summaryImage}
+                  src="/main/icon/community.png"
+                  width={132}
+                  height={132}
+                  alt="커뮤니티"
+                />
+                <Link href="/community" className={style.summaryLink}>
+                  바로가기
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -200,7 +279,7 @@ export default function TestPage() {
               성능, 연비, 가격 비교를 통해 최고의 선택을 할 수 있습니다.
             </p>
 
-            <Link href="/car/info">
+            <Link href="/info">
               <button className={style.featureButton}>정보 확인 하기</button>
             </Link>
           </div>
@@ -324,6 +403,8 @@ export default function TestPage() {
         </div>
 
         <Footer />
+
+        <MenuButtons />
       </section>
     </div>
   );

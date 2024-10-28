@@ -112,10 +112,66 @@
 }
 
 .featureBox {
+  padding: 14px 24px 20px;
+  display: flex;
   width: 264px;
   height: 150px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
+}
+
+.featureSummary {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summaryTitle {
+  margin-bottom: 10px;
+  color: #121212;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.summaryDescription {
+  width: 140px;
+  color: #555555;
+  font-size: 14px;
+  line-height: 140%;
+  word-break: keep-all;
+}
+
+.summaryContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.summaryImage {
+  width: 66px;
+  height: 66px;
+}
+
+.summaryLink {
+  display: flex;
+  align-items: center;
+  color: #888888;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.summaryLink::after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("/main/icon/arrow.png") no-repeat center;
+  background-size: cover;
+}
+
+.summaryLink:hover {
+  text-decoration: underline;
 }
 
 .feature {

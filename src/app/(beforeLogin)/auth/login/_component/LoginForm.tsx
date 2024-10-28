@@ -44,7 +44,7 @@ export default function LoginForm() {
       if (response?.error) {
         toast.error("아이디와 비밀번호를 다시 확인해주세요.");
       } else if (response?.error === null) {
-        router.replace("/mypage");
+        router.replace("/");
         router.refresh();
         toast.success("로그인 성공");
       }

@@ -28,7 +28,7 @@ export default function Home() {
               <div className={style.contentImageBox}>
                 <Image
                   className={style.contentImg}
-                  src="/main/icon/estimate.png"
+                  src="/main/estimate.png"
                   alt=""
                   width={200}
                   height={160}
@@ -45,7 +45,7 @@ export default function Home() {
               <div className={style.contentImageBox}>
                 <Image
                   className={style.contentImg}
-                  src="/main/icon/info.png"
+                  src="/main/info.png"
                   alt=""
                   width={200}
                   height={160}
@@ -62,7 +62,7 @@ export default function Home() {
               <div className={style.contentImageBox}>
                 <Image
                   className={style.contentImg}
-                  src="/main/icon/community.png"
+                  src="/main/community.png"
                   alt=""
                   width={200}
                   height={160}
@@ -79,7 +79,7 @@ export default function Home() {
               <div className={style.contentImageBox}>
                 <Image
                   className={style.contentImg}
-                  src="/main/icon/auction.png"
+                  src="/main/auction.png"
                   alt=""
                   width={200}
                   height={160}
