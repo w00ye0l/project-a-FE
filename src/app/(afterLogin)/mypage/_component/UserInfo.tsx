@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import style from "./userInfo.module.css";
 
 type Props = {
   me: Session;
@@ -39,6 +40,9 @@ export default function UserInfo({ me }: Props) {
       console.log({ result });
 
       if (result.statusCode === 403) {
+        // 토큰 만료
+        toast.error("로그인 세션이 만료되었습니다.");
+
         signOut({ redirect: false }).then(() => {
           // 로그아웃 후 페이지 이동
           router.replace("/");
@@ -53,8 +57,8 @@ export default function UserInfo({ me }: Props) {
       setUserInfo({ ...result.data });
     } catch (error) {
       // 유저 정보 가져오는 것 실패
-      console.error("유저 정보를 가져오는데 실패했습니다.");
-      toast.error("유저 정보를 가져오는데 실패했습니다.");
+      console.error("로그인 세션이 만료되었습니다.");
+      toast.error("로그인 세션이 만료되었습니다.");
       signOut({ redirect: false }).then(() => {
         // 로그아웃 후 페이지 이동
         router.replace("/");
@@ -111,31 +115,61 @@ export default function UserInfo({ me }: Props) {
   }, [getUserInfo, initialLoad]);
 
   return (
-    <>
+    <div className={style.main}>
       {/* 프로필 이미지 업로드 성공 시 호출되는 콜백 함수 전달 */}
-      <ProfileImage
+      <div className={style.titleSection}>
+        <div className={style.profileImage}></div>
+        <h1 className={style.title}>
+          <span className={style.titleNickname}>{userInfo?.nickname}</span> 님,
+          간편하게 <span className={style.highlight}>조회 차량</span>과{" "}
+          <span className={style.highlight}>내 정보</span>를 확인해 보세요!
+        </h1>
+      </div>
+      {/* <ProfileImage
         imageProp={userInfo?.profileImage!}
         onImageUploadSuccess={handleImageUploadSuccess}
-      />
+      /> */}
 
-      <button onClick={handleImageDelete}>이미지 삭제</button>
+      {/* <button onClick={handleImageDelete}>이미지 삭제</button> */}
 
-      <div>
-        <h2>유저 정보</h2>
-        <p>{userInfo?.userPk}</p>
-        <p>{userInfo?.name}</p>
-        <p>{userInfo?.email}</p>
-        {/* <p>{userInfo?.profileImage}</p> */}
-        <p>{userInfo?.registerBy}</p>
-        <p>{userInfo?.userType}</p>
-        <p>{userInfo?.point}</p>
-        <p>{userInfo?.cash}</p>
-        <p>{userInfo?.eventPoint}</p>
+      <div className={style.userInfo}>
+        <div className={style.pointSection}>
+          <div className={style.pointBox}>
+            <p className={style.pointTitle}>활동 포인트</p>
+            <p className={style.point}>
+              {Number(userInfo?.point).toLocaleString()}
+              <span className={style.pointUnit}>P</span>
+            </p>
+            <Link className={style.pointLink} href="/mypage">
+              자세히 보기
+            </Link>
+          </div>
+          <div className={style.pointBox}>
+            <p className={style.pointTitle}>유료 포인트</p>
+            <p className={style.point}>
+              {Number(userInfo?.cash).toLocaleString()}
+              <span className={style.pointUnit}>P</span>
+            </p>
+            <Link className={style.pointLink} href="/mypage">
+              자세히 보기
+            </Link>
+          </div>
+          <div className={style.pointBox}>
+            <p className={style.pointTitle}>이벤트 포인트</p>
+            <p className={style.point}>
+              {Number(userInfo?.eventPoint).toLocaleString()}
+              <span className={style.pointUnit}>P</span>
+            </p>
+            <Link className={style.pointLink} href="/mypage">
+              자세히 보기
+            </Link>
+          </div>
+        </div>
 
-        {userInfo?.registerBy === "HOME" && (
-          <Link href="/user/change/pw">비밀번호 변경</Link>
-        )}
+        <div className={style.unknownBox}></div>
+
+        <div className={style.unknownBox}></div>
       </div>
-    </>
+    </div>
   );
 }
