@@ -21,7 +21,7 @@ export default function EstimateEndPage() {
   const [prePrice, setPrePrice] = useState<string>("threePre");
   const [depositPrice, setDepositPrice] = useState<string>("");
   const [buyerType, setBuyerType] = useState<string>("person");
-  const [area, setArea] = useState<string>("");
+  const [area, setArea] = useState<string>("서울");
   const [loading, setLoading] = useState<boolean>(false);
   const [carTax, setCarTax] = useState<number>(0);
   const [getTax, setGetTax] = useState<number>(0);
@@ -965,26 +965,28 @@ export default function EstimateEndPage() {
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                   >
-                    <option value="" defaultValue="" hidden>
+                    {/* <option value="" defaultValue="" hidden>
                       지역
+                    </option> */}
+                    <option value="서울" defaultChecked>
+                      서울
                     </option>
-                    <option value="seoul">서울</option>
-                    <option value="gyeonggi">경기</option>
-                    <option value="incheon">인천</option>
-                    <option value="gangwon">강원</option>
-                    <option value="daejeon">대전</option>
-                    <option value="sejong">세종</option>
-                    <option value="chungbuk">충북</option>
-                    <option value="chungnam">충남</option>
-                    <option value="busan">부산</option>
-                    <option value="daegu">대구</option>
-                    <option value="ulsan">울산</option>
-                    <option value="gyeongbuk">경북</option>
-                    <option value="gyeongnam">경남</option>
-                    <option value="gwangju">광주</option>
-                    <option value="jeonbuk">전북</option>
-                    <option value="jeonnam">전남</option>
-                    <option value="jeju">제주</option>
+                    <option value="경기">경기</option>
+                    <option value="인천">인천</option>
+                    <option value="강원">강원</option>
+                    <option value="대전">대전</option>
+                    <option value="세종">세종</option>
+                    <option value="충북">충북</option>
+                    <option value="충남">충남</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                    <option value="울산">울산</option>
+                    <option value="경북">경북</option>
+                    <option value="경남">경남</option>
+                    <option value="광주">광주</option>
+                    <option value="전북">전북</option>
+                    <option value="전남">전남</option>
+                    <option value="제주">제주</option>
                   </select>
                 </div>
               </div>
