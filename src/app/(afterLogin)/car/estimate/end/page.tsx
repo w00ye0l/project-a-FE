@@ -25,6 +25,7 @@ export default function EstimateEndPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [carTax, setCarTax] = useState<number>(0);
   const [getTax, setGetTax] = useState<number>(0);
+  const [deliveryPrice, setDeliveryPrice] = useState<number>(0);
   const [monthlyPrice, setMonthlyPrice] = useState<any[]>([]);
 
   const carPk = carPriceStore.selectedCarSpec.carPk;
@@ -1008,7 +1009,11 @@ export default function EstimateEndPage() {
               <div className={style.monthPriceContainer}>
                 {monthlyPrice && monthlyPrice.length > 0 ? (
                   monthlyPrice.map(
-                    (price: { capitalName: string; monthPrice: number }) => (
+                    (price: {
+                      capitalName: string;
+                      monthPrice: number;
+                      deliveryPrice: number;
+                    }) => (
                       <div
                         className={style.priceContainer}
                         key={price.capitalName}
@@ -1019,6 +1024,10 @@ export default function EstimateEndPage() {
                             type="radio"
                             name="capital"
                             id={price.capitalName}
+                            onChange={() => {
+                              console.log(price);
+                              setDeliveryPrice(price.deliveryPrice);
+                            }}
                           />
                           <label
                             className={style.capitalName}
@@ -1064,7 +1073,7 @@ export default function EstimateEndPage() {
                   </div>
                   <div className={style.bigoContent}>
                     <p>탁송료</p>
-                    <p>-</p>
+                    <p>{deliveryPrice.toLocaleString()}</p>
                   </div>
                 </div>
                 <div className={style.bigoBox}>
