@@ -7,9 +7,9 @@ import Image from "next/image";
 import Footer from "@/app/_component/Footer";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import MenuButtons from "./_component/MeunButtons";
+import MenuButtons from "./_component/MenuButtons";
 
-export default function TestPage() {
+export default function MainPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
