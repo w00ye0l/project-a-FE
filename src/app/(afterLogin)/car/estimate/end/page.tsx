@@ -26,7 +26,8 @@ export default function EstimateEndPage() {
   const [carTax, setCarTax] = useState<number>(0);
   const [getTax, setGetTax] = useState<number>(0);
   const [deliveryPrice, setDeliveryPrice] = useState<number>(0);
-  const [monthlyPrice, setMonthlyPrice] = useState<any[]>([]);
+  const [monthlyPrices, setMonthlyPrices] = useState<any[]>([]);
+  const [monthlyPrice, setMonthlyPrice] = useState<{}>({});
 
   const carPk = carPriceStore.selectedCarSpec.carPk;
   const totalPrice =
@@ -150,9 +151,13 @@ export default function EstimateEndPage() {
       });
 
       console.log({ result });
-      setCarTax(result.data.carTax);
-      setGetTax(result.data.getTax);
-      setMonthlyPrice(result.data.monthlyPrices);
+      if (result.data) {
+        setMonthlyPrice({});
+        setCarTax(result.data.carTax);
+        setGetTax(result.data.getTax);
+        setMonthlyPrices(result.data.monthlyPrices);
+        setDeliveryPrice(0);
+      }
     } catch (error) {
       console.error("Failed to fetch model details:", error);
     }
@@ -1007,8 +1012,8 @@ export default function EstimateEndPage() {
               </div>
 
               <div className={style.monthPriceContainer}>
-                {monthlyPrice && monthlyPrice.length > 0 ? (
-                  monthlyPrice.map(
+                {monthlyPrices && monthlyPrices.length > 0 ? (
+                  monthlyPrices.map(
                     (price: {
                       capitalName: string;
                       monthPrice: number;
@@ -1026,8 +1031,10 @@ export default function EstimateEndPage() {
                             id={price.capitalName}
                             onChange={() => {
                               console.log(price);
+                              setMonthlyPrice(price);
                               setDeliveryPrice(price.deliveryPrice);
                             }}
+                            checked={monthlyPrice === price}
                           />
                           <label
                             className={style.capitalName}
